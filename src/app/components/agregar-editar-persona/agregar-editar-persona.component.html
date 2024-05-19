@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>Agregar Persona</h2>
+<mat-dialog-content>
+
+  <div class="row">
+    <div class="column">
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput placeholder="Ingrese Nombre" autocomplete="off">
+      </mat-form-field>
+    </div>
+    <div class="column">
+      <mat-form-field appearance="fill">
+        <mat-label>Apellido</mat-label>
+        <input matInput placeholder="Ingrese Apellido" autocomplete="off">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <mat-form-field appearance="fill">
+        <mat-label>Correo</mat-label>
+        <input matInput placeholder="Ingrese Correo" autocomplete="off">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <mat-form-field>
+        <mat-label>Tipo Documento</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let item of tipoDocumento" [value]="item">
+            {{ item }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="column">
+      <mat-form-field appearance="fill">
+        <mat-label>Documento</mat-label>
+        <input matInput placeholder="Ingrese Documento" autocomplete="off">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column">
+      <mat-form-field class="example-full-width">
+        <mat-label>Fecha Nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+      </mat-form-field>      
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button (click)="cancelar()" mat-button >Cancelar</button>
+  <button mat-button cdkFocusInitial>Aceptar</button>
+</mat-dialog-actions>
