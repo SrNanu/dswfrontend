@@ -8,12 +8,22 @@
           <mat-label>Nombre</mat-label>
           <input formControlName="nombre" matInput placeholder="Ingrese Nombre" autocomplete="off">
         </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('nombre')?.hasError('required') && form.get('nombre')?.touched">
+            <strong>Campo obligatorio</strong>
+          </span>
+        </div>
       </div>
       <div class="column">
         <mat-form-field appearance="fill">
           <mat-label>Apellido</mat-label>
           <input formControlName="apellido" matInput placeholder="Ingrese Apellido" autocomplete="off">
         </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('apellido')?.hasError('required') && form.get('apellido')?.touched">
+            <strong>Campo obligatorio</strong>
+          </span>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -22,6 +32,11 @@
           <mat-label>Correo</mat-label>
           <input formControlName="correo" matInput placeholder="Ingrese Correo" autocomplete="off">
         </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('correo')?.hasError('required') && form.get('correo')?.touched">
+            <strong>Campo obligatorio</strong>
+          </span>
+        </div>
       </div>
     </div>
   
@@ -35,12 +50,22 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('tipoDocumento')?.hasError('required') && form.get('tipoDocumento')?.touched">
+            <strong>Campo obligatorio</strong>
+          </span>
+        </div>
       </div>
       <div class="column">
         <mat-form-field appearance="fill">
           <mat-label>Documento</mat-label>
           <input formControlName="documento" matInput placeholder="Ingrese Documento" autocomplete="off">
         </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('documento')?.hasError('required') && form.get('documento')?.touched">
+            <strong>Campo obligatorio</strong>
+          </span>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -50,13 +75,19 @@
           <input formControlName="fechaNacimiento" matInput [matDatepicker]="picker">
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker touchUi #picker></mat-datepicker>
-        </mat-form-field>      
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('fechaNacimiento')?.hasError('required') && form.get('fechaNacimiento')?.touched">
+            <strong>Campo obligatorio</strong>
+          </span>
+        </div> 
       </div>
     </div>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button type='button' (click)="cancelar()" mat-button >Cancelar</button>
     <button type='submit' mat-button cdkFocusInitial>Aceptar</button>
+    <!--[disabled]="form.invalid" DESHABILITAR EL BOTON ACEPTAR SI EL FORM ES INVALIDO-->
   </mat-dialog-actions>
   
 </form>

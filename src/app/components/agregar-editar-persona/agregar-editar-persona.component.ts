@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Persona } from 'l:/gestion-clinica/Frontend/src/app/interfaces/persona';
+import { Persona } from '../../interfaces/persona';
 
 @Component({
   selector: 'app-agregar-editar-persona',
@@ -16,12 +16,12 @@ export class AgregarEditarPersonaComponent {
   
   constructor(public dialogRef: MatDialogRef<AgregarEditarPersonaComponent>, private fb:FormBuilder){
     this.form = this.fb.group({
-      nombre: [''],
-      apellido: [''],
-      correo: [''],
-      tipoDocumento: [null],
-      documento: [null],
-      fechaNacimiento: [null],
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
+      correo: ['', Validators.required],
+      tipoDocumento: [null, Validators.required],
+      documento: [null, Validators.required],
+      fechaNacimiento: [null, Validators.required],
     })
   }
 
