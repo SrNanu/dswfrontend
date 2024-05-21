@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Persona } from 'src/app/interfaces/persona';
+import { Persona } from 'l:/gestion-clinica/Frontend/src/app/interfaces/persona';
 
 @Component({
   selector: 'app-agregar-editar-persona',
