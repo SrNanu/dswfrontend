@@ -1,9 +1,11 @@
 export interface Persona {
     id?: number;
-    nombre: string;
-    apellido: string;
-    correo: string;
-    tipoDocumento: string;
-    documento: number;
-    fechaNacimiento: Date;
+    firstname: string;
+    lastname: string;
+    Mail: string;
+    DniType: string;
+    dni: number;
+    BornDate: Date;
+    Password: string;
+    Username: string;
 }

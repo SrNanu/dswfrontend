@@ -16,12 +16,14 @@ export class AgregarEditarPersonaComponent {
   
   constructor(public dialogRef: MatDialogRef<AgregarEditarPersonaComponent>, private fb:FormBuilder){
     this.form = this.fb.group({
-      nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
-      correo: ['', Validators.required],
-      tipoDocumento: [null, Validators.required],
-      documento: [null, Validators.required],
-      fechaNacimiento: [null, Validators.required],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      Mail: ['', Validators.required],
+      DniType: [null, Validators.required],
+      dni: [null, Validators.required],
+      BornDate: [null, Validators.required],
+      Password: [null, Validators.required],
+      Username: [null, Validators.required]
     })
   }
 
@@ -31,12 +33,15 @@ export class AgregarEditarPersonaComponent {
   addEditPersona(){
 
     const persona: Persona = {
-      nombre: this.form.value.nombre,
-      apellido: this.form.value.apellido,
-      correo: this.form.value.correo,
-      tipoDocumento: this.form.value.tipoDocumento,
-      documento: this.form.value.documento,
-      fechaNacimiento: this.form.value.fechaNacimiento,
+      firstname: this.form.value.nombre,
+      lastname: this.form.value.apellido,
+      Mail: this.form.value.correo,
+      DniType: this.form.value.tipoDocumento,
+      dni: this.form.value.documento,
+      BornDate: this.form.value.fechaNacimiento,
+      Password: this.form.value.password,
+      Username: this.form.value.usuario,
+      id: this.form.value.id
     }
     console.log(persona);
   }

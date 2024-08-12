@@ -5,12 +5,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { AgregarEditarPersonaComponent } from '../agregar-editar-persona/agregar-editar-persona.component';
+import { PersonaService } from '../../services/persona.service';
 
 
 
-const listPersonas: Persona[] = [
-  { nombre: "Juan", apellido: "Fiele", correo: "juanfiele2002@gmail.com", tipoDocumento:"DNI", documento:43768000, fechaNacimiento:new Date() },
-];
+
 
 @Component({
   selector: 'app-list-personas',
@@ -20,22 +19,40 @@ const listPersonas: Persona[] = [
 export class ListPersonasComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['nombre', 'apellido', 'correo', 'tipodocumento', 'documento', 'fechanacimiento', "acciones"];
   dataSource: MatTableDataSource<Persona>;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  constructor(public dialog: MatDialog){
-    this.dataSource = new MatTableDataSource(listPersonas);
+
+  constructor(public dialog: MatDialog, private _personaService: PersonaService) {
+    this.dataSource = new MatTableDataSource();
   }
 
   ngOnInit(): void {
-    
+    this.obtenerPersonas(); 
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.paginator._intl.itemsPerPageLabel = "Items por pagina"
     this.dataSource.sort = this.sort;
   }
 
+  obtenerPersonas(){
+    this._personaService.getPersonas().subscribe(data => {
+      console.log('Data recibida del backend:', data ); // Debería mostrar los datos correctos
+      this.dataSource.data = data;
+      console.log('DataSource data:', this.dataSource.data); // Debería mostrar los mismos datos que el log anterior
+      this.dataSource.paginator = this.paginator;
+      
+      this.dataSource.sort = this.sort;}, error => {
+        console.error('Error al obtener personas:', error);
+      
+      /*this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.paginator._intl.itemsPerPageLabel = "Items por pagina"
+      this.dataSource.sort = this.sort;*/
+    });
+
+  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
