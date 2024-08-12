@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Persona } from '../interfaces/persona';
 import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,10 @@ export class PersonaService {
    }
 
    getPersonas(): Observable<Persona[]> {
-      return this.http.get<Persona[]>(`${this.myAppUrl}${this.myApiUrl}`);
-   }
+    return this.http.get<{ data: Persona[] }>(`${this.myAppUrl}${this.myApiUrl}`)
+      .pipe(
+        map(response => response.data) // Extrae el array de la propiedad `data`
+      );
+  }
+  
 }
