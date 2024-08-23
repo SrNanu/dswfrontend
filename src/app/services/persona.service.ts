@@ -22,5 +22,7 @@ export class PersonaService {
         map(response => response.data) // Extrae el array de la propiedad `data`
       );
   }
+   deletePersona(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`);}
   
 }

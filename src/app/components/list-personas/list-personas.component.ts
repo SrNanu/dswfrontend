@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { AgregarEditarPersonaComponent } from '../agregar-editar-persona/agregar-editar-persona.component';
 import { PersonaService } from '../../services/persona.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -23,7 +24,8 @@ export class ListPersonasComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog, private _personaService: PersonaService) {
+  constructor(public dialog: MatDialog, private _personaService: PersonaService, private _snackBar :MatSnackBar) {
+    
     this.dataSource = new MatTableDataSource();
   }
 
@@ -72,6 +74,22 @@ export class ListPersonasComponent implements OnInit, AfterViewInit {
       console.log('The dialog was closed');
     });
 
+  }
+
+  deleteSecretary(id: number){
+    this._personaService.deletePersona(id).subscribe(data => {
+      this.obtenerPersonas();
+      this.successMessage();
+    }, error => {
+      console.error('Error al eliminar persona:', error);
+    });
+  }
+  successMessage(){
+    this._snackBar.open('La secretaria fue eliminada con exito',"" ,{
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
   }
 
 }
