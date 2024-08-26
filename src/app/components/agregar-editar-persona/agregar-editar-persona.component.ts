@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Persona } from '../../interfaces/persona';
+import { PersonaService } from '../../services/persona.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-agregar-editar-persona',
@@ -13,8 +15,8 @@ export class AgregarEditarPersonaComponent {
 
   tipoDocumento: string[] = ['DNI', 'Libreta Civica', 'Pasaporte'];
   form: FormGroup;
-  
-  constructor(public dialogRef: MatDialogRef<AgregarEditarPersonaComponent>, private fb:FormBuilder){
+  loading : boolean = false;
+  constructor(public dialogRef: MatDialogRef<AgregarEditarPersonaComponent>, private fb:FormBuilder, private _personaService: PersonaService,private _snackBar :MatSnackBar) {
     this.form = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -28,23 +30,40 @@ export class AgregarEditarPersonaComponent {
   }
 
   cancelar(){
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
   addEditPersona(){
 
     const persona: Persona = {
-      firstname: this.form.value.nombre,
-      lastname: this.form.value.apellido,
-      Mail: this.form.value.correo,
-      DniType: this.form.value.tipoDocumento,
-      dni: this.form.value.documento,
-      BornDate: this.form.value.fechaNacimiento,
-      Password: this.form.value.password,
-      Username: this.form.value.usuario,
+      firstname: this.form.value.firstname,
+      lastname: this.form.value.lastname,
+      Mail: this.form.value.Mail,
+      DniType: this.form.value.DniType,
+      dni: this.form.value.dni,
+      BornDate: this.form.value.BornDate.toISOString().slice(0, 10),
+      Password: this.form.value.Password,
+      Username: this.form.value.Username,
       id: this.form.value.id
+      
     }
+
+    this.loading = true;
+    
+    console.log(persona.BornDate);
     console.log(persona);
-  }
+    this._personaService.addPersona(persona).subscribe(() => {
+      this.loading = false;
+      this.dialogRef.close(true);
+      this.successMessage();
+    });
+}
+successMessage(){
+  this._snackBar.open('La secretaria fue creada con exito',"" ,{
+    duration: 3000,
+    horizontalPosition: 'center',
+    verticalPosition: 'bottom'
+  });
+}
 
 
 }

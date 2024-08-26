@@ -1,4 +1,8 @@
-<h2 mat-dialog-title>Agregar Persona</h2>
+<div class="container">
+  <h2 mat-dialog-title>Agregar Persona</h2>
+  <mat-spinner *ngIf="loading"  [diameter]="30" class="spinner" ></mat-spinner>
+</div>
+
 <form [formGroup]="form" (ngSubmit)="addEditPersona()">
   <mat-dialog-content>
 
@@ -6,10 +10,10 @@
       <div class="column">
         <mat-form-field appearance="fill">
           <mat-label>Nombre</mat-label>
-          <input formControlName="nombre" matInput placeholder="Ingrese Nombre" autocomplete="off">
+          <input formControlName="firstname" matInput placeholder="Ingrese Nombre" autocomplete="off">
         </mat-form-field>
         <div class="error">
-          <span *ngIf="form.get('nombre')?.hasError('required') && form.get('nombre')?.touched">
+          <span *ngIf="form.get('firstname')?.hasError('required') && form.get('firstname')?.touched">
             <strong>Campo obligatorio</strong>
           </span>
         </div>
@@ -17,10 +21,10 @@
       <div class="column">
         <mat-form-field appearance="fill">
           <mat-label>Apellido</mat-label>
-          <input formControlName="apellido" matInput placeholder="Ingrese Apellido" autocomplete="off">
+          <input formControlName="lastname" matInput placeholder="Ingrese Apellido" autocomplete="off">
         </mat-form-field>
         <div class="error">
-          <span *ngIf="form.get('apellido')?.hasError('required') && form.get('apellido')?.touched">
+          <span *ngIf="form.get('lastname')?.hasError('required') && form.get('lastname')?.touched">
             <strong>Campo obligatorio</strong>
           </span>
         </div>
@@ -30,10 +34,10 @@
       <div class="column">
         <mat-form-field appearance="fill">
           <mat-label>Correo</mat-label>
-          <input formControlName="correo" matInput placeholder="Ingrese Correo" autocomplete="off">
+          <input formControlName="Mail" matInput placeholder="Ingrese Correo" autocomplete="off">
         </mat-form-field>
         <div class="error">
-          <span *ngIf="form.get('correo')?.hasError('required') && form.get('correo')?.touched">
+          <span *ngIf="form.get('Mail')?.hasError('required') && form.get('Mail')?.touched">
             <strong>Campo obligatorio</strong>
           </span>
         </div>
@@ -44,14 +48,14 @@
       <div class="column">
         <mat-form-field>
           <mat-label>Tipo Documento</mat-label>
-          <mat-select formControlName="tipoDocumento">
+          <mat-select formControlName="DniType">
             <mat-option *ngFor="let item of tipoDocumento" [value]="item">
               {{ item }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <div class="error">
-          <span *ngIf="form.get('tipoDocumento')?.hasError('required') && form.get('tipoDocumento')?.touched">
+          <span *ngIf="form.get('DniType')?.hasError('required') && form.get('DniType')?.touched">
             <strong>Campo obligatorio</strong>
           </span>
         </div>
@@ -59,10 +63,10 @@
       <div class="column">
         <mat-form-field appearance="fill">
           <mat-label>Documento</mat-label>
-          <input formControlName="documento" matInput placeholder="Ingrese Documento" autocomplete="off">
+          <input formControlName="dni" matInput placeholder="Ingrese Documento" autocomplete="off">
         </mat-form-field>
         <div class="error">
-          <span *ngIf="form.get('documento')?.hasError('required') && form.get('documento')?.touched">
+          <span *ngIf="form.get('dni')?.hasError('required') && form.get('dni')?.touched">
             <strong>Campo obligatorio</strong>
           </span>
         </div>
@@ -72,12 +76,12 @@
       <div class="column">
         <mat-form-field class="example-full-width">
           <mat-label>Fecha Nacimiento</mat-label>
-          <input formControlName="fechaNacimiento" matInput [matDatepicker]="picker">
+          <input formControlName="BornDate" matInput [matDatepicker]="picker">
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker touchUi #picker></mat-datepicker>
         </mat-form-field>
         <div class="error">
-          <span *ngIf="form.get('fechaNacimiento')?.hasError('required') && form.get('fechaNacimiento')?.touched">
+          <span *ngIf="form.get('BornDate')?.hasError('required') && form.get('BornDate')?.touched">
             <strong>Campo obligatorio</strong>
           </span>
         </div> 
