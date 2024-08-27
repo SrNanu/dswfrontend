@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-    <span>Listado de Personas</span>
+    <span>Listado de Secretarias</span>
 </mat-toolbar>
 
 <mat-card>
@@ -42,7 +42,7 @@
         <ng-container matColumnDef="acciones">
             <th mat-sort-header mat-header-cell *matHeaderCellDef> </th>
             <td mat-cell *matCellDef="let element">
-                <mat-icon class="btnEdit"matTooltip="Editar">edit</mat-icon>
+                <mat-icon (click)="addEditPersona(element.id)" class="btnEdit"matTooltip="Editar">edit</mat-icon>
                 <mat-icon (click)= "deleteSecretary(element.id)" class="btnDelete"matTooltip="Eliminar">delete</mat-icon>
             </td>
         </ng-container>

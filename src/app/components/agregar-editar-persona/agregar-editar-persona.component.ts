@@ -1,22 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Persona } from '../../interfaces/persona';
 import { PersonaService } from '../../services/persona.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-agregar-editar-persona',
   templateUrl: './agregar-editar-persona.component.html',
   styleUrl: './agregar-editar-persona.component.css'
 })
-export class AgregarEditarPersonaComponent {
+export class AgregarEditarPersonaComponent implements OnInit {
 
 
   tipoDocumento: string[] = ['DNI', 'Libreta Civica', 'Pasaporte'];
   form: FormGroup;
   loading : boolean = false;
-  constructor(public dialogRef: MatDialogRef<AgregarEditarPersonaComponent>, private fb:FormBuilder, private _personaService: PersonaService,private _snackBar :MatSnackBar) {
+  operacion: string = 'Agregar';
+  id: number | undefined;
+  constructor(public dialogRef: MatDialogRef<AgregarEditarPersonaComponent>, private fb:FormBuilder, private _personaService: PersonaService,private _snackBar :MatSnackBar, private dateAdapter:DateAdapter<any>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.form = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -27,10 +30,35 @@ export class AgregarEditarPersonaComponent {
       Password: [null, Validators.required],
       Username: [null, Validators.required]
     })
+    this.id = data.id;
+    dateAdapter.setLocale('es-AR');
   }
-
+  ngOnInit(): void {
+    this.isEdit(this.id)
+  }
   cancelar(){
     this.dialogRef.close(false);
+  }
+  isEdit(id: number|undefined){
+    if(id !== undefined){
+      this.operacion = 'Editar';
+      this.getPersona(id);
+    }
+  }
+
+  getPersona(id: number){
+    this._personaService.getPersona(id).subscribe(data => {
+      this.form.patchValue({
+        firstname:data.firstname,
+        lastname:data.lastname,
+        Mail:data.Mail,
+        DniType:data.DniType,
+        dni:data.dni,
+        BornDate:new Date(data.BornDate) 
+
+      })
+
+    });
   }
   addEditPersona(){
 
@@ -46,19 +74,29 @@ export class AgregarEditarPersonaComponent {
       id: this.form.value.id
       
     }
-
+    console.log(persona);
     this.loading = true;
     
-    console.log(persona.BornDate);
-    console.log(persona);
-    this._personaService.addPersona(persona).subscribe(() => {
-      this.loading = false;
-      this.dialogRef.close(true);
-      this.successMessage();
-    });
+    if(this.id === undefined){
+      //IS ADD
+      this._personaService.addPersona(persona).subscribe(() => {
+        this.successMessage("agregada");
+      });
+
+    }else{
+      //IS EDIT
+      this._personaService.updatePersona(this.id, persona).subscribe(() => {
+        this.successMessage("actualizada");
+      });
+
+    }
+
+    this.loading = false;
+    this.dialogRef.close(true);
+    
 }
-successMessage(){
-  this._snackBar.open('La secretaria fue creada con exito',"" ,{
+successMessage(operation: string){
+  this._snackBar.open(`La secretaria fue ${operation} con exito`,"" ,{
     duration: 3000,
     horizontalPosition: 'center',
     verticalPosition: 'bottom'

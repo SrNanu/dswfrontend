@@ -64,10 +64,12 @@ export class ListPersonasComponent implements OnInit, AfterViewInit {
     }
   }
 
-  addEditPersona(){
+  addEditPersona( id?:number){
+    console.log('id:', id);
     const dialogRef = this.dialog.open(AgregarEditarPersonaComponent, {
       width: '550px',
-      disableClose: true
+      disableClose: true,
+      data: {id: id}
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -27,6 +27,13 @@ export class PersonaService {
 
    addPersona(persona: Persona): Observable<void> {
     return this.http.post<void>(`${this.myAppUrl}${this.myApiUrl}`, persona)}
-   
-  
+
+   getPersona(id: number): Observable<Persona> {
+    return this.http.get<{ data: Persona }>(`${this.myAppUrl}${this.myApiUrl}/${id}`)
+      .pipe(
+        map(response => response.data) // Extrae el objeto de la propiedad `data`
+      );}
+
+   updatePersona(id: number, persona: Persona): Observable<void> {
+    return this.http.put<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`, persona) }
 }
