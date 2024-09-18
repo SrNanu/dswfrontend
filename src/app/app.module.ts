@@ -6,8 +6,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 //Components
 import { AppComponent } from './app.component';
-import { ListPersonasComponent } from './components/list-personas/list-personas.component';
-import { AgregarEditarPersonaComponent } from './components/agregar-editar-persona/agregar-editar-persona.component';
+import { ListSecretarysComponent } from './components/list-secretary/list-secretary.component';
+import { AgregarEditarSecretaryComponent } from './components/agregar-editar-secretary/agregar-editar-secretary.component';
 
 //Modulos
 import { SharedModule } from './shared/shared.module';
@@ -16,8 +16,8 @@ import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
-    ListPersonasComponent,
-    AgregarEditarPersonaComponent
+    ListSecretarysComponent,
+    AgregarEditarSecretaryComponent
   ],
   imports: [
     BrowserModule,

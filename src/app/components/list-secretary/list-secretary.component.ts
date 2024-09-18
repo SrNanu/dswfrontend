@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { Persona } from '../../interfaces/persona';
+import { Secretary } from '../../interfaces/secretary';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { AgregarEditarPersonaComponent } from '../agregar-editar-persona/agregar-editar-persona.component';
-import { PersonaService } from '../../services/persona.service';
+import { AgregarEditarSecretaryComponent } from '../agregar-editar-secretary/agregar-editar-secretary.component';
+import { SecretaryService } from '../../services/secretary.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
@@ -13,24 +13,24 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
-  selector: 'app-list-personas',
-  templateUrl: './list-personas.component.html',
-  styleUrl: './list-personas.component.css'
+  selector: 'app-list-secretary',
+  templateUrl: './list-secretary.component.html',
+  styleUrl: './list-secretary.component.css'
 })
-export class ListPersonasComponent implements OnInit, AfterViewInit {
+export class ListSecretarysComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['nombre', 'apellido', 'correo', 'tipodocumento', 'documento', 'fechanacimiento', "acciones"];
-  dataSource: MatTableDataSource<Persona>;
+  dataSource: MatTableDataSource<Secretary>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog, private _personaService: PersonaService, private _snackBar :MatSnackBar) {
+  constructor(public dialog: MatDialog, private _secretaryService: SecretaryService, private _snackBar :MatSnackBar) {
     
     this.dataSource = new MatTableDataSource();
   }
 
   ngOnInit(): void {
-    this.obtenerPersonas(); 
+    this.obtenerSecretarys(); 
   }
 
   ngAfterViewInit(): void {
@@ -38,15 +38,15 @@ export class ListPersonasComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  obtenerPersonas(){
-    this._personaService.getPersonas().subscribe(data => {
+  obtenerSecretarys(){
+    this._secretaryService.getSecretarys().subscribe(data => {
       console.log('Data recibida del backend:', data ); // Debería mostrar los datos correctos
       this.dataSource.data = data;
       console.log('DataSource data:', this.dataSource.data); // Debería mostrar los mismos datos que el log anterior
       this.dataSource.paginator = this.paginator;
       
       this.dataSource.sort = this.sort;}, error => {
-        console.error('Error al obtener personas:', error);
+        console.error('Error al obtener secretarys:', error);
       
       /*this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
@@ -64,9 +64,9 @@ export class ListPersonasComponent implements OnInit, AfterViewInit {
     }
   }
 
-  addEditPersona( id?:number){
+  addEditSecretary( id?:number){
     console.log('id:', id);
-    const dialogRef = this.dialog.open(AgregarEditarPersonaComponent, {
+    const dialogRef = this.dialog.open(AgregarEditarSecretaryComponent, {
       width: '550px',
       disableClose: true,
       data: {id: id}
@@ -75,18 +75,18 @@ export class ListPersonasComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       if(result){
-        this.obtenerPersonas();
+        this.obtenerSecretarys();
       }
     });
 
   }
 
   deleteSecretary(id: number){
-    this._personaService.deletePersona(id).subscribe(data => {
-      this.obtenerPersonas();
+    this._secretaryService.deleteSecretary(id).subscribe(data => {
+      this.obtenerSecretarys();
       this.successMessage();
     }, error => {
-      console.error('Error al eliminar persona:', error);
+      console.error('Error al eliminar secretary:', error);
     });
   }
   successMessage(){

@@ -1,4 +1,4 @@
-export interface Persona {
+export interface Secretary {
     id?: number;
     firstname: string;
     lastname: string;
