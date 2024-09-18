@@ -18,7 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './list-secretary.component.css'
 })
 export class ListSecretarysComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['nombre', 'apellido', 'correo', 'tipodocumento', 'documento', 'fechanacimiento', "acciones"];
+  displayedColumns: string[] = ['nombre', 'apellido','usuario', 'correo', 'tipodocumento', 'documento', 'fechanacimiento', "acciones"];
   dataSource: MatTableDataSource<Secretary>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
