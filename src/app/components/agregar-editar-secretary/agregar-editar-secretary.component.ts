@@ -74,7 +74,7 @@ export class AgregarEditarSecretaryComponent implements OnInit {
       id: this.form.value.id
       
     }
-    console.log(secretary);
+    //console.log(secretary);
     this.loading = true;
     
     if(this.id === undefined){

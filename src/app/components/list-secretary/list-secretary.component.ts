@@ -65,7 +65,7 @@ export class ListSecretarysComponent implements OnInit, AfterViewInit {
   }
 
   addEditSecretary( id?:number){
-    console.log('id:', id);
+    //console.log('id:', id);
     const dialogRef = this.dialog.open(AgregarEditarSecretaryComponent, {
       width: '550px',
       disableClose: true,
