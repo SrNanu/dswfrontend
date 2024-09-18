@@ -23,12 +23,12 @@ export class AgregarEditarPersonaComponent implements OnInit {
     this.form = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
-      Mail: ['', Validators.required],
-      DniType: [null, Validators.required],
+      mail: ['', Validators.required],
+      dniType: [null, Validators.required],
       dni: [null, Validators.required],
-      BornDate: [null, Validators.required],
-      Password: [null, Validators.required],
-      Username: [null, Validators.required]
+      bornDate: [null, Validators.required],
+      password: [null, Validators.required],
+      username: [null, Validators.required]
     })
     this.id = data.id;
     dateAdapter.setLocale('es-AR');
@@ -51,10 +51,10 @@ export class AgregarEditarPersonaComponent implements OnInit {
       this.form.patchValue({
         firstname:data.firstname,
         lastname:data.lastname,
-        Mail:data.Mail,
-        DniType:data.DniType,
+        mail:data.mail,
+        dniType:data.dniType,
         dni:data.dni,
-        BornDate:new Date(data.BornDate) 
+        bornDate:new Date(data.bornDate) 
 
       })
 
@@ -65,12 +65,12 @@ export class AgregarEditarPersonaComponent implements OnInit {
     const persona: Persona = {
       firstname: this.form.value.firstname,
       lastname: this.form.value.lastname,
-      Mail: this.form.value.Mail,
-      DniType: this.form.value.DniType,
+      mail: this.form.value.mail,
+      dniType: this.form.value.dniType,
       dni: this.form.value.dni,
-      BornDate: this.form.value.BornDate.toISOString().slice(0, 10),
-      Password: this.form.value.Password,
-      Username: this.form.value.Username,
+      bornDate: this.form.value.bornDate.toISOString().slice(0, 10),
+      password: this.form.value.password,
+      username: this.form.value.username,
       id: this.form.value.id
       
     }

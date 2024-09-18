@@ -34,10 +34,10 @@
       <div class="column">
         <mat-form-field appearance="fill">
           <mat-label>Correo</mat-label>
-          <input formControlName="Mail" matInput placeholder="Ingrese Correo" autocomplete="off">
+          <input formControlName="mail" matInput placeholder="Ingrese Correo" autocomplete="off">
         </mat-form-field>
         <div class="error">
-          <span *ngIf="form.get('Mail')?.hasError('required') && form.get('Mail')?.touched">
+          <span *ngIf="form.get('mail')?.hasError('required') && form.get('Mail')?.touched">
             <strong>Campo obligatorio</strong>
           </span>
         </div>
@@ -48,14 +48,14 @@
       <div class="column">
         <mat-form-field>
           <mat-label>Tipo Documento</mat-label>
-          <mat-select formControlName="DniType">
+          <mat-select formControlName="dniType">
             <mat-option *ngFor="let item of tipoDocumento" [value]="item">
               {{ item }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <div class="error">
-          <span *ngIf="form.get('DniType')?.hasError('required') && form.get('DniType')?.touched">
+          <span *ngIf="form.get('dniType')?.hasError('required') && form.get('DniType')?.touched">
             <strong>Campo obligatorio</strong>
           </span>
         </div>
@@ -76,12 +76,12 @@
       <div class="column">
         <mat-form-field class="example-full-width">
           <mat-label>Fecha Nacimiento</mat-label>
-          <input formControlName="BornDate" matInput [matDatepicker]="picker">
+          <input formControlName="bornDate" matInput [matDatepicker]="picker">
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker touchUi #picker></mat-datepicker>
         </mat-form-field>
         <div class="error">
-          <span *ngIf="form.get('BornDate')?.hasError('required') && form.get('BornDate')?.touched">
+          <span *ngIf="form.get('bornDate')?.hasError('required') && form.get('bornDate')?.touched">
             <strong>Campo obligatorio</strong>
           </span>
         </div> 

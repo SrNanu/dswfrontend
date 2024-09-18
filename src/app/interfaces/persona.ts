@@ -2,10 +2,10 @@ export interface Persona {
     id?: number;
     firstname: string;
     lastname: string;
-    Mail: string;
-    DniType: string;
+    mail: string;
+    dniType: string;
     dni: number;
-    BornDate: Date;
-    Password: string;
-    Username: string;
+    bornDate: Date;
+    password: string;
+    username: string;
 }
