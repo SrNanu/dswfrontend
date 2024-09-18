@@ -22,14 +22,14 @@ export class AgregarEditarSecretaryComponent implements OnInit {
   id: number | undefined;
   constructor(public dialogRef: MatDialogRef<AgregarEditarSecretaryComponent>, private fb:FormBuilder, private _secretaryService: SecretaryService,private _snackBar :MatSnackBar, private dateAdapter:DateAdapter<any>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.form = this.fb.group({
-      firstname: ['', Validators.required],
+      firstname: ['', [Validators.required, Validators.maxLength(20)]],
       lastname: ['', Validators.required],
       mail: ['', Validators.required],
       dniType: [null, Validators.required],
       dni: [null, Validators.required],
       bornDate: [null, Validators.required],
       password: [null, Validators.required],
-      username: [null, Validators.required]
+      username: ['', [Validators.required, Validators.maxLength(20)]]
     })
     this.id = data.id;
     dateAdapter.setLocale('es-AR');
