@@ -40,9 +40,9 @@ export class ListSecretarysComponent implements OnInit, AfterViewInit {
 
   obtenerSecretarys(){
     this._secretaryService.getSecretarys().subscribe(data => {
-      console.log('Data recibida del backend:', data ); // Debería mostrar los datos correctos
+      //console.log('Data recibida del backend:', data );  Debería mostrar los datos correctos
       this.dataSource.data = data;
-      console.log('DataSource data:', this.dataSource.data); // Debería mostrar los mismos datos que el log anterior
+      //console.log('DataSource data:', this.dataSource.data);  Debería mostrar los mismos datos que el log anterior
       this.dataSource.paginator = this.paginator;
       
       this.dataSource.sort = this.sort;}, error => {
