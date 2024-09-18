@@ -54,6 +54,7 @@ export class AgregarEditarSecretaryComponent implements OnInit {
         mail:data.mail,
         dniType:data.dniType,
         dni:data.dni,
+        username:data.username,
         bornDate:new Date(data.bornDate) 
 
       })
