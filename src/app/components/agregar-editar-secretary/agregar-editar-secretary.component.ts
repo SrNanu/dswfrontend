@@ -18,6 +18,7 @@ export class AgregarEditarSecretaryComponent implements OnInit {
   form: FormGroup;
   loading : boolean = false;
   operacion: string = 'Agregar';
+  hide :boolean= true;
   id: number | undefined;
   constructor(public dialogRef: MatDialogRef<AgregarEditarSecretaryComponent>, private fb:FormBuilder, private _secretaryService: SecretaryService,private _snackBar :MatSnackBar, private dateAdapter:DateAdapter<any>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.form = this.fb.group({
