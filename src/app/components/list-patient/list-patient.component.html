@@ -1,4 +1,4 @@
-<mat-toolbar color="primary"></mat-toolbar>
+<mat-toolbar color="primary">
     <span>Listado de Pacientes</span>
 </mat-toolbar>
 
@@ -7,7 +7,7 @@
         <mat-label>Filtro</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input autocomplete="off">
        </mat-form-field>
-    <button (click)= "addEditPacient()" mat-raised-button color="primary">Agregar</button>
+    <button (click)= "addEditPatient()" mat-raised-button color="primary">Agregar</button>
     <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z15">
         <ng-container matColumnDef="nombre">
             <th mat-sort-header mat-header-cell *matHeaderCellDef> Nombre </th>
@@ -44,22 +44,22 @@
             <td mat-cell *matCellDef="let element"> {{element.birthDate | date:'dd/MM/yyyy'}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="grupo sanguineo"></ng-container>
+        <ng-container matColumnDef="grupo sanguineo">
             <th mat-sort-header mat-header-cell *matHeaderCellDef> Grupo Sanguineo </th>
             <td mat-cell *matCellDef="let element"> {{element.grupoSanguineo}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="antecedentes personales"></ng-container>
+        <ng-container matColumnDef="antecedentes personales">
             <th mat-sort-header mat-header-cell *matHeaderCellDef> Antecedentes Personales </th>
             <td mat-cell *matCellDef="let element"> {{element.antecedentesPersonales}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="antecedentes familiares"></ng-container>
+        <ng-container matColumnDef="antecedentes familiares">
             <th mat-sort-header mat-header-cell *matHeaderCellDef> Antecedentes Familiares </th>
             <td mat-cell *matCellDef="let element"> {{element.antecedentesFamiliares}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="obra social"></ng-container>
+        <ng-container matColumnDef="obra social">
             <th mat-sort-header mat-header-cell *matHeaderCellDef> Obra Social </th>
             <td mat-cell *matCellDef="let element"> {{element.healthInsurance}} </td>
         </ng-container>
@@ -67,8 +67,8 @@
         <ng-container matColumnDef="acciones">
             <th mat-sort-header mat-header-cell *matHeaderCellDef> </th>
             <td mat-cell *matCellDef="let element">
-                <mat-icon (click)="addEditPacient(element.id)" class="btnEdit"matTooltip="Editar">edit</mat-icon>
-                <mat-icon (click)= "deletePacient(element.id)" class="btnDelete"matTooltip="Eliminar">delete</mat-icon>
+                <mat-icon (click)="addEditPatient(element.id)" class="btnEdit"matTooltip="Editar">edit</mat-icon>
+                <mat-icon (click)= "deletePatient(element.id)" class="btnDelete"matTooltip="Eliminar">delete</mat-icon>
             </td>
         </ng-container>
 

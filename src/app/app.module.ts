@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 import { ListSecretarysComponent } from './components/list-secretary/list-secretary.component';
 import { AgregarEditarSecretaryComponent } from './components/agregar-editar-secretary/agregar-editar-secretary.component';
 import { AgregarEditarPatientComponent } from './components/agregar-editar-paciente/agregar-editar-paciente.component';
-import { ListPatientsComponent } from './components/list-patient/list-patient.component';
+import { ListPatientsComponent } from './components/list-patient/list.patient.component';
 //Modulos
 import { SharedModule } from './shared/shared.module';
 
@@ -22,7 +22,8 @@ import { SharedModule } from './shared/shared.module';
     AppComponent,
     ListSecretarysComponent,
     AgregarEditarSecretaryComponent,
-    AgregarEditarPatientComponent
+    AgregarEditarPatientComponent,
+    ListPatientsComponent,
   ],
   imports: [
     ReactiveFormsModule,

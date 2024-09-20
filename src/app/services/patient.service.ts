@@ -22,7 +22,7 @@ export class PatientService {
         map(response => response.data) // Extrae el array de la propiedad `data`
       );
   }
-   deletePatients(id: number): Observable<void> {
+   deletePatient(id: number): Observable<void> {
     return this.http.delete<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`);}
 
    addPatient(patient: Patient): Observable<void> {
