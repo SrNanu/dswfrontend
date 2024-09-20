@@ -72,7 +72,6 @@ export class AgregarEditarPatientComponent implements OnInit {
   addEditPatient(){
 
     const patient: Patient = {
-        id: this.form.value.id,
       firstname: this.form.value.firstname,
       lastname: this.form.value.lastname,
       dni: this.form.value.dni,
@@ -83,7 +82,8 @@ export class AgregarEditarPatientComponent implements OnInit {
       grupoSanguineo: this.form.value.grupoSanguineo,
       antecedentesPersonales: this.form.value.antecedentesPersonales,
       antecedentesFamiliares: this.form.value.antecedentesFamiliares,
-      healthInsurance: this.form.value.healthInsurance      
+      healthInsurance: this.form.value.healthInsurance,    
+      id: this.form.value.id,
     }
     //console.log(patient);
     this.loading = true;

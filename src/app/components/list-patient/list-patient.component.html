@@ -6,7 +6,7 @@
     <mat-form-field>
         <mat-label>Filtro</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input autocomplete="off">
-       </mat-form-field>
+    </mat-form-field>
     <button (click)= "addEditPatient()" mat-raised-button color="primary">Agregar</button>
     <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z15">
         <ng-container matColumnDef="nombre">

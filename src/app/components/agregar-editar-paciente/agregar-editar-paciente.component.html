@@ -1,7 +1,7 @@
 <div class="container">
     <h2 mat-dialog-title>{{operacion}} Paciente</h2>
     <mat-spinner *ngIf="loading"  [diameter]="30" class="spinner" ></mat-spinner>
-  </div>
+
   
   <form [formGroup]="form" (ngSubmit)="addEditPatient()">
     <mat-dialog-content>
@@ -46,19 +46,8 @@
             </span>
           </div>
         </div>
-        <div class="column">
-          <mat-form-field appearance="fill">
-            <mat-label>Apellido</mat-label>
-            <input formControlName="lastname" matInput placeholder="Ingrese Apellido" autocomplete="off">
-          </mat-form-field>
-          <div class="error">
-            <span *ngIf="form.get('lastname')?.hasError('required') && form.get('lastname')?.touched">
-              <strong>Campo obligatorio</strong>
-            </span>
-          </div>
-        </div>
-      </div>
-  
+      </div>  
+
       <div class="row">
         <div class="column">
           <mat-form-field appearance="fill">
@@ -180,6 +169,7 @@
     </mat-dialog-actions>
     
   </form>
+</div>
   
   
   
