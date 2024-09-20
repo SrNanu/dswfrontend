@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Patient } from '../interfaces/patient';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class PatientService {
    }
 
    getPatients(): Observable<Patient[]> {
-    return this.http.get<{ data: Patient[] }>(`${this.myAppUrl}${this.myApiUrl}`)
+    return this.http.get<{ message: String; data: Patient[] }>(`${this.myAppUrl}${this.myApiUrl}`)
       .pipe(
         map(response => response.data) // Extrae el array de la propiedad `data`
       );

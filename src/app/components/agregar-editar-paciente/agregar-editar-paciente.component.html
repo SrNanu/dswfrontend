@@ -1,11 +1,9 @@
 <div class="container">
-    <h2 mat-dialog-title>{{operacion}} Paciente</h2>
-    <mat-spinner *ngIf="loading"  [diameter]="30" class="spinner" ></mat-spinner>
+  <h2 mat-dialog-title>{{operacion}} Paciente</h2>
+  <mat-spinner *ngIf="loading" [diameter]="30" class="spinner"></mat-spinner>
 
-  
   <form [formGroup]="form" (ngSubmit)="addEditPatient()">
     <mat-dialog-content>
-      
       <div class="row">
         <div class="column">
           <mat-form-field appearance="fill">
@@ -51,8 +49,8 @@
       <div class="row">
         <div class="column">
           <mat-form-field appearance="fill">
-            <mat-label>Telefono</mat-label>
-            <input formControlName="phoneNumber" matInput placeholder="Ingrese Telefono" autocomplete="off">
+            <mat-label>Teléfono</mat-label>
+            <input formControlName="phoneNumber" matInput placeholder="Ingrese Teléfono" autocomplete="off">
           </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('phoneNumber')?.hasError('required') && form.get('phoneNumber')?.touched">
@@ -65,8 +63,8 @@
       <div class="row">
         <div class="column">
           <mat-form-field appearance="fill">
-            <mat-label>Direccion</mat-label>
-            <input formControlName="address" matInput placeholder="Ingrese Direccion" autocomplete="off">
+            <mat-label>Dirección</mat-label>
+            <input formControlName="address" matInput placeholder="Ingrese Dirección" autocomplete="off">
           </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('address')?.hasError('required') && form.get('address')?.touched">
@@ -92,7 +90,7 @@
 
       <div class="row">
         <div class="column">
-          <mat-form-field class="example-full-width">
+          <mat-form-field appearance="fill">
             <mat-label>Fecha Nacimiento</mat-label>
             <input formControlName="birthDate" matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -108,8 +106,8 @@
 
       <div class="row">
         <div class="column">
-          <mat-form-field>
-            <mat-label>Grupo Sanguineo</mat-label>
+          <mat-form-field appearance="fill">
+            <mat-label>Grupo Sanguíneo</mat-label>
             <mat-select formControlName="grupoSanguineo">
               <mat-option *ngFor="let item of bloodGroup" [value]="item">
                 {{ item }}
@@ -124,52 +122,53 @@
         </div>
       </div>
 
-      <div class="column">
-        <mat-form-field appearance="fill">
-          <mat-label>Antecedentes Personales</mat-label>
-          <input formControlName="antecedentesPersonales" matInput placeholder="Ingrese Antecedentes Personales" autocomplete="off">
-        </mat-form-field>
-        <div class="error">
-          <span *ngIf="form.get('antecedentesPersonales')?.hasError('required') && form.get('antecedentesPersonales')?.touched">
-            <strong>Campo obligatorio</strong>
-          </span>
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="fill">
+            <mat-label>Antecedentes Personales</mat-label>
+            <input formControlName="antecedentesPersonales" matInput placeholder="Ingrese Antecedentes Personales" autocomplete="off">
+          </mat-form-field>
+          <div class="error">
+            <span *ngIf="form.get('antecedentesPersonales')?.hasError('required') && form.get('antecedentesPersonales')?.touched">
+              <strong>Campo obligatorio</strong>
+            </span>
+          </div>
         </div>
       </div>
 
-      <div class="column">
-        <mat-form-field appearance="fill">
-          <mat-label>Antecedentes Familiares</mat-label>
-          <input formControlName="antecedentesFamiliares" matInput placeholder="Ingrese Antecedentes Familiares" autocomplete="off">
-        </mat-form-field>
-        <div class="error">
-          <span *ngIf="form.get('antecedentesFamiliares')?.hasError('required') && form.get('antecedentesFamiliares')?.touched">
-            <strong>Campo obligatorio</strong>
-          </span>
-        </div>
-      </div>      
-
-      <div class="column">
-        <mat-form-field appearance="fill">
-          <mat-label>Obra Social</mat-label>
-          <input formControlName="healthInsurance" matInput placeholder="Ingrese Obra Social" autocomplete="off">
-        </mat-form-field>
-        <div class="error">
-          <span *ngIf="form.get('healthInsurance')?.hasError('required') && form.get('healthInsurance')?.touched">
-            <strong>Campo obligatorio</strong>
-          </span>
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="fill">
+            <mat-label>Antecedentes Familiares</mat-label>
+            <input formControlName="antecedentesFamiliares" matInput placeholder="Ingrese Antecedentes Familiares" autocomplete="off">
+          </mat-form-field>
+          <div class="error">
+            <span *ngIf="form.get('antecedentesFamiliares')?.hasError('required') && form.get('antecedentesFamiliares')?.touched">
+              <strong>Campo obligatorio</strong>
+            </span>
+          </div>
         </div>
       </div>
-      <!--Aca se deberian mostrar las obras sociales cargadas?-->
 
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="fill">
+            <mat-label>Obra Social</mat-label>
+            <input formControlName="healthInsurance" matInput placeholder="Ingrese Obra Social" autocomplete="off">
+          </mat-form-field>
+          <div class="error">
+            <span *ngIf="form.get('healthInsurance')?.hasError('required') && form.get('healthInsurance')?.touched">
+              <strong>Campo obligatorio</strong>
+            </span>
+          </div>
+        </div>
+      </div>
     </mat-dialog-content>
+
     <mat-dialog-actions align="end">
-      <button type='button' (click)="cancelar()" mat-button >Cancelar</button>
+      <button type='button' (click)="cancelar()" mat-button>Cancelar</button>
       <button type='submit' mat-button cdkFocusInitial>Aceptar</button>
       <!--[disabled]="form.invalid" DESHABILITAR EL BOTON ACEPTAR SI EL FORM ES INVALIDO-->
     </mat-dialog-actions>
-    
   </form>
 </div>
-  
-  
-  
