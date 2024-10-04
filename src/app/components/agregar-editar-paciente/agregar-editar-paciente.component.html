@@ -1,6 +1,7 @@
 <div class="container">
   <h2 mat-dialog-title>{{operacion}} Paciente</h2>
   <mat-spinner *ngIf="loading" [diameter]="30" class="spinner"></mat-spinner>
+</div>
 
   <form [formGroup]="form" (ngSubmit)="addEditPatient()">
     <mat-dialog-content>
@@ -16,9 +17,7 @@
             </span>
           </div>
         </div>
-      </div>
-    
-      <div class="row">
+      
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>Apellido</mat-label>
@@ -44,9 +43,7 @@
             </span>
           </div>
         </div>
-      </div>  
 
-      <div class="row">
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>Teléfono</mat-label>
@@ -72,9 +69,7 @@
             </span>
           </div>
         </div>
-      </div>
 
-      <div class="row">
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
@@ -102,9 +97,7 @@
             </span>
           </div> 
         </div>
-      </div>
 
-      <div class="row">
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>Grupo Sanguíneo</mat-label>
@@ -154,7 +147,11 @@
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>Obra Social</mat-label>
-            <input formControlName="healthInsurance" matInput placeholder="Ingrese Obra Social" autocomplete="off">
+            <mat-select formControlName="healthInsurance">
+              <mat-option *ngFor="let item of healthInsurences" [value]="item.id">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('healthInsurance')?.hasError('required') && form.get('healthInsurance')?.touched">
@@ -171,4 +168,4 @@
       <!--[disabled]="form.invalid" DESHABILITAR EL BOTON ACEPTAR SI EL FORM ES INVALIDO-->
     </mat-dialog-actions>
   </form>
-</div>
+

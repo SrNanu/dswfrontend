@@ -14,6 +14,11 @@ import { AgregarEditarSecretaryComponent } from './components/agregar-editar-sec
 import { AgregarEditarPatientComponent } from './components/agregar-editar-paciente/agregar-editar-paciente.component';
 import { ListPatientsComponent } from './components/list-patient/list.patient.component';
 import { MenuComponent } from './menu/menu.component';
+import { ListSpecialtyComponent } from './components/list-specialty/list-specialty.component';
+import { AgregarEditarSpecialtyComponent } from './components/agregar-editar-specialty/agregar-editar-specialty.component';
+import { ListMedicsComponent } from './components/list-medics/list-medics.component';
+import { AddEditMedicComponent } from './components/add-edit-medic/add-edit-medic.component';
+
 //Modulos
 import { SharedModule } from './shared/shared.module';
 
@@ -26,6 +31,10 @@ import { SharedModule } from './shared/shared.module';
     AgregarEditarPatientComponent,
     ListPatientsComponent,
     MenuComponent,
+    ListSpecialtyComponent,
+    AgregarEditarSpecialtyComponent,
+    ListMedicsComponent,
+    AddEditMedicComponent,
   ],
   imports: [
     ReactiveFormsModule,

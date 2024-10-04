@@ -1,0 +1,24 @@
+mat-form-field{
+  width: 100%;
+}
+.row{
+  display: flex;
+}
+
+.column{
+  flex: 50%;
+  margin: 0px 5px;
+}
+
+.error{
+  margin-top: -20px;
+  margin-bottom: 10px
+}
+
+.container{
+  display: flex;
+  justify-content: space-between;
+}
+.spinner{
+  margin: 10px;
+}

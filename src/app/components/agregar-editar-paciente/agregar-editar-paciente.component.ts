@@ -6,7 +6,8 @@ import { PatientService } from '../../services/patient.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DateAdapter } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { HealthInsurance } from '../../interfaces/healthInsurance';
+import { HealthInsuranceService } from '../../services/healthInsurance.service';
 @Component({
   selector: 'app-agregar-editar-paciente',
   templateUrl: './agregar-editar-paciente.component.html',
@@ -14,31 +15,32 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class AgregarEditarPatientComponent implements OnInit {
 
-
+  healthInsurences: HealthInsurance[] = [];
   bloodGroup: string[] = ['A+', 'A-', 'B+', 'B-', '0+', '0-', 'AB+', 'AB-'];
   form: FormGroup;
   loading : boolean = false;
   operacion: string = 'Agregar';
   id: number | undefined;
-  constructor(public dialogRef: MatDialogRef<AgregarEditarPatientComponent>, private fb:FormBuilder, private _patientService: PatientService,private _snackBar :MatSnackBar, private dateAdapter:DateAdapter<any>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(public dialogRef: MatDialogRef<AgregarEditarPatientComponent>, private _healthInsuranceService: HealthInsuranceService, private fb:FormBuilder, private _patientService: PatientService,private _snackBar :MatSnackBar, private dateAdapter:DateAdapter<any>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.form = this.fb.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      dni: [null, Validators.required],
-      phoneNumber: [null, Validators.required],
-      address: [null, Validators.required],
-      email: [null, Validators.required],
-      birthDate: [null, Validators.required],
-      grupoSanguineo: [null, Validators.required],
-      antecedentesPersonales: [null, Validators.required],
-      antecedentesFamiliares: [null, Validators.required],
-      healthInsurance: [null, Validators.required],
+      firstname: ['', Validators.required, Validators.maxLength(40)],
+      lastname: ['', Validators.required, Validators.maxLength(40)],
+      dni: ['', Validators.required, Validators.pattern('^[0-9]*$')],
+      phoneNumber: ['', Validators.required],
+      address: ['', Validators.required],
+      email: ['', Validators.required],
+      birthDate: ['', Validators.required],
+      grupoSanguineo: ['', Validators.required],
+      antecedentesPersonales: ['', Validators.required],
+      antecedentesFamiliares: ['', Validators.required],
+      healthInsurance: ['', Validators.required],
     })
     this.id = data.id;
     dateAdapter.setLocale('es-AR');
   }
   ngOnInit(): void {
-    this.isEdit(this.id)
+    this.isEdit(this.id);
+    this.obtenerObrasSociales();
   }
   cancelar(){
     this.dialogRef.close(false);
@@ -49,7 +51,12 @@ export class AgregarEditarPatientComponent implements OnInit {
       this.getPatient(id);
     }
   }
-
+  obtenerObrasSociales(){
+    this._healthInsuranceService.getHealthInsurances().subscribe(data => {
+      this.healthInsurences=data;
+      console.log('Obras Sociales:', this.healthInsurences)
+    });
+  }
   getPatient(id: number){
     this._patientService.getPatient(id).subscribe(data => {
       this.form.patchValue({
@@ -64,7 +71,6 @@ export class AgregarEditarPatientComponent implements OnInit {
         antecedentesPersonales:data.antecedentesPersonales,
         antecedentesFamiliares:data.antecedentesFamiliares,
         healthInsurance:data.healthInsurance
-
       })
 
     });
