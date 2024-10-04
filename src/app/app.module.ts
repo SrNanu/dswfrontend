@@ -18,7 +18,8 @@ import { ListSpecialtyComponent } from './components/list-specialty/list-special
 import { AgregarEditarSpecialtyComponent } from './components/agregar-editar-specialty/agregar-editar-specialty.component';
 import { ListMedicsComponent } from './components/list-medics/list-medics.component';
 import { AddEditMedicComponent } from './components/add-edit-medic/add-edit-medic.component';
-
+import { AgregarEditarHealthInsuranceComponent } from './components/agregar-editar-healthInsurance/agregar-editar-healthInsurance.component';
+import { ListHealthInsuranceComponent } from './components/list-healthInsurance/list-healthInsurance.component';
 //Modulos
 import { SharedModule } from './shared/shared.module';
 
@@ -35,6 +36,8 @@ import { SharedModule } from './shared/shared.module';
     AgregarEditarSpecialtyComponent,
     ListMedicsComponent,
     AddEditMedicComponent,
+    AgregarEditarHealthInsuranceComponent,
+    ListHealthInsuranceComponent
   ],
   imports: [
     ReactiveFormsModule,
