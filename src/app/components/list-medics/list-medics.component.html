@@ -1,0 +1,95 @@
+<mat-toolbar color="primary">
+  <span>Listado de Médicos</span>
+</mat-toolbar>  
+
+<!--<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar> -->
+
+
+<mat-card appearance="outlined">
+
+    <mat-form-field>
+      <mat-label>Filtro</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input autocomplete="off">
+    </mat-form-field>
+
+    <button (click)="addEditMedic()" mat-raised-button color="primary">Agregar</button>
+  
+    <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- dni Column -->
+    <ng-container matColumnDef="dni">
+      <th mat-header-cell *matHeaderCellDef> DNI </th>
+      <td mat-cell *matCellDef="let element"> {{element.dni}} </td>
+    </ng-container>
+  
+    <!-- firstname Column -->
+    <ng-container matColumnDef="firstname">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+    </ng-container>
+  
+    <!-- lastname Column -->
+    <ng-container matColumnDef="lastname">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+    </ng-container>
+  
+    <!-- dnitype Column -->
+    <ng-container matColumnDef="dniType">
+      <th mat-header-cell *matHeaderCellDef> Tipo DNI </th>
+      <td mat-cell *matCellDef="let element"> {{element.dniType}} </td>
+    </ng-container>
+
+      <!-- username Column -->
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef> Nombre de Usuario </th>
+      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+    </ng-container>
+  
+    <!-- password Column -->
+    <ng-container matColumnDef="password">
+      <th mat-header-cell *matHeaderCellDef> Contraseña </th>
+      <td mat-cell *matCellDef="let element"> {{element.password}} </td>
+    </ng-container>
+
+    <!-- medicalConsultationValue Column -->
+      <ng-container matColumnDef="medicalConsultationValue">
+        <th mat-header-cell *matHeaderCellDef> Valor Consulta </th>
+         <td mat-cell *matCellDef="let element"> {{element.medicalConsultationValue}} </td>
+      </ng-container>
+    
+    <!-- license Column -->
+    <ng-container matColumnDef="license">
+      <th mat-header-cell *matHeaderCellDef> Nro Lisencia </th>
+      <td mat-cell *matCellDef="let element"> {{element.license}} </td>
+    </ng-container>
+
+    <!-- specialty Column -->
+    <ng-container matColumnDef="specialty">
+      <th mat-header-cell *matHeaderCellDef> Especialidad </th> 
+      <td mat-cell *matCellDef="let element"> {{element.specialty.name}} </td>
+    </ng-container>
+    
+    <!-- consultationHours Column 
+        <ng-container matColumnDef="consultationHours">
+          <th mat-header-cell *matHeaderCellDef> Horarios de consulta </th> 
+          <td mat-cell *matCellDef="let element"> {{element.consultationHours}} </td>
+        </ng-container>
+        -->
+    
+    <!-- actions Column -->
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"> 
+      <mat-icon class="btnedit"  matTooltip="Editar Médico">edit</mat-icon>  
+      <mat-icon (click)="deleteMedico(element.id)" class="btndelete"  matTooltip="Borrar Médico">delete</mat-icon> 
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+
+</mat-card>
