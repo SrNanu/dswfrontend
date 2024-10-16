@@ -1,7 +1,7 @@
 <div class="container">
 
-  <h2 mat-dialog-title>Agregar Médico</h2>
-  <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+  <h2 mat-dialog-title>{{operacion}} Médico</h2>
+  <mat-spinner *ngIf="loading" [diameter]="30" class="spinner"></mat-spinner>
 
 </div>
 
@@ -84,18 +84,21 @@
         </div>
       </div>
 
-      <div class="column">
-        <mat-form-field appearance="fill">
-          <mat-label>Contraseña</mat-label>
-          <input formControlName="password" matInput placeholder="Ingrese Contraseña" autocomplete="off">
-        </mat-form-field>
-        <div class="error">
-          <span *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched">
-            La contraseña es un campo <strong>requerido</strong>
-          </span>
-          <span *ngIf="form.get('password')?.hasError('maxlength')">
-            La contraseña debe tener como minimo <strong>8 caracteres</strong>
-          </span>
+      <div *ngIf="operacion === 'Agregar'">
+        <div class="row">
+          <div class="column">
+            <mat-form-field appearance="fill">
+              <mat-label>Contraseña</mat-label>
+              <input matInput placeholder="Ingrese Contraseña" [type]="hide ? 'password' : 'text'" formControlName="password"
+                required>
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field>
+            <div class="error">
+              <span *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched">
+                <strong>Campo obligatorio</strong>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -135,18 +138,23 @@
     </div>
 
     <!-- "acá se puede agregar el campo especialidad" -->
-    <div class="row">
-      <div class="column">
-        <mat-form-field>
-          <mat-label>Especialidad</mat-label>
-          <mat-select formControlName="specialty">
-            <mat-option *ngFor="let item of specialties" [value]="item">
-              {{item.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+<div class="row">
+  <div class="column">
+    <mat-form-field>
+      <mat-label>Especialidad</mat-label>
+      <mat-select formControlName="specialty">
+        <mat-option *ngFor="let item of specialties" [value]="item">
+          {{ item.name }}
+        </mat-option>
+      </mat-select>
+      <div class="error">
+        <span *ngIf="form.get('specialty')?.hasError('required') && form.get('specialty')?.touched">
+          La especialidad es un campo <strong>requerido</strong>
+        </span>
       </div>
-    </div>
+    </mat-form-field>
+  </div>
+</div>
     
   </mat-dialog-content>
 

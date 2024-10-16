@@ -20,7 +20,10 @@ export class AgregarEditarSecretaryComponent implements OnInit {
   operacion: string = 'Agregar';
   hide :boolean= true;
   id: number | undefined;
-  constructor(public dialogRef: MatDialogRef<AgregarEditarSecretaryComponent>, private fb:FormBuilder, private _secretaryService: SecretaryService,private _snackBar :MatSnackBar, private dateAdapter:DateAdapter<any>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(public dialogRef: MatDialogRef<AgregarEditarSecretaryComponent>, 
+    private fb:FormBuilder, private _secretaryService: SecretaryService,
+    private _snackBar :MatSnackBar, private dateAdapter:DateAdapter<any>, 
+    @Inject(MAT_DIALOG_DATA) public data: any) {
     this.form = this.fb.group({
       firstname: ['', [Validators.required, Validators.maxLength(20)]],
       lastname: ['', Validators.required],

@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject,  OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Medic } from '../../interfaces/medic.js';
 import { MedicService } from '../../services/medic.service.js';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SpecialtyService } from '../../services/specialty.service.js';
 import { Specialty } from '../../interfaces/specialty.js';
+import { DateAdapter } from '@angular/material/core';
+import { spec } from 'node:test/reporters';
+import { get } from 'node:http';
 
 @Component({
   selector: 'app-add-edit-medic',
@@ -19,11 +22,16 @@ export class AddEditMedicComponent implements OnInit {
   tipoDocumento: string[] = ['DNI', 'Libreta Civica', 'Pasaporte'];
   specialties: Specialty[] = [];
   form: FormGroup;
+  operacion: string = 'Agregar';
   loading: boolean = false;
+  id: number | undefined;
+  hide: boolean = true;
 
-  constructor(public dialogRef: MatDialogRef<AddEditMedicComponent>, private _specialtyService: SpecialtyService,
-    public fb: FormBuilder, private _medicService: MedicService
-  , private _snackBar: MatSnackBar) {
+  constructor(public dialogRef: MatDialogRef<AddEditMedicComponent>, 
+    private _specialtyService: SpecialtyService,
+    public fb: FormBuilder, private _medicService: MedicService, private _snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dateAdapter: DateAdapter<any>) {
     this.form = this.fb.group({
       firstname: ['', [Validators.required, Validators.maxLength(20)]],
       lastname: ['', [Validators.required, Validators.maxLength(20)]],
@@ -33,17 +41,27 @@ export class AddEditMedicComponent implements OnInit {
       password: ['', [Validators.required, Validators.maxLength(12)]],
       medicalConsultationValue: ['', [Validators.required, Validators.maxLength(5)]],
       license: ['', [Validators.required, Validators.pattern('^[0-5]*$')]],
-      specialty: ['', Validators.required]
+      specialty: [null, Validators.required]
       //consultationHours: ['', Validators.required]
     })
+    this.id = data.id;
+    dateAdapter.setLocale('es-AR');
   }
 
   ngOnInit(): void {
     this.obternerEspecialidades();
+    this.isEdit(this.id);
   }
 
   cancelar() {
     this.dialogRef.close(false);
+  }
+
+  isEdit(id: number | undefined) {
+    if (id !== undefined) {
+      this.operacion = 'Editar';
+      this.getMedico(id);
+    }
   }
   mensajeExito() {
     this._snackBar.open('Medico agregado con exito', '', {
@@ -57,7 +75,26 @@ export class AddEditMedicComponent implements OnInit {
       console.log('Especialidades:', this.specialties);
     });
   }
+  
 
+  getMedico(id: number) {
+    this._medicService.getMedico(id).subscribe(data => {
+      const specialty = this.specialties.find(s => s.id === Number(data.specialty));
+      this.form.patchValue({
+        firstname: data.firstname, 
+        lastname: data.lastname,
+        dniType: data.dniType,
+        dni: data.dni,
+        username: data.username,
+        password: data.password,
+        medicalConsultationValue: data.medicalConsultationValue,
+        license: data.license,
+        specialty: specialty
+      })
+      console.log(this.form.value.specialty);
+
+    });
+  }
 
   
   addEditMedico() {
@@ -72,19 +109,40 @@ export class AddEditMedicComponent implements OnInit {
         password: this.form.value.password,
         medicalConsultationValue: this.form.value.medicalConsultationValue,
         license: this.form.value.license,
-        specialty: this.form.value.specialty.id
-        //consultationHours: this.form.value.consultationHours
+        specialty: this.form.value.specialty.id,
+        consultationHours: this.form.value.consultationHours
       }
 
       this.loading = true;
 
-      this._medicService.addMedico(medic).subscribe(() => {
-        this.loading = false;
-        this.mensajeExito();
-        this.dialogRef.close(true);
-      }); 
+    if (this.id === undefined) {
+      //IS ADD
+        this._medicService.addMedico(medic).subscribe(() => {
+          this.successMessage("agregado");
+        });
+    
+    } else {
+      //IS EDIT
+ 
+        this._medicService.updateMedico(this.id, medic).subscribe(() => {
+          this.successMessage("actualizado");
+        });
+
     }
   }
-
- 
+  
+    successMessage(operation: string){
+      this._snackBar.open(`El medico fue ${operation} con exito`, "", {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom'
+      });
+   
+      this.loading = false;
+      this.mensajeExito();
+      this.dialogRef.close(true);
+    }}  
+      
+    
+  
 
