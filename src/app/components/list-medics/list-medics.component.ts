@@ -72,11 +72,15 @@ applyFilter(event: Event){
   }
 };
 
-addEditMedic() {
+
+addEditMedic(id?: number) {
+  console.log('id:', id);
   const dialogRef = this.dialog.open(AddEditMedicComponent, {
     width: '550px',
     disableClose: true,
+    data: {id: id}
   });
+
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
       this.obtenerMedicos();

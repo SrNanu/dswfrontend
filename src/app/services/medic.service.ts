@@ -24,6 +24,16 @@ export class MedicService {
       );
   }
 
+  getMedico(id: number): Observable<Medic> {
+    return this.http.get<{ data: Medic }>(`${this.myAppUrl}${this.myApiUrl}/${id}`)
+      .pipe(
+        map(response => response.data) // Extrae el objeto de la propiedad `data`
+      );
+  }
+
+  updateMedico(id: number, medic: Medic): Observable<void> {
+    return this.http.put<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`, medic)
+  }
 
   deleteMedico(id: number) : Observable<void> {
     return this.http.delete<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`);
@@ -34,3 +44,4 @@ export class MedicService {
     return this.http.post<void>(`${this.myAppUrl}${this.myApiUrl}`, medic);
   }
 }
+

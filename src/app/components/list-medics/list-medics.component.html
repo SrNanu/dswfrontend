@@ -81,8 +81,8 @@
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element"> 
-      <mat-icon class="btnedit"  matTooltip="Editar Médico">edit</mat-icon>  
-      <mat-icon (click)="deleteMedico(element.id)" class="btndelete"  matTooltip="Borrar Médico">delete</mat-icon> 
+          <mat-icon (click)="addEditMedic(element.id)" class="btnEdit" matTooltip="Editar">edit</mat-icon>
+          <mat-icon (click)="deleteMedico(element.id)" class="btndelete"  matTooltip="Borrar Médico">delete</mat-icon> 
       </td>
     </ng-container>
   
