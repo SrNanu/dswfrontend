@@ -4,7 +4,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ConsultationHours } from '../../interfaces/consultationHours.js';
 import { ConsultationHoursService } from '../../services/consultationHours.service.js';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { start } from 'repl';
 
 @Component({
   selector: 'app-agregar-editar-consultationHours',
