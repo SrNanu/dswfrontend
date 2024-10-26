@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'specialty', component: ListSpecialtyComponent },
   { path: 'healthInsurance', component: ListHealthInsuranceComponent },
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/patient', pathMatch: 'full' }];
+  { path: '', redirectTo: '/login', pathMatch: 'full' }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

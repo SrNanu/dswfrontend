@@ -1,5 +1,6 @@
 import {  Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 
@@ -13,10 +14,12 @@ export class LoginComponent {
     username: new FormControl(''),
     password: new FormControl(''),
   });
+  constructor(private router: Router) {}
 
   submit() {
     if (this.form.valid) {
-      console.log(this.form.value); // Procesa los datos aquí
+      console.log(this.form.value); // Aca tendriamos que validar la contraseña y el usuario
+      this.router.navigate(['/secretary']);
     }
   }
 
