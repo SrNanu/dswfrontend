@@ -22,9 +22,9 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
     , private _snackBar :MatSnackBar
     , @Inject(MAT_DIALOG_DATA) public data: any) {
       this.form = this.fb.group({
-        day: [null, [Validators.required, Validators.pattern("^[0-9]*$")]],
-        startTime: [null, [Validators.required, Validators.pattern("^[0-9]*$")]],
-        endTime: ['', [Validators.required, Validators.maxLength(20)]]
+        day: [null, [Validators.required]],
+        startTime: [null, [Validators.required, Validators.pattern("^[0-9:]*$"),  Validators.maxLength(20)]],
+        endTime: [null, [Validators.required, Validators.pattern("^[0-9:]*$"),  Validators.maxLength(20)]]
       })
       this.id = data.id;
      }
@@ -35,7 +35,7 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
 
   isEdit(id: number | undefined){
     if(id !== undefined){
-      this.operation = 'Editar ';
+      this.operation = 'Editar';
       this.getConsultationHours(id);
     }
   }
@@ -43,6 +43,8 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
   getConsultationHours(id: number){
     this._consultationHoursService.getConsultationHours(id).subscribe(data => {
       console.log(data);
+      console.log(data.day);
+      console.log(data.startTime);
       this.form.patchValue({
         day: data.day,
         startTime: data.startTime,

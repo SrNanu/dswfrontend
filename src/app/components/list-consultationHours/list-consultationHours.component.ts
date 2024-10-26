@@ -17,7 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 
 export class ListConsultationHoursComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['Start Time', 'End Time', 'acciones'];
+  displayedColumns: string[] = ['day','startTime', 'endTime', 'acciones'];
   dataSource: MatTableDataSource<ConsultationHours>;
   loading: boolean = false;
 
@@ -47,6 +47,7 @@ export class ListConsultationHoursComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+    console.log(this.dataSource);
   }
 
   applyFilter(event: Event) {

@@ -33,7 +33,10 @@ addConsultationHours(aConsultationHours: ConsultationHours): Observable<void> {
 }
 
 getConsultationHours(id:number): Observable<ConsultationHours> {
-  return this.http.get<ConsultationHours>(`${this.myAppUrl}${this.myApiUrl}/${id}`)
+  return this.http.get<{ data: ConsultationHours }>(`${this.myAppUrl}${this.myApiUrl}/${id}`)
+  .pipe(
+    map(response => response.data) // Extrae el objeto de la propiedad `data`
+  );
 }
 
 updateConsultationHours(id: number, aConsultationHours: ConsultationHours): Observable<void> {
