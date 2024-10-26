@@ -8,22 +8,15 @@
   <mat-dialog-content class="mat-typography">
 
     <div class="row">
-      <div class=" column">
-        <mat-form-field appearance="fill">
+      <div class="column">
+        <mat-form-field>
           <mat-label>Dia</mat-label>
-          <input formControlName="day" matInput placeholder="Ingrese dia" autocomplete="off">
+          <mat-select formControlName="day">
+            <mat-option *ngFor="let item of days" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
-        <div class="error">
-
-          <span *ngIf="form.get('day')?.hasError('required') && form.get('day')?.touched">
-            El dia es un campo <strong>Obligatorio</strong>
-          </span>
-
-          <span *ngIf="form.get('day')?.hasError('pattern')">
-            El dia solo admite <strong>letras</strong>
-          </span>
-
-        </div>
       </div>
     </div>
     <div class="row">
@@ -70,6 +63,20 @@
             El dia solo admite <strong>numeros</strong>
           </span>
         </div>
+      </div>
+    </div>
+
+  
+    <div class="row">
+      <div class="column">
+        <mat-form-field>
+          <mat-label>Medico</mat-label>
+          <mat-select formControlName="medic">
+            <mat-option *ngFor="let item of medics" [value]="item">
+              {{item.firstname + ' ' + item.lastname + ' ' + item.specialty.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </div>
 

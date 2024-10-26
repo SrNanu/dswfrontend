@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ConsultationHours } from '../../interfaces/consultationHours.js';
 import { ConsultationHoursService } from '../../services/consultationHours.service.js';
+import { MedicService } from '../../services/medic.service.js';
+import { Medic } from '../../interfaces/medic.js';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -17,20 +20,27 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
   operation: string = 'Agregar ';
   id : number | undefined;
 
+  medics: Medic[] = [];
+  days= ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"];
+
+
   constructor(public dialogRef: MatDialogRef<AgregarEditarConsultationHoursComponent>,
     private fb: FormBuilder, private _consultationHoursService: ConsultationHoursService
     , private _snackBar :MatSnackBar
-    , @Inject(MAT_DIALOG_DATA) public data: any) {
+    , @Inject(MAT_DIALOG_DATA) public data: any
+  , private _medicService: MedicService) {
       this.form = this.fb.group({
         day: [null, [Validators.required]],
         startTime: [null, [Validators.required, Validators.pattern("^[0-9:]*$"),  Validators.maxLength(20)]],
-        endTime: [null, [Validators.required, Validators.pattern("^[0-9:]*$"),  Validators.maxLength(20)]]
+        endTime: [null, [Validators.required, Validators.pattern("^[0-9:]*$"),  Validators.maxLength(20)]],
+        medic:[null, [Validators.required]]
       })
       this.id = data.id;
      }
 
   ngOnInit(): void {
     this.isEdit(this.id);
+    this.obternerMedicos() ;
   }
 
   isEdit(id: number | undefined){
@@ -48,7 +58,8 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
       this.form.patchValue({
         day: data.day,
         startTime: data.startTime,
-        endTime: data.endTime
+        endTime: data.endTime,
+        medic: data.medic
       })
     })
   }
@@ -63,7 +74,8 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
     const aConsultationHours: ConsultationHours = {
       day: this.form.value.day,
       startTime: this.form.value.startTime,
-      endTime: this.form.value.endTime
+      endTime: this.form.value.endTime,
+      medic: this.form.value.medic
     }
 
     this.loading = true;
@@ -92,6 +104,13 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
       duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom'
+    });
+  }
+
+  obternerMedicos() {
+    this._medicService.getMedics().subscribe(data => {
+      this.medics = data;
+      console.log('Medicos:', this.medics);
     });
   }
 
