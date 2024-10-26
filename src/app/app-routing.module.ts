@@ -14,6 +14,9 @@ const routes: Routes = [
   { path: 'medic', component: ListMedicsComponent },
   { path: 'specialty', component: ListSpecialtyComponent },
   { path: 'healthInsurance', component: ListHealthInsuranceComponent },
+  { path: 'consultationhours', component: ListConsultationHoursComponent },
+  { path: 'otorgarturno', component: OtorgarTurnoComponent },
+  { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' }];
 
 @NgModule({
