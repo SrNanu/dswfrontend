@@ -1,3 +1,5 @@
+import { Specialty } from "./specialty";
+
 export interface Medic {
   id?: number;
   dni: string
@@ -9,5 +11,5 @@ export interface Medic {
   medicalConsultationValue: number
   license: number
   consultationHours?: []
-  specialty: string
+  specialty: Specialty
 }

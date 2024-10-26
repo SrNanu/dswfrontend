@@ -22,8 +22,10 @@ import { AgregarEditarHealthInsuranceComponent } from './components/agregar-edit
 import { ListHealthInsuranceComponent } from './components/list-healthInsurance/list-healthInsurance.component';
 //Modulos
 import { SharedModule } from './shared/shared.module';
+import { AgregarEditarConsultationHoursComponent } from './components/agregar-editar-consultationHours/agregar-editar-consultationHours.component';
 import { LoginComponent } from './components/login/login.component';
 import { OtorgarTurnoComponent } from './components/otorgar-turno/otorgar-turno.component';
+import { ListConsultationHoursComponent } from './components/list-consultationHours/list-consultationHours.component';
 
 
 @NgModule({
@@ -39,9 +41,11 @@ import { OtorgarTurnoComponent } from './components/otorgar-turno/otorgar-turno.
     ListMedicsComponent,
     AddEditMedicComponent,
     AgregarEditarHealthInsuranceComponent,
-    ListHealthInsuranceComponent,
+    AgregarEditarConsultationHoursComponent,
+    ListConsultationHoursComponent,
     LoginComponent,
-    OtorgarTurnoComponent
+    OtorgarTurnoComponent,
+    ListHealthInsuranceComponent
   ],
   imports: [
     ReactiveFormsModule,
