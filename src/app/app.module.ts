@@ -22,6 +22,7 @@ import { AgregarEditarHealthInsuranceComponent } from './components/agregar-edit
 import { ListHealthInsuranceComponent } from './components/list-healthInsurance/list-healthInsurance.component';
 //Modulos
 import { SharedModule } from './shared/shared.module';
+import { LoginComponent } from './components/login/login.component';
 import { OtorgarTurnoComponent } from './components/otorgar-turno/otorgar-turno.component';
 
 
@@ -39,6 +40,7 @@ import { OtorgarTurnoComponent } from './components/otorgar-turno/otorgar-turno.
     AddEditMedicComponent,
     AgregarEditarHealthInsuranceComponent,
     ListHealthInsuranceComponent,
+    LoginComponent,
     OtorgarTurnoComponent
   ],
   imports: [
