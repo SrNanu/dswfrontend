@@ -7,8 +7,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SpecialtyService } from '../../services/specialty.service.js';
 import { Specialty } from '../../interfaces/specialty.js';
 import { DateAdapter } from '@angular/material/core';
-import { spec } from 'node:test/reporters';
-import { get } from 'node:http';
 
 @Component({
   selector: 'app-add-edit-medic',

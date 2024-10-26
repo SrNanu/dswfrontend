@@ -22,6 +22,7 @@ import { AgregarEditarHealthInsuranceComponent } from './components/agregar-edit
 import { ListHealthInsuranceComponent } from './components/list-healthInsurance/list-healthInsurance.component';
 //Modulos
 import { SharedModule } from './shared/shared.module';
+import { OtorgarTurnoComponent } from './components/otorgar-turno/otorgar-turno.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { SharedModule } from './shared/shared.module';
     ListMedicsComponent,
     AddEditMedicComponent,
     AgregarEditarHealthInsuranceComponent,
-    ListHealthInsuranceComponent
+    ListHealthInsuranceComponent,
+    OtorgarTurnoComponent
   ],
   imports: [
     ReactiveFormsModule,

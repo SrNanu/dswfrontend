@@ -1,0 +1,57 @@
+<div class="container">
+  <h2 mat-dialog-title>Turno</h2>
+</div>
+
+<mat-dialog-content>
+  <div class="row">
+    <div class="column">
+      <mat-form-field appearance="fill">
+        <mat-label>DNI Paciente</mat-label>
+        <input matInput formControlName="DNI" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <mat-form-field appearance="fill">
+        <mat-label>Listado de Médicos</mat-label>
+        <mat-select formControlName="medico">
+          <mat-option *ngFor="let item of listMedics" [value]="item">
+            {{ item }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha del Turno</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaTurno" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <mat-form-field appearance="fill">
+        <mat-label>Horarios Disponibles</mat-label>
+        <mat-select formControlName="horario">
+          <mat-option *ngFor="let item of listHorario" [value]="item">
+            {{ item }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+
+  <mat-dialog-actions>
+    <button type="button" (click)="cancelar()" mat-button class="cancel-button">Cancelar</button>
+    <button type="submit" mat-button class="add-button">Agregar</button>
+  </mat-dialog-actions>
+</mat-dialog-content>

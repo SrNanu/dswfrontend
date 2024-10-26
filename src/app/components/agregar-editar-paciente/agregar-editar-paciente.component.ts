@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+  import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Patient } from '../../interfaces/patient';
