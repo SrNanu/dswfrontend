@@ -26,8 +26,6 @@ import { AgregarEditarConsultationHoursComponent } from './components/agregar-ed
 import { LoginComponent } from './components/login/login.component';
 import { OtorgarTurnoComponent } from './components/otorgar-turno/otorgar-turno.component';
 import { ListConsultationHoursComponent } from './components/list-consultationHours/list-consultationHours.component';
-
-
 @NgModule({
   declarations: [
     AppComponent,
