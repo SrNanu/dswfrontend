@@ -19,7 +19,7 @@
           <mat-label>Listado de Médicos</mat-label>
           <mat-select formControlName="medico">
             <mat-option *ngFor="let item of medics" [value]="item">
-              {{ item }}
+              {{item.firstname + ' ' + item.lastname + ' ' + item.specialty.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -43,7 +43,7 @@
           <mat-label>Horarios Disponibles</mat-label>
           <mat-select formControlName="horario">
             <mat-option *ngFor="let item of consultationHours" [value]="item">
-              {{ item }}
+              {{ item.startTime }}
             </mat-option>
           </mat-select>
         </mat-form-field>

@@ -21,7 +21,6 @@ export class OtorgarTurnoComponent  implements OnInit{
     private fb: FormBuilder 
     , private _medicService: MedicService
     , private _consultationHoursService: ConsultationHoursService
-    , @Inject(MAT_DIALOG_DATA) public data: any
     ) {
       this.form = this.fb.group({
         dni: [null, [Validators.required]],
