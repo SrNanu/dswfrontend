@@ -5,6 +5,9 @@ import { Medic } from '../../interfaces/medic.js';
 import { MedicService } from '../../services/medic.service.js';
 import { ConsultationHours } from '../../interfaces/consultationHours.js';
 import { ConsultationHoursService } from '../../services/consultationHours.service.js';
+import { Attention } from '../../interfaces/attention.js';
+import { Patient } from '../../interfaces/patient.js';
+import { PatientService } from '../../services/patient.service.js';
 
 @Component({
   selector: 'app-otorgar-turno',
@@ -21,6 +24,8 @@ export class OtorgarTurnoComponent  implements OnInit{
     private fb: FormBuilder 
     , private _medicService: MedicService
     , private _consultationHoursService: ConsultationHoursService
+    , private _patientService: PatientService
+    
     ) {
       this.form = this.fb.group({
         dni: [null, [Validators.required]],
@@ -32,9 +37,24 @@ export class OtorgarTurnoComponent  implements OnInit{
 
 
   addTurno() {
-  throw new Error('Method not implemented.');
-  }
 
+    this.loading = true;
+    const aPatient : any= this._patientService.getPatientByDni(this.form.value.dni);
+    const aAttention: Attention  = {
+      patient: aPatient, 
+      date: this.form.value.date,
+      consultationHours: this.form.value.consultationHours,
+      medic: this.form.value.medic,
+    }
+   
+    //this._attentionService.addConsultationHours(aAttention).subscribe(() => {
+    //  this.successMessage('agregada');
+    //}); FALTA IMPLEMENTAR EL SERVICIO DE ATTENTION
+
+    this.loading = false;
+    this.dialogRef.close(true);
+  }
+  
   ngOnInit(): void {
    this.obternerHoras();
     this.obternerMedicos() ;

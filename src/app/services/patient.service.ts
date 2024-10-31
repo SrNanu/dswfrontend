@@ -36,4 +36,11 @@ export class PatientService {
 
    updatePatient(id: number, patient: Patient): Observable<void> {
     return this.http.put<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`, patient) }
+
+    getPatientByDni(dni: string): Observable<Patient> {
+      return this.http.get<{ data: Patient }>(`${this.myAppUrl}${this.myApiUrl}/dni/${dni}`) 
+        .pipe(
+          map(response => response.data) // Extrae el objeto de la propiedad `data`
+        );
+    }
 }
