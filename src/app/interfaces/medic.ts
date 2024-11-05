@@ -1,3 +1,4 @@
+import { ConsultationHours } from "./consultationHours.js";
 import { Specialty } from "./specialty";
 
 export interface Medic {
@@ -10,6 +11,6 @@ export interface Medic {
   password: string
   medicalConsultationValue: number
   license: number
-  consultationHours?: []
+  consultationHours?: ConsultationHours[]
   specialty: Specialty
 }

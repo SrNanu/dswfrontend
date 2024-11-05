@@ -17,7 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 
 export class ListConsultationHoursComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['day','startTime', 'endTime', 'acciones'];
+  displayedColumns: string[] = ['day','startTime', 'endTime', 'medic', 'acciones'];
   dataSource: MatTableDataSource<ConsultationHours>;
   loading: boolean = false;
 

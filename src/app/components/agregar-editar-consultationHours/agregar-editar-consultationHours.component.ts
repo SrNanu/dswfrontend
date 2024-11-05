@@ -21,7 +21,13 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
   id : number | undefined;
 
   medics: Medic[] = [];
-  days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+  days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+  startTime = ["07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", 
+    "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", 
+    "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00"];
+  endTime = ["07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", 
+    "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", 
+    "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15"];
 
 
 
@@ -32,8 +38,8 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
   , private _medicService: MedicService) {
       this.form = this.fb.group({
         day: [null, [Validators.required]],
-        startTime: [null, [Validators.required, Validators.pattern("^[0-9:]*$"),  Validators.maxLength(20)]],
-        endTime: [null, [Validators.required, Validators.pattern("^[0-9:]*$"),  Validators.maxLength(20)]],
+        startTime: [null, [Validators.required]],
+        endTime: [null, [Validators.required]],
         medic:[null, [Validators.required]]
       })
       this.id = data.id;
@@ -51,24 +57,17 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
     }
   }
 
-  getConsultationHours(id: number){
+  getConsultationHours(id: number) {
     this._consultationHoursService.getConsultationHours(id).subscribe(data => {
-      const medic = this.medics.find(s => s.id == Number(data.medic));
-      const day = this.days.find(s => s === data.day);
-      console.log(data);
+      const medic = this.medics.find(s => s.id === Number(data.medic.id)); // Usa `data.medic.id` si el objeto `data` contiene un objeto `medic`
       this.form.patchValue({
         day: data.day,
         startTime: data.startTime,
         endTime: data.endTime,
-        medic: medic
-
-      })
-      console.log(data);
-      console.log("specialty " + this.form.value.medic);
-
-    })
+        medic: medic 
+      });
+    });
   }
-
 
   cancelar(){
     this.dialogRef.close(false);
@@ -80,7 +79,7 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
       day: this.form.value.day,
       startTime: this.form.value.startTime,
       endTime: this.form.value.endTime,
-      medic: this.form.value.medic.id
+      medic: this.form.value.medic.id,
     }
     this.loading = true;
 
