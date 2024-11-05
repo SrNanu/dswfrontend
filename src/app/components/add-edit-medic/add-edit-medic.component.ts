@@ -89,7 +89,8 @@ export class AddEditMedicComponent implements OnInit {
         license: data.license,
         specialty: specialty
       })
-      console.log(this.form.value.specialty);
+      console.log("specialty " + this.form.value.specialty);
+      console.log(data);
 
     });
   }

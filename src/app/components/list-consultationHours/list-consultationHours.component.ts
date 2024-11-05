@@ -42,6 +42,7 @@ export class ListConsultationHoursComponent implements OnInit, AfterViewInit {
   obternerConsultationHours() {
     this.loading = true;
     this._consultationHours.getAllConsultationHours().subscribe( data =>  {
+      console.log('Data recibida del backend:', data );
       this.loading = false;
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
@@ -84,7 +85,7 @@ export class ListConsultationHoursComponent implements OnInit, AfterViewInit {
 
 
   successMessage(){
-    this._snackBar.open('La especialidad fue eliminada con exito',"" ,{
+    this._snackBar.open('La hora de consulta fue eliminada con exito',"" ,{
       duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom'

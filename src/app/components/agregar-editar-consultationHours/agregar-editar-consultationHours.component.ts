@@ -21,7 +21,8 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
   id : number | undefined;
 
   medics: Medic[] = [];
-  days= ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"];
+  days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+
 
 
   constructor(public dialogRef: MatDialogRef<AgregarEditarConsultationHoursComponent>,
@@ -52,15 +53,19 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
 
   getConsultationHours(id: number){
     this._consultationHoursService.getConsultationHours(id).subscribe(data => {
+      const medic = this.medics.find(s => s.id == Number(data.medic));
+      const day = this.days.find(s => s === data.day);
       console.log(data);
-      console.log(data.day);
-      console.log(data.startTime);
       this.form.patchValue({
         day: data.day,
         startTime: data.startTime,
         endTime: data.endTime,
-        medic: data.medic
+        medic: medic
+
       })
+      console.log(data);
+      console.log("specialty " + this.form.value.medic);
+
     })
   }
 
@@ -75,9 +80,8 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
       day: this.form.value.day,
       startTime: this.form.value.startTime,
       endTime: this.form.value.endTime,
-      medic: this.form.value.medic
+      medic: this.form.value.medic.id
     }
-
     this.loading = true;
 
 
@@ -89,13 +93,14 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
 
     }else {
       // es editar
-      this._consultationHoursService.updateConsultationHours(this.id, aConsultationHours).subscribe(data => {
+      this._consultationHoursService.updateConsultationHours(this.id, aConsultationHours).subscribe(() => {
         this.successMessage('actualizada');
       });
     }
 
     this.loading = false;
     this.dialogRef.close(true);
+    this.obternerMedicos()
 
   }
 
