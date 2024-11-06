@@ -38,13 +38,13 @@ export class AgregarEditarHealthInsuranceComponent implements OnInit {
     }
   }
 
-  getHealthInsurance(id: number){
-    this._healthInsuranceService.getHealthInsurance(id).subscribe(data => {
-      console.log(data);
+  getHealthInsurance(id: number) {
+    this._healthInsuranceService.getHealthInsurance(id).subscribe(response => {
+      console.log(response); // Confirma aquí la estructura de los datos
       this.form.patchValue({
-        name: data.name
-      })
-    })
+        name: response.data.name // Asegúrate de acceder correctamente a `name`
+      });
+    });
   }
 
 
@@ -55,7 +55,8 @@ export class AgregarEditarHealthInsuranceComponent implements OnInit {
   addEditHealthInsurance() {
 
     const aHealthInsurance: HealthInsurance = {
-      name: this.form.value.name
+      name: this.form.value.name,
+      data: undefined
     }
 
     this.loading = true;

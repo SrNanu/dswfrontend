@@ -148,7 +148,7 @@
           <mat-form-field appearance="fill">
             <mat-label>Obra Social</mat-label>
             <mat-select formControlName="healthInsurance">
-              <mat-option *ngFor="let item of healthInsurences" [value]="item.id">
+              <mat-option *ngFor="let item of healthInsurences" [value]="item">
                 {{item.name}}
               </mat-option>
             </mat-select>

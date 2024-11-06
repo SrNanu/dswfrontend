@@ -46,8 +46,8 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    this.obternerMedicos();
     this.isEdit(this.id);
-    this.obternerMedicos() ;
   }
 
   isEdit(id: number | undefined){

@@ -21,26 +21,26 @@ export class AgregarEditarPatientComponent implements OnInit {
   loading : boolean = false;
   operacion: string = 'Agregar';
   id: number | undefined;
-  constructor(public dialogRef: MatDialogRef<AgregarEditarPatientComponent>, private _healthInsuranceService: HealthInsuranceService, private fb:FormBuilder, private _patientService: PatientService,private _snackBar :MatSnackBar, private dateAdapter:DateAdapter<any>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(public dialogRef: MatDialogRef<AgregarEditarPatientComponent>, private _healthInsuranceService: HealthInsuranceService, private fb:FormBuilder, private _patientService: PatientService,private _snackBar :MatSnackBar, dateAdapter:DateAdapter<any>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.form = this.fb.group({
-      firstname: ['', Validators.required, Validators.maxLength(40)],
-      lastname: ['', Validators.required, Validators.maxLength(40)],
-      dni: ['', Validators.required, Validators.pattern('^[0-9]*$')],
-      phoneNumber: ['', Validators.required],
-      address: ['', Validators.required],
-      email: ['', Validators.required],
-      birthDate: ['', Validators.required],
-      grupoSanguineo: ['', Validators.required],
-      antecedentesPersonales: ['', Validators.required],
-      antecedentesFamiliares: ['', Validators.required],
-      healthInsurance: ['', Validators.required],
+      firstname: [null, [Validators.required, Validators.maxLength(40)]],
+      lastname: [null, [Validators.required, Validators.maxLength(40)]],
+      dni: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
+      phoneNumber: [null, Validators.required],
+      address: [null, Validators.required],
+      email: [null, Validators.required],
+      birthDate: [null, Validators.required],
+      grupoSanguineo: [null, Validators.required],
+      antecedentesPersonales: [null, Validators.required],
+      antecedentesFamiliares: [null, Validators.required],
+      healthInsurance: [null, Validators.required],
     })
     this.id = data.id;
     dateAdapter.setLocale('es-AR');
   }
   ngOnInit(): void {
-    this.isEdit(this.id);
     this.obtenerObrasSociales();
+    this.isEdit(this.id);
   }
   cancelar(){
     this.dialogRef.close(false);
@@ -57,24 +57,28 @@ export class AgregarEditarPatientComponent implements OnInit {
       console.log('Obras Sociales:', this.healthInsurences)
     });
   }
-  getPatient(id: number){
+  getPatient(id: number) {
     this._patientService.getPatient(id).subscribe(data => {
-      this.form.patchValue({
-        firstname:data.firstname,
-        lastname:data.lastname,
-        dni:data.dni,
-        phoneNumber:data.phoneNumber,
-        address:data.address,
-        email:data.email,
-        birhtDate:new Date(data.birthDate),
-        grupoSanguineo:data.grupoSanguineo,
-        antecedentesPersonales:data.antecedentesPersonales,
-        antecedentesFamiliares:data.antecedentesFamiliares,
-        healthInsurance:data.healthInsurance
-      })
+      // Asegúrate de que 'data.healthInsurance' sea un objeto
+      const selectedHealthInsurance = this.healthInsurences.find(hi => hi.id === data.healthInsurance?.id);
 
+      this.form.patchValue({
+        firstname: data.firstname,
+        lastname: data.lastname,
+        dni: data.dni,
+        phoneNumber: data.phoneNumber,
+        address: data.address,
+        email: data.email,
+        birthDate: new Date(data.birthDate),
+        grupoSanguineo: data.grupoSanguineo,
+        antecedentesPersonales: data.antecedentesPersonales,
+        antecedentesFamiliares: data.antecedentesFamiliares,
+        healthInsurance: selectedHealthInsurance || null  // Asignamos el objeto completo
+      });
+      console.log('Paciente:', data);
     });
   }
+
   addEditPatient(){
 
     const patient: Patient = {
@@ -84,14 +88,14 @@ export class AgregarEditarPatientComponent implements OnInit {
       phoneNumber: this.form.value.phoneNumber,
       address: this.form.value.address,
       email: this.form.value.email,
-      birthDate: this.form.value.birthDate.toISOString().slice(0, 10),
+      birthDate: this.form.value.birthDate ? this.form.value.birthDate.toISOString().slice(0, 10) : '',
       grupoSanguineo: this.form.value.grupoSanguineo,
       antecedentesPersonales: this.form.value.antecedentesPersonales,
       antecedentesFamiliares: this.form.value.antecedentesFamiliares,
       healthInsurance: this.form.value.healthInsurance,    
       id: this.form.value.id,
     }
-    //console.log(patient);
+    //console.log('paciente',patient);
     this.loading = true;
     
     if(this.id === undefined){
