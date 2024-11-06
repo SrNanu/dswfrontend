@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-agregar-editar-specialty',
   templateUrl: './agregar-editar-specialty.component.html',
-  styleUrl: './agregar-editar-specialty.component.css'
+  styleUrls: ['./agregar-editar-specialty.component.css']
 })
 export class AgregarEditarSpecialtyComponent implements OnInit {
 
@@ -39,14 +39,14 @@ export class AgregarEditarSpecialtyComponent implements OnInit {
     }
   }
 
-  getSpecialty(id: number){
-    this._specialtyService.getSpecialty(id).subscribe(data => {
-      console.log(data);
+  getSpecialty(id: number) {
+    this._specialtyService.getSpecialty(id).subscribe(response => {
+      console.log(response); // Confirma la estructura exacta
       this.form.patchValue({
-        code: data.code,
-        name: data.name
-      })
-    })
+        code: response.data.code,
+        name: response.data.name
+      });
+    });
   }
 
 
@@ -55,32 +55,38 @@ export class AgregarEditarSpecialtyComponent implements OnInit {
   }
 
   addEditSpecialty() {
-
     const aSpecialty: Specialty = {
       code: this.form.value.code,
-      name: this.form.value.name
-    }
+      name: this.form.value.name,
+      data: undefined
+    };
 
     this.loading = true;
 
-
-    if(this.id === undefined){
-      //es agregar
+    if (this.id === undefined) {
+      // Agregar
       this._specialtyService.addSpecialty(aSpecialty).subscribe(() => {
         this.successMessage('agregada');
+        this.loading = false;
+        this.dialogRef.close(true);
+      }, error => {
+        this.loading = false;
+        console.error("Error al agregar especialidad:", error);
       });
 
-    }else {
-      // es editar
-      this._specialtyService.updateSpecialty(this.id, aSpecialty).subscribe(data => {
+    } else {
+      // Editar
+      this._specialtyService.updateSpecialty(this.id, aSpecialty).subscribe(() => {
         this.successMessage('actualizada');
+        this.loading = false;
+        this.dialogRef.close(true);
+      }, error => {
+        this.loading = false;
+        console.error("Error al actualizar especialidad:", error);
       });
     }
-
-    this.loading = false;
-    this.dialogRef.close(true);
-
   }
+
 
   successMessage(operation: string){
     this._snackBar.open(`La especialidad fue ${operation} con exito`,"" ,{

@@ -14,7 +14,7 @@ export class ConsultationHoursService {
 
   constructor(private http: HttpClient) {
     this.myAppUrl = 'http://localhost:3000/'
-    this.myApiUrl = 'api/ConsultationHours'
+    this.myApiUrl = 'api/consultationhours'
   }
 
 getAllConsultationHours(): Observable<ConsultationHours[]> {

@@ -21,7 +21,14 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
   id : number | undefined;
 
   medics: Medic[] = [];
-  days= ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"];
+  days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+  startTime = ["07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", 
+    "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", 
+    "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00"];
+  endTime = ["07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", 
+    "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", 
+    "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15"];
+
 
 
   constructor(public dialogRef: MatDialogRef<AgregarEditarConsultationHoursComponent>,
@@ -31,16 +38,16 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
   , private _medicService: MedicService) {
       this.form = this.fb.group({
         day: [null, [Validators.required]],
-        startTime: [null, [Validators.required, Validators.pattern("^[0-9:]*$"),  Validators.maxLength(20)]],
-        endTime: [null, [Validators.required, Validators.pattern("^[0-9:]*$"),  Validators.maxLength(20)]],
+        startTime: [null, [Validators.required]],
+        endTime: [null, [Validators.required]],
         medic:[null, [Validators.required]]
       })
       this.id = data.id;
      }
 
   ngOnInit(): void {
+    this.obternerMedicos();
     this.isEdit(this.id);
-    this.obternerMedicos() ;
   }
 
   isEdit(id: number | undefined){
@@ -50,20 +57,17 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
     }
   }
 
-  getConsultationHours(id: number){
+  getConsultationHours(id: number) {
     this._consultationHoursService.getConsultationHours(id).subscribe(data => {
-      console.log(data);
-      console.log(data.day);
-      console.log(data.startTime);
+      const medic = this.medics.find(s => s.id === Number(data.medic.id)); // Usa `data.medic.id` si el objeto `data` contiene un objeto `medic`
       this.form.patchValue({
         day: data.day,
         startTime: data.startTime,
         endTime: data.endTime,
-        medic: data.medic
-      })
-    })
+        medic: medic 
+      });
+    });
   }
-
 
   cancelar(){
     this.dialogRef.close(false);
@@ -75,9 +79,8 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
       day: this.form.value.day,
       startTime: this.form.value.startTime,
       endTime: this.form.value.endTime,
-      medic: this.form.value.medic
+      medic: this.form.value.medic.id,
     }
-
     this.loading = true;
 
 
@@ -89,13 +92,14 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
 
     }else {
       // es editar
-      this._consultationHoursService.updateConsultationHours(this.id, aConsultationHours).subscribe(data => {
+      this._consultationHoursService.updateConsultationHours(this.id, aConsultationHours).subscribe(() => {
         this.successMessage('actualizada');
       });
     }
 
     this.loading = false;
     this.dialogRef.close(true);
+    this.obternerMedicos()
 
   }
 

@@ -19,53 +19,32 @@
         </mat-form-field>
       </div>
     </div>
+
     <div class="row">
       <div class="column">
-        <mat-form-field appearance="fill">
+        <mat-form-field>
           <mat-label>Hora Inicio</mat-label>
-          <input formControlName="startTime" matInput placeholder="Hora Inicio" autocomplete="off">
+          <mat-select formControlName="startTime">
+            <mat-option *ngFor="let item of startTime" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
-        <div class="error">
-
-          <span *ngIf="form.get('startTime')?.hasError('required') && form.get('startTime')?.touched">
-            La hora de inicio es un campo <strong>Obligatorio</strong>
-          </span>
-
-          <span *ngIf="form.get('startTime')?.hasError('maxlength')">
-            La hora de inicio menos de <strong>20 caracteres</strong>
-          </span>
-
-          <span *ngIf="form.get('startTime')?.hasError('pattern')">
-            El dia solo admite <strong>numeros</strong>
-          </span>
-
-        </div>
       </div>
     </div>
 
     <div class="row">
       <div class="column">
-        <mat-form-field appearance="fill">
+        <mat-form-field>
           <mat-label>Hora Fin</mat-label>
-          <input formControlName="endTime" matInput placeholder="Hora Fin" autocomplete="off">
+          <mat-select formControlName="endTime">
+            <mat-option *ngFor="let item of endTime" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
-        <div class="error">
-
-          <span *ngIf="form.get('endTime')?.hasError('required') && form.get('endTime')?.touched">
-            La hora de fin es un campo <strong>Obligatorio</strong>
-          </span>
-
-          <span *ngIf="form.get('endTime')?.hasError('maxlength')">
-            La hora de fin menos de <strong>20 caracteres</strong>
-          </span>
-
-          <span *ngIf="form.get('endTime')?.hasError('pattern')">
-            El dia solo admite <strong>numeros</strong>
-          </span>
-        </div>
       </div>
     </div>
-
   
     <div class="row">
       <div class="column">
