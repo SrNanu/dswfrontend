@@ -1,35 +1,35 @@
-/* Estilos generales para el menú */
-.mat-toolbar {
-  background-color: #3f51b5; /* Color de fondo de la barra */
-  color: white; /* Color del texto */
-  padding: 16px; /* Espaciado */
+.main-toolbar {
+  width: 100%;
+  background-color: #3f51b5;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  top: 0;
 }
 
-/* Estilos para los botones */
-button {
-  margin: 0 10px; /* Margen entre botones */
-  font-weight: bold; /* Hacer el texto en negrita */
-  transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding-top: 50px; /* To avoid overlapping with toolbar */
 }
 
-button:hover {
-  background-color: #fff; /* Color de fondo al pasar el ratón */
-  color: #3f51b5; /* Cambiar el color del texto */
+.main-button {
+  background-color: #3f51b5;
+  color: white!important;
+  border: 2px solid #3f51b5;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 20px;
+  margin: 20px;
+  padding: 10px 20px;
+  width: 150px;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
-/* Espaciador para flexbox */
-.spacer {
-  flex: 1 1 auto;
-}
-
-/* Estilos de responsividad */
-@media (max-width: 600px) {
-  .mat-toolbar {
-      flex-direction: column; /* Cambiar a columna en pantallas pequeñas */
-      align-items: flex-start; /* Alinear a la izquierda */
-  }
-  button {
-      width: 100%; /* Botones ocupan el 100% del ancho */
-      margin-bottom: 10px; /* Espaciado inferior */
-  }
+.main-button:hover {
+  background-color: #0056b3;
+  border-color: #003f7f; 
 }

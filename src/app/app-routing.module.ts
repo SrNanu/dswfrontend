@@ -7,7 +7,7 @@ import { ListSpecialtyComponent } from './components/list-specialty/list-special
 import { ListHealthInsuranceComponent } from './components/list-healthInsurance/list-healthInsurance.component';
 import { ListConsultationHoursComponent } from './components/list-consultationHours/list-consultationHours.component';
 import { LoginComponent } from './components/login/login.component';
-import { OtorgarTurnoComponent } from './components/otorgar-turno/otorgar-turno.component.js';
+import { OtorgarTurnoComponent } from './components/otorgar-turno/otorgar-turno.component';
 import { MenuComponent } from './menu/menu.component';
 import { MedicMenuComponent } from './medic-menu/med-menu.component';
 import { SelectJobComponent } from './select-job/sel-job.component';

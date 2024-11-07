@@ -23,6 +23,7 @@ import { ListHealthInsuranceComponent } from './components/list-healthInsurance/
 import { MedicMenuComponent } from './medic-menu/med-menu.component';
 import { BuscarPacienteComponent } from './medic-menu/buscar-paciente.component';
 import { SelectJobComponent } from './select-job/sel-job.component';
+import { HCPacienteComponent } from './medic-menu/hc-paciente.component';
 
 //Modulos
 import { SharedModule } from './shared/shared.module';
@@ -52,7 +53,8 @@ import { FormsModule } from '@angular/forms';
     ListHealthInsuranceComponent,
     MedicMenuComponent,
     BuscarPacienteComponent,
-    SelectJobComponent
+    SelectJobComponent,
+    HCPacienteComponent
   ],
   imports: [
     ReactiveFormsModule,
