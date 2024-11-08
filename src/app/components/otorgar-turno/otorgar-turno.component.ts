@@ -25,13 +25,12 @@ export class OtorgarTurnoComponent  implements OnInit{
     , private _medicService: MedicService
     , private _consultationHoursService: ConsultationHoursService
     , private _patientService: PatientService
-    
     ) {
       this.form = this.fb.group({
         dni: [null, [Validators.required]],
-        medico: [null, [Validators.required]],
-        fechaTurno: [null, [Validators.required]],
-        horario:[null, [Validators.required]]
+        medic: [null, [Validators.required]],
+        date: [Date, [Validators.required]],
+        consultationHours:[null, [Validators.required]]
       })
      }
 
