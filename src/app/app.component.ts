@@ -11,6 +11,6 @@ export class AppComponent {
   title = 'Frontend';
   hide = true;
   isLoginRoute(): boolean {
-    return this.router.url.includes('login');
+    return this.router.url.includes('');
   }
 }

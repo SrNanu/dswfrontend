@@ -1,0 +1,26 @@
+<app-med-menu></app-med-menu>
+<mat-toolbar color="primary">
+    <span>Historia Clinica</span>
+</mat-toolbar>
+<div class="paciente-detalle-container">
+    <h2>Detalles del Paciente</h2>
+    <ng-container *ngFor="let item of patientInfo">
+      <p><strong>{{ item.label }}:</strong> {{ item.value }}</p>
+    </ng-container>
+  
+    <div class="atenciones-container">
+      <h3>Atenciones</h3>
+      <ng-container *ngIf="hasAttentions; else noAttentions">
+        <ul>
+          <li *ngFor="let attention of attentionList">
+            <p><strong>Fecha:</strong> {{ attention.date }}</p>
+            <p><strong>Detalles:</strong> {{ attention.details }}</p>
+          </li>
+        </ul>
+      </ng-container>
+      <ng-template #noAttentions>
+        <p>No hay atenciones registradas para este paciente.</p>
+      </ng-template>
+    </div>
+</div>
+  

@@ -20,12 +20,19 @@ import { ListMedicsComponent } from './components/list-medics/list-medics.compon
 import { AddEditMedicComponent } from './components/add-edit-medic/add-edit-medic.component';
 import { AgregarEditarHealthInsuranceComponent } from './components/agregar-editar-healthInsurance/agregar-editar-healthInsurance.component';
 import { ListHealthInsuranceComponent } from './components/list-healthInsurance/list-healthInsurance.component';
+import { MedicMenuComponent } from './medic-menu/med-menu.component';
+import { BuscarPacienteComponent } from './medic-menu/buscar-paciente.component';
+import { SelectJobComponent } from './select-job/sel-job.component';
+import { HCPacienteComponent } from './medic-menu/hc-paciente.component';
+
 //Modulos
 import { SharedModule } from './shared/shared.module';
 import { AgregarEditarConsultationHoursComponent } from './components/agregar-editar-consultationHours/agregar-editar-consultationHours.component';
 import { LoginComponent } from './components/login/login.component';
 import { OtorgarTurnoComponent } from './components/otorgar-turno/otorgar-turno.component';
 import { ListConsultationHoursComponent } from './components/list-consultationHours/list-consultationHours.component';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +50,11 @@ import { ListConsultationHoursComponent } from './components/list-consultationHo
     ListConsultationHoursComponent,
     LoginComponent,
     OtorgarTurnoComponent,
-    ListHealthInsuranceComponent
+    ListHealthInsuranceComponent,
+    MedicMenuComponent,
+    BuscarPacienteComponent,
+    SelectJobComponent,
+    HCPacienteComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -51,7 +62,8 @@ import { ListConsultationHoursComponent } from './components/list-consultationHo
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FormsModule
   ],
   providers: [
     provideClientHydration(),
