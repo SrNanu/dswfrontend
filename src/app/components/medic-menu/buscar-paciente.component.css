@@ -5,7 +5,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 .buscar-paciente-container {
@@ -44,4 +44,8 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+.alerta {
+  text-align: center;
 }

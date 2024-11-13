@@ -1,5 +1,5 @@
 .paciente-detalle-container {
-    max-width: 600px;
+    max-width: 1100px;
     margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -36,4 +36,44 @@ li {
 
 strong {
     color: #333;
+}
+
+table {
+  width: 100%;
+  margin-top: 0%;
+}
+
+.mat-toolbar{
+margin-bottom: 2%;
+}
+
+span{
+margin-left: 45%;
+}
+
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 91%;
+}
+
+button{
+margin: 5px 0px;
+font-size: 12px;
+width: 5%;
+margin-left: 92%;
+margin-top: -55px;
+
+}
+
+.btnEdit, .btnDelete {
+cursor: pointer;
+}
+
+.btnDelete{
+color: #A30B0B;
+}
+
+.btnEdit{
+color: #355CCE;
 }
