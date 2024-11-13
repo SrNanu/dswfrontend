@@ -1,0 +1,149 @@
+<div class="container">
+  <h2 mat-dialog-title> Agregar datos medicos de la Consulta</h2>
+  <mat-spinner class="spinner" *ngIf="loading" [diameter]="30"></mat-spinner>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="agregarAttention()">
+  <mat-dialog-content class="mat-typography">
+
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field class="container">
+          <mat-label>Elegi la fecha de la Consulta</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="date">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('date')?.hasError('required') && form.get('date')?.touched">
+            La fecha de la Consulta es necesaria son <strong>Obligatorios</strong>.
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill" class="large-textarea">
+          <mat-label>Resultados de la Consulta</mat-label>
+          <textarea formControlName="result" matInput placeholder="Ingrese los Resultados de la Consulta" autocomplete="off" rows="4"></textarea>
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('result')?.hasError('required') && form.get('result')?.touched">
+            Los Resultados de la Consulta son <strong>Obligatorios</strong>; en caso de no tener que poner, escriba <strong>Ninguno</strong>.
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill" class="large-textarea">
+          <mat-label>Motivo de Consulta</mat-label>
+          <textarea formControlName="reason" matInput placeholder="Ingrese el Motivo de Consulta" autocomplete="off" rows="4"></textarea>
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('reason')?.hasError('required') && form.get('reason')?.touched">
+            El Motivo de Consulta son <strong>Obligatorios</strong>; en caso de no tener motivo, escriba <strong>Ninguno</strong>.
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill" class="large-textarea">
+          <mat-label>Enfermedad Actual</mat-label>
+          <textarea formControlName="currentIllness" matInput placeholder="Ingrese la Enfermedad Actual" autocomplete="off" rows="4"></textarea>
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('currentIllness')?.hasError('required') && form.get('currentIllness')?.touched">
+            La/as Enfermedad Actual son <strong>Obligatorios</strong>; en caso de no tener ninguna, escriba <strong>Ninguno</strong>.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill" class="large-textarea">
+          <mat-label>Signos Vitales</mat-label>
+          <textarea formControlName="vitalSigns" matInput placeholder="Ingrese los Signos Vitales" autocomplete="off" rows="4"></textarea>
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('vitalSigns')?.hasError('required') && form.get('vitalSigns')?.touched">
+            Los Signos Vitales son <strong>Obligatorios</strong>; en caso de no tener nada que evaluar para la Consulta, escriba <strong>Ninguno</strong>.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill" class="large-textarea">
+          <mat-label>Examen Fisico</mat-label>
+          <textarea formControlName="physicalExamination" matInput placeholder="Ingrese el resultado del Examen Fisico" autocomplete="off" rows="4"></textarea>
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('physicalExamination')?.hasError('required') && form.get('physicalExamination')?.touched">
+            Los resultados de Examen Fisico son <strong>Obligatorios</strong>; en caso de no haber realizado ninguno, escriba <strong>Ninguno</strong>.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill" class="large-textarea">
+          <mat-label>Diagnostico</mat-label>
+          <textarea formControlName="diagnosis" matInput placeholder="Ingrese el Diagnostico" autocomplete="off" rows="4"></textarea>
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('diagnosis')?.hasError('required') && form.get('diagnosis')?.touched">
+            El Diagnostico son <strong>Obligatorios</strong>; en caso de no tener diagnostico, escriba <strong>Ninguno</strong>.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill" class="large-textarea">
+          <mat-label>Tratamiento</mat-label>
+          <textarea formControlName="treatment" matInput placeholder="Ingrese el Tratamiento" autocomplete="off" rows="4"></textarea>
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('treatment')?.hasError('required') && form.get('treatment')?.touched">
+            El Tratamiento son <strong>Obligatorios</strong>; en caso de no haber indicado nada, escriba <strong>Ninguno</strong>.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill" class="large-textarea">
+          <mat-label>Observaciones</mat-label>
+          <textarea formControlName="observation" matInput placeholder="Ingrese sus Observaciones" autocomplete="off" rows="4"></textarea>
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('observation')?.hasError('required') && form.get('observation')?.touched">
+            Las Observaciones son <strong>Obligatorios</strong>; en caso de no tener nada que poner, escriba <strong>Ninguna</strong>.
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button type="button" (click)="close()" mat-button>Cancelar</button>
+    <button [disabled]="form.invalid" type="submit" mat-button cdkFocusInitial>Aceptar</button>
+  </mat-dialog-actions>
+</form>

@@ -18,19 +18,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './list-patient.component.css'
 })
 export class ListPatientsComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['firstname', 'lastname','dni', 'phoneNumber', 'address', 'email', 'birthDate', 'grupoSanguineo', 'antecedentesPersonales', 'antecedentesFamiliares', 'healthInsurance', "acciones"];
+  displayedColumns: string[] = ['firstname', 'lastname','dni', 'phoneNumber', 'address', 'email', 'birthDate', 'healthInsurance', "acciones"];
   dataSource: MatTableDataSource<Patient>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(public dialog: MatDialog, private _patientService: PatientService, private _snackBar :MatSnackBar) {
-    
+
     this.dataSource = new MatTableDataSource();
   }
 
   ngOnInit(): void {
-    this.obtenerPatients(); 
+    this.obtenerPatients();
   }
 
   ngAfterViewInit(): void {
@@ -44,10 +44,10 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
       this.dataSource.data = data;
       //console.log('DataSource data:', this.dataSource.data);  Debería mostrar los mismos datos que el log anterior
       this.dataSource.paginator = this.paginator;
-      
+
       this.dataSource.sort = this.sort;}, error => {
         console.error('Error al obtener patients:', error);
-      
+
       /*this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.paginator._intl.itemsPerPageLabel = "Items por pagina"

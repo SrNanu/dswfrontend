@@ -32,7 +32,9 @@ import { LoginComponent } from './components/login/login.component';
 import { OtorgarTurnoComponent } from './components/otorgar-turno/otorgar-turno.component';
 import { ListConsultationHoursComponent } from './components/list-consultationHours/list-consultationHours.component';
 import { FormsModule } from '@angular/forms';
-import { ModalDatosMedicosPacienteComponent } from './components/medic-menu/modal-datos-medicos-paciente.component';
+import { ModalDatosMedicosPacienteComponent } from './components/medic-menu/modal-datos-medicos-paciente/modal-datos-medicos-paciente.component';
+import { EditarConsultaComponent } from './components/medic-menu/editar-consulta/editar-consulta.component';
+import { AgregarConsultaComponent } from './components/medic-menu/agregar-consulta/agregar-consulta.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { ModalDatosMedicosPacienteComponent } from './components/medic-menu/moda
     BuscarPacienteComponent,
     SelectJobComponent,
     HCPacienteComponent,
-    ModalDatosMedicosPacienteComponent
+    ModalDatosMedicosPacienteComponent,
+    EditarConsultaComponent,
+    AgregarConsultaComponent
   ],
   imports: [
     ReactiveFormsModule,

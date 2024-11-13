@@ -30,9 +30,6 @@ export class AgregarEditarPatientComponent implements OnInit {
       address: [null, Validators.required],
       email: [null, Validators.required],
       birthDate: [null, Validators.required],
-      grupoSanguineo: [null, Validators.required],
-      antecedentesPersonales: [null, Validators.required],
-      antecedentesFamiliares: [null, Validators.required],
       healthInsurance: [null, Validators.required],
     })
     this.id = data.id;
@@ -70,9 +67,6 @@ export class AgregarEditarPatientComponent implements OnInit {
         address: data.address,
         email: data.email,
         birthDate: new Date(data.birthDate),
-        grupoSanguineo: data.grupoSanguineo,
-        antecedentesPersonales: data.antecedentesPersonales,
-        antecedentesFamiliares: data.antecedentesFamiliares,
         healthInsurance: selectedHealthInsurance || null  // Asignamos el objeto completo
       });
       console.log('Paciente:', data);
@@ -89,15 +83,15 @@ export class AgregarEditarPatientComponent implements OnInit {
       address: this.form.value.address,
       email: this.form.value.email,
       birthDate: this.form.value.birthDate ? this.form.value.birthDate.toISOString().slice(0, 10) : '',
-      grupoSanguineo: this.form.value.grupoSanguineo,
-      antecedentesPersonales: this.form.value.antecedentesPersonales,
-      antecedentesFamiliares: this.form.value.antecedentesFamiliares,
-      healthInsurance: this.form.value.healthInsurance,    
+      grupoSanguineo: "",
+      antecedentesPersonales: "",
+      antecedentesFamiliares: "",
+      healthInsurance: this.form.value.healthInsurance,
       id: this.form.value.id,
     }
     //console.log('paciente',patient);
     this.loading = true;
-    
+
     if(this.id === undefined){
       //IS ADD
       this._patientService.addPatient(patient).subscribe(() => {
@@ -114,7 +108,7 @@ export class AgregarEditarPatientComponent implements OnInit {
 
     this.loading = false;
     this.dialogRef.close(true);
-    
+
 }
 successMessage(operation: string){
   this._snackBar.open(`El Paciente fue ${operation} con exito`,"" ,{
