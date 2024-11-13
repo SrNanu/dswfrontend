@@ -5,7 +5,7 @@ import { Patient } from '../../interfaces/patient.js';
 import { Attention } from '../../interfaces/attention.js';
 import { PatientService } from '../../services/patient.service.js';
 import { throwError } from 'rxjs';
-import { ModalDatosMedicosPacienteComponent } from './modal-datos-medicos-paciente.component.js';
+import { ModalDatosMedicosPacienteComponent } from './modal-datos-medicos-paciente/modal-datos-medicos-paciente.component.js';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AttentionService } from '../../services/attentions.service.js';
@@ -14,6 +14,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { After } from 'v8';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { EditarConsultaComponent } from './editar-consulta/editar-consulta.component.js';
+import { AgregarConsultaComponent } from './agregar-consulta/agregar-consulta.component.js';
 
 
 @Component({
@@ -25,6 +27,7 @@ export class HCPacienteComponent implements OnInit , AfterViewInit {
   patientInfo: { label: string, value: string }[] = [];
   attentionList: { date: string}[] = [];
   dni: string = '';
+  idPac: number = 0;
   doesntHaveAttentions = false;
   displayedColumns: string[] = ['date', 'reason', 'acciones'];
   dataSource: MatTableDataSource<Attention>;
@@ -46,7 +49,7 @@ export class HCPacienteComponent implements OnInit , AfterViewInit {
 
   ngOnInit(): void {
     this.dni = this.route.snapshot.paramMap.get('dni') || '';
-    this.loadPatientData(this.dni);
+    this.loadPatientData();
   }
 
   ngAfterViewInit(): void {
@@ -54,7 +57,7 @@ export class HCPacienteComponent implements OnInit , AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  loadPatientData( dni : String ): void {
+  loadPatientData(): void {
 
     this._PatientService.getPatientByDni(this.dni).subscribe(response => {
       if(response) //Look if a patient arrives (i mean its not null)
@@ -64,14 +67,13 @@ export class HCPacienteComponent implements OnInit , AfterViewInit {
             { label: 'Nombre y Apellido', value: (patient.firstname + ' ' + patient.lastname) },
             { label: 'DNI', value: patient.dni },
             { label: 'Obra Social', value: patient.healthInsurance.name },
-            { label: 'Fecha de Nacimiento', value:  patient.birthDate.toString() },
+            { label: 'Fecha de Nacimiento', value:  patient.birthDate.toString().split('T')[0] },
             { label: 'Grupo Sanguíneo', value: patient.grupoSanguineo },
             { label: 'Antecedentes Personales', value: patient.antecedentesPersonales },
             { label: 'Antecedentes Familiares', value: patient.antecedentesFamiliares },
             { label: 'Email', value: patient.email },
-            { label: 'Teléfono', value: patient.phoneNumber },
-            { label: 'Dirección', value: patient.address },
             ];
+          this.idPac = patient.id as number;
           //Check if medical data has been written on it
           if (!patient.grupoSanguineo || !patient.antecedentesPersonales || !patient.antecedentesFamiliares) {
             // If not, it will trigger the component or modal for medical data information
@@ -84,9 +86,10 @@ export class HCPacienteComponent implements OnInit , AfterViewInit {
             dialogRef.afterClosed().subscribe(result => {
               // After the modal is closed, it will reload the patient data, and it will load its attentions
               if(result) {
-                this.loadPatientData(this.dni);
+                this.loadPatientData();
                 // TODO EVITAR EL AS NUMBER
-                this.loadPatientAttentions(patient.id as number);
+                this.idPac = patient.id as number;
+                this.loadPatientAttentions(this.idPac);
               }
             });
 
@@ -94,7 +97,8 @@ export class HCPacienteComponent implements OnInit , AfterViewInit {
           else {
             // If the patient has medical data, it will load its attentions
             // TODO EVITAR EL AS NUMBER
-            this.loadPatientAttentions(patient.id as number);
+            this.idPac = patient.id as number;
+            this.loadPatientAttentions(this.idPac);
           }
       }
       else
@@ -104,6 +108,7 @@ export class HCPacienteComponent implements OnInit , AfterViewInit {
     });
 
   }
+
 
   loadPatientAttentions(id : number): void {
     this.loading = true;
@@ -124,10 +129,10 @@ export class HCPacienteComponent implements OnInit , AfterViewInit {
       this.doesntHaveAttentions = true;
       if (error.status === 404) {
         console.warn('No attentions found for this patient:', error.message);
-        // Optionally, display an alert or message to the user here
+
       } else {
         console.error('An error occurred:', error.message);
-        // Handle other errors here, like displaying a generic error message
+
       }
     }
 
@@ -143,35 +148,67 @@ export class HCPacienteComponent implements OnInit , AfterViewInit {
     }
   }
 
+  editarDatosMedicos(){
+    const dialogRef = this.dialog.open(ModalDatosMedicosPacienteComponent, {
+      width: '800px',
+      disableClose: true,
+      data: {id: this.idPac , edit: true }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if(result){
+        this.loadPatientData();
+        this.loadPatientAttentions(this.idPac);
+      }
+    });
+  }
+
+
   addConsulta(){
+
+    const dialogRef = this.dialog.open(AgregarConsultaComponent, {
+      width: '800px',
+      disableClose: true,
+      data: {id: this.idPac }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if(result){
+        this.loadPatientAttentions(this.idPac);
+      }
+    });
 
   }
 
   editAttention( id?:number){
-    // //console.log('id:', id);
-    // const dialogRef = this.dialog.open(AgregarEditarPatientComponent, {
-    //   width: '550px',
-    //   disableClose: true,
-    //   data: {id: id}
-    // });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    //   if(result){
-    //     this.obtenerPatients();
-    //   }
-    // });
+    const dialogRef = this.dialog.open(EditarConsultaComponent, {
+      width: '800px',
+      disableClose: true,
+      data: {id: id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if(result){
+        this.loadPatientAttentions(this.idPac);
+      }
+    });
 
   }
 
   deleteAttention(id: number){
-    // this._patientService.deletePatient(id).subscribe(data => {
-    //   this.obtenerPatients();
-    //   this.successMessage();
-    // }, error => {
-    //   console.error('Error al eliminar patient:', error);
-    // });
+    this._AttentionService.deleteAttention(id).subscribe(data => {
+      this.loadPatientAttentions(this.idPac);
+      this.successMessage();
+    }, error => {
+      console.error('Error al eliminar patient:', error);
+    });
   }
+
+
   successMessage(){
     this._snackBar.open('El paciente fue eliminada con exito',"" ,{
       duration: 3000,

@@ -32,7 +32,10 @@ export class AttentionService {
   }
 
   getAttention(id: number): Observable<Attention> {
-    return this.http.get<Attention>(`${this.myAppUrl}${this.myApiUrl}/${id}`);
+    return this.http.get<{ message: string; data: Attention }>(`${this.myAppUrl}${this.myApiUrl}/${id}`)
+    .pipe(
+      map(response => response.data)
+    );
   }
 
   updateAttention(id: number, anAttention: Attention): Observable<void> {

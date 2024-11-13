@@ -17,7 +17,7 @@
             </span>
           </div>
         </div>
-      
+
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>Apellido</mat-label>
@@ -30,7 +30,7 @@
           </div>
         </div>
       </div>
-  
+
       <div class="row">
         <div class="column">
           <mat-form-field appearance="fill">
@@ -56,7 +56,7 @@
           </div>
         </div>
       </div>
-    
+
       <div class="row">
         <div class="column">
           <mat-form-field appearance="fill">
@@ -93,50 +93,6 @@
           </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('birthDate')?.hasError('required') && form.get('birthDate')?.touched">
-              <strong>Campo obligatorio</strong>
-            </span>
-          </div> 
-        </div>
-
-        <div class="column">
-          <mat-form-field appearance="fill">
-            <mat-label>Grupo Sanguíneo</mat-label>
-            <mat-select formControlName="grupoSanguineo">
-              <mat-option *ngFor="let item of bloodGroup" [value]="item">
-                {{ item }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <div class="error">
-            <span *ngIf="form.get('grupoSanguineo')?.hasError('required') && form.get('grupoSanguineo')?.touched">
-              <strong>Campo obligatorio</strong>
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="column">
-          <mat-form-field appearance="fill">
-            <mat-label>Antecedentes Personales</mat-label>
-            <input formControlName="antecedentesPersonales" matInput placeholder="Ingrese Antecedentes Personales" autocomplete="off">
-          </mat-form-field>
-          <div class="error">
-            <span *ngIf="form.get('antecedentesPersonales')?.hasError('required') && form.get('antecedentesPersonales')?.touched">
-              <strong>Campo obligatorio</strong>
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="column">
-          <mat-form-field appearance="fill">
-            <mat-label>Antecedentes Familiares</mat-label>
-            <input formControlName="antecedentesFamiliares" matInput placeholder="Ingrese Antecedentes Familiares" autocomplete="off">
-          </mat-form-field>
-          <div class="error">
-            <span *ngIf="form.get('antecedentesFamiliares')?.hasError('required') && form.get('antecedentesFamiliares')?.touched">
               <strong>Campo obligatorio</strong>
             </span>
           </div>

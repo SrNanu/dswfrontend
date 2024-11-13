@@ -6,7 +6,7 @@ export interface Attention {
     id?: number;
 
     date: Date;
-    
+
     paymentDate?: Date
 
     result?: string
@@ -28,9 +28,7 @@ export interface Attention {
     dateCancelled?: Date;
 
     consultationHours: ConsultationHours;
-    
+
     patient:Patient;
-    
-    medic: Medic;
-    
+
 }

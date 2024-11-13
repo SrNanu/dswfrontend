@@ -4,16 +4,20 @@
 </mat-toolbar>
 <div class="paciente-detalle-container">
     <h2>Detalles del Paciente</h2>
-    <ng-container *ngFor="let item of patientInfo">
-      <p><strong>{{ item.label }}:</strong> {{ item.value }}</p>
+
+    <ng-container>
+      <ng-container *ngFor="let item of patientInfo">
+        <p><strong>{{ item.label }}:</strong> {{ item.value }}</p>
+      </ng-container>
+      <button (click)="editarDatosMedicos()" mat-raised-button color="primary">Editar</button>
     </ng-container>
 
     <div class="atenciones-container">
-      <h3>Atenciones</h3>
+      <h3>Consultas</h3>
 
 
       <ng-container class="alerta" #noAttentions *ngIf="doesntHaveAttentions">
-        <p><strong>No hay atenciones registradas para este paciente.</strong></p>
+        <p><strong>No hay consultas registradas para este paciente.</strong></p>
       </ng-container>
 
       <mat-card>

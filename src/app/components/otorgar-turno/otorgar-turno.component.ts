@@ -21,7 +21,7 @@ export class OtorgarTurnoComponent  implements OnInit{
   form: FormGroup;
 
   constructor( @Optional() public dialogRef: MatDialogRef<OtorgarTurnoComponent>,
-    private fb: FormBuilder 
+    private fb: FormBuilder
     , private _medicService: MedicService
     , private _consultationHoursService: ConsultationHoursService
     , private _patientService: PatientService
@@ -40,12 +40,11 @@ export class OtorgarTurnoComponent  implements OnInit{
     this.loading = true;
     const aPatient : any= this._patientService.getPatientByDni(this.form.value.dni);
     const aAttention: Attention  = {
-      patient: aPatient, 
+      patient: aPatient,
       date: this.form.value.date,
       consultationHours: this.form.value.consultationHours,
-      medic: this.form.value.medic,
     }
-   
+
     //this._attentionService.addConsultationHours(aAttention).subscribe(() => {
     //  this.successMessage('agregada');
     //}); FALTA IMPLEMENTAR EL SERVICIO DE ATTENTION
@@ -53,7 +52,7 @@ export class OtorgarTurnoComponent  implements OnInit{
     this.loading = false;
     this.dialogRef.close(true);
   }
-  
+
   ngOnInit(): void {
    this.obternerHoras();
     this.obternerMedicos() ;
