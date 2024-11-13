@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'sel-job', component: SelectJobComponent },
   { path: 'hc-paciente', component: HCPacienteComponent },
   { path: 'buscar-paciente', component: BuscarPacienteComponent },
-  { path: '', redirectTo: '/sel-job', pathMatch: 'full' }];
+  { path: '', redirectTo: '/login', pathMatch: 'full' }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
