@@ -19,7 +19,7 @@ export class LoginComponent {
   submit() {
     if (this.form.valid) {
       console.log(this.form.value); // Aca tendriamos que validar la contraseña y el usuario
-      this.router.navigate(['/secretary']);
+      this.router.navigate(['/sel-job']);
     }
   }
 
