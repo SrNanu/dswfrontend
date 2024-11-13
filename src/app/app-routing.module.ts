@@ -9,10 +9,10 @@ import { ListConsultationHoursComponent } from './components/list-consultationHo
 import { LoginComponent } from './components/login/login.component';
 import { OtorgarTurnoComponent } from './components/otorgar-turno/otorgar-turno.component';
 import { MenuComponent } from './menu/menu.component';
-import { MedicMenuComponent } from './medic-menu/med-menu.component';
+import { MedicMenuComponent } from './components/medic-menu/med-menu.component';
 import { SelectJobComponent } from './select-job/sel-job.component';
-import { HCPacienteComponent } from './medic-menu/hc-paciente.component';
-import { BuscarPacienteComponent } from './medic-menu/buscar-paciente.component';
+import { HCPacienteComponent } from './components/medic-menu/hc-paciente.component';
+import { BuscarPacienteComponent } from './components/medic-menu/buscar-paciente.component';
 
 const routes: Routes = [
   { path: 'patient', component: ListPatientsComponent },
@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'menu', component: MenuComponent },
   { path: 'med-menu', component: MedicMenuComponent },
   { path: 'sel-job', component: SelectJobComponent },
-  { path: 'hc-paciente', component: HCPacienteComponent },
+  { path: 'hc-paciente/:dni', component: HCPacienteComponent },
   { path: 'buscar-paciente', component: BuscarPacienteComponent },
   { path: '', redirectTo: '/sel-job', pathMatch: 'full' }];
 

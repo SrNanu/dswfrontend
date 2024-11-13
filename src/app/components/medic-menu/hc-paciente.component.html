@@ -1,0 +1,52 @@
+<app-med-menu></app-med-menu>
+<mat-toolbar color="primary">
+    <span>Historia Clinica</span>
+</mat-toolbar>
+<div class="paciente-detalle-container">
+    <h2>Detalles del Paciente</h2>
+    <ng-container *ngFor="let item of patientInfo">
+      <p><strong>{{ item.label }}:</strong> {{ item.value }}</p>
+    </ng-container>
+
+    <div class="atenciones-container">
+      <h3>Atenciones</h3>
+
+
+      <ng-container class="alerta" #noAttentions *ngIf="doesntHaveAttentions">
+        <p><strong>No hay atenciones registradas para este paciente.</strong></p>
+      </ng-container>
+
+      <mat-card>
+        <mat-form-field>
+            <mat-label>Filtro</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input autocomplete="off">
+        </mat-form-field>
+        <button (click)="addConsulta()" mat-raised-button color="primary">Agregar</button>
+        <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z15">
+
+            <ng-container matColumnDef="date">
+                <th mat-sort-header mat-header-cell *matHeaderCellDef> Fecha Consulta </th>
+                <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="reason">
+                <th mat-sort-header mat-header-cell *matHeaderCellDef> Motivo Consulta </th>
+                <td mat-cell *matCellDef="let element"> {{element.reason}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+                <th mat-sort-header mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-icon (click)="editAttention(element.id)" class="btnEdit" matTooltip="Editar">edit</mat-icon>
+                    <mat-icon (click)="deleteAttention(element.id)" class="btnDelete" matTooltip="Eliminar">delete</mat-icon>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </mat-card>
+
+    </div>
+</div>
