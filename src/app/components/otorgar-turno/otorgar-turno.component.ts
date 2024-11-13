@@ -8,6 +8,8 @@ import { ConsultationHoursService } from '../../services/consultationHours.servi
 import { Attention } from '../../interfaces/attention.js';
 import { Patient } from '../../interfaces/patient.js';
 import { PatientService } from '../../services/patient.service.js';
+import { AttentionService } from '../../services/attentions.service.js';
+import { MatSnackBar } from '@angular/material/snack-bar/index.js';
 
 @Component({
   selector: 'app-otorgar-turno',
@@ -25,6 +27,8 @@ export class OtorgarTurnoComponent  implements OnInit{
     , private _medicService: MedicService
     , private _consultationHoursService: ConsultationHoursService
     , private _patientService: PatientService
+    , private _attentionService: AttentionService
+    , private _snackBar :MatSnackBar
     ) {
       this.form = this.fb.group({
         dni: [null, [Validators.required]],
@@ -46,9 +50,12 @@ export class OtorgarTurnoComponent  implements OnInit{
       medic: this.form.value.medic,
     }
    
-    //this._attentionService.addConsultationHours(aAttention).subscribe(() => {
-    //  this.successMessage('agregada');
-    //}); FALTA IMPLEMENTAR EL SERVICIO DE ATTENTION
+    this._attentionService.addAttention(aAttention).subscribe(() => {
+      this.successMessage('agregada');
+      console.log('Turno agregado:', aAttention); // para probar
+      const atenciones = this._attentionService.getAttentions();
+      console.log('Atenciones:', atenciones);
+    }); 
 
     this.loading = false;
     this.dialogRef.close(true);
@@ -76,4 +83,11 @@ export class OtorgarTurnoComponent  implements OnInit{
     });
   }
 
+  successMessage(operation: string){
+    this._snackBar.open(`La consulta fue ${operation} con exito`,"" ,{
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
+  }
 }
