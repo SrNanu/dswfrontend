@@ -19,13 +19,13 @@ export class AgregarConsultaComponent {
 
 
   constructor
-  (
-    private fb: FormBuilder,
-    public dialogRef: MatDialogRef<AgregarConsultaComponent>,
-    private _AttentionService: AttentionService,
-    private _snackBar :MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ){
+    (
+      private fb: FormBuilder,
+      public dialogRef: MatDialogRef<AgregarConsultaComponent>,
+      private _AttentionService: AttentionService,
+      private _snackBar: MatSnackBar,
+      @Inject(MAT_DIALOG_DATA) public data: any
+    ) {
     this.form = this.fb.group({
       date: ['', [Validators.required]],
       result: ['', [Validators.required]],
@@ -37,7 +37,7 @@ export class AgregarConsultaComponent {
       treatment: ['', [Validators.required]],
       observation: ['', [Validators.required]],
     })
-}
+  }
 
   ngOnInit(): void {
 
@@ -57,7 +57,7 @@ export class AgregarConsultaComponent {
 
           // comparo sin tiempo
           return turnoDate.toISOString().split('T')[0] === selectedDate.toISOString().split('T')[0] &&
-                 turno.reason === "";
+            turno.reason === "";
         });
 
         //console.log('Turno Vacio:', this.turnoVacio);  // veo si se encontro
@@ -103,15 +103,15 @@ export class AgregarConsultaComponent {
 
 
 
-  successMessage(operation: string){
-    this._snackBar.open(`La Consulta fue ${operation} con exito`,"" ,{
+  successMessage(operation: string) {
+    this._snackBar.open(`La Consulta fue ${operation} con exito`, "", {
       duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom'
     });
   }
 
-  close(){
+  close() {
     this.dialogRef.close();
   }
 

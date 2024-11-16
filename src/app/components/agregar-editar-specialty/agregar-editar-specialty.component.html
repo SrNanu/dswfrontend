@@ -1,4 +1,3 @@
-
 <div class="container">
   <h2 mat-dialog-title> {{operation}} Especialidad</h2>
   <mat-spinner class="spinner" *ngIf="loading" [diameter]="30"></mat-spinner>
@@ -49,9 +48,8 @@
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
-    <button [disabled]="form.invalid"  type="submit"  mat-button cdkFocusInitial>Acpetar</button>
+    <button [disabled]="form.invalid" type="submit" mat-button>Acpetar</button>
   </mat-dialog-actions>
 
 
 </form>
-

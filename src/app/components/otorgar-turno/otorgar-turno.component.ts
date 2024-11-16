@@ -9,53 +9,53 @@ import { Attention } from '../../interfaces/attention.js';
 import { Patient } from '../../interfaces/patient.js';
 import { PatientService } from '../../services/patient.service.js';
 import { AttentionService } from '../../services/attentions.service.js';
-import { MatSnackBar } from '@angular/material/snack-bar/index.js';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-otorgar-turno',
   templateUrl: './otorgar-turno.component.html',
   styleUrls: ['./otorgar-turno.component.css']
 })
-export class OtorgarTurnoComponent  implements OnInit{
+export class OtorgarTurnoComponent implements OnInit {
   loading: any;
-  medics: Medic[]= [];
+  medics: Medic[] = [];
   consultationHours: ConsultationHours[] = [];
   form: FormGroup;
 
-  constructor( @Optional() public dialogRef: MatDialogRef<OtorgarTurnoComponent>,
+  constructor(@Optional() public dialogRef: MatDialogRef<OtorgarTurnoComponent>,
     private fb: FormBuilder
     , private _medicService: MedicService
     , private _consultationHoursService: ConsultationHoursService
     , private _patientService: PatientService
     , private _attentionService: AttentionService
-    , private _snackBar :MatSnackBar
-    ) {
-      this.form = this.fb.group({
-        dni: [null, [Validators.required]],
-        medic: [null, [Validators.required]],
-        date: [Date, [Validators.required]],
-        consultationHours:[null, [Validators.required]]
-      })
-     }
+    , private _snackBar: MatSnackBar
+  ) {
+    this.form = this.fb.group({
+      dni: [null, [Validators.required]],
+      medic: [null, [Validators.required]],
+      date: [Date, [Validators.required]],
+      consultationHours: [null, [Validators.required]]
+    })
+  }
 
 
   addTurno() {
 
     this.loading = true;
-    const aPatient : any= this._patientService.getPatientByDni(this.form.value.dni);
-    const aAttention: Attention  = {
+    const aPatient: any = this._patientService.getPatientByDni(this.form.value.dni);
+    const aAttention: Attention = {
       patient: aPatient,
       date: this.form.value.date,
       consultationHours: this.form.value.consultationHours,
     }
 
-   
+
     this._attentionService.addAttention(aAttention).subscribe(() => {
       this.successMessage('agregada');
       console.log('Turno agregado:', aAttention); // para probar
       const atenciones = this._attentionService.getAttentions();
       console.log('Atenciones:', atenciones);
-    }); 
+    });
 
 
     this.loading = false;
@@ -63,10 +63,10 @@ export class OtorgarTurnoComponent  implements OnInit{
   }
 
   ngOnInit(): void {
-   this.obternerHoras();
-    this.obternerMedicos() ;
+    this.obternerHoras();
+    this.obternerMedicos();
   }
-  cancelar(){
+  cancelar() {
     this.dialogRef.close(false);
   }
 
@@ -84,8 +84,8 @@ export class OtorgarTurnoComponent  implements OnInit{
     });
   }
 
-  successMessage(operation: string){
-    this._snackBar.open(`La consulta fue ${operation} con exito`,"" ,{
+  successMessage(operation: string) {
+    this._snackBar.open(`La consulta fue ${operation} con exito`, "", {
       duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom'

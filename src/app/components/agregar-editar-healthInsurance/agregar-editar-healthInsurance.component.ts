@@ -13,26 +13,26 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AgregarEditarHealthInsuranceComponent implements OnInit {
 
   form: FormGroup;
-  loading : boolean = false;
+  loading: boolean = false;
   operation: string = 'Agregar ';
-  id : number | undefined;
+  id: number | undefined;
 
   constructor(public dialogRef: MatDialogRef<AgregarEditarHealthInsuranceComponent>,
     private fb: FormBuilder, private _healthInsuranceService: HealthInsuranceService
-    , private _snackBar :MatSnackBar
+    , private _snackBar: MatSnackBar
     , @Inject(MAT_DIALOG_DATA) public data: any) {
-      this.form = this.fb.group({
-        name: ['', [Validators.required, Validators.maxLength(40)]]
-      })
-      this.id = data.id;
-     }
+    this.form = this.fb.group({
+      name: ['', [Validators.required, Validators.maxLength(40)]]
+    })
+    this.id = data.id;
+  }
 
   ngOnInit(): void {
     this.isEdit(this.id);
   }
 
-  isEdit(id: number | undefined){
-    if(id !== undefined){
+  isEdit(id: number | undefined) {
+    if (id !== undefined) {
       this.operation = 'Editar ';
       this.getHealthInsurance(id);
     }
@@ -48,7 +48,7 @@ export class AgregarEditarHealthInsuranceComponent implements OnInit {
   }
 
 
-  cancelar(){
+  cancelar() {
     this.dialogRef.close(false);
   }
 
@@ -62,13 +62,13 @@ export class AgregarEditarHealthInsuranceComponent implements OnInit {
     this.loading = true;
 
 
-    if(this.id === undefined){
+    if (this.id === undefined) {
       //es agregar
       this._healthInsuranceService.addHealthInsurance(aHealthInsurance).subscribe(() => {
         this.successMessage('agregada');
       });
 
-    }else {
+    } else {
       // es editar
       this._healthInsuranceService.updateHealthInsurance(this.id, aHealthInsurance).subscribe(data => {
         this.successMessage('actualizada');
@@ -80,8 +80,8 @@ export class AgregarEditarHealthInsuranceComponent implements OnInit {
 
   }
 
-  successMessage(operation: string){
-    this._snackBar.open(`La Obra Social fue ${operation} con exito`,"" ,{
+  successMessage(operation: string) {
+    this._snackBar.open(`La Obra Social fue ${operation} con exito`, "", {
       duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom'

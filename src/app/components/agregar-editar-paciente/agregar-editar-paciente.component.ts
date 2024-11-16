@@ -1,4 +1,4 @@
-  import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Patient } from '../../interfaces/patient';
@@ -18,10 +18,10 @@ export class AgregarEditarPatientComponent implements OnInit {
   healthInsurences: HealthInsurance[] = [];
   bloodGroup: string[] = ['A+', 'A-', 'B+', 'B-', '0+', '0-', 'AB+', 'AB-'];
   form: FormGroup;
-  loading : boolean = false;
+  loading: boolean = false;
   operacion: string = 'Agregar';
   id: number | undefined;
-  constructor(public dialogRef: MatDialogRef<AgregarEditarPatientComponent>, private _healthInsuranceService: HealthInsuranceService, private fb:FormBuilder, private _patientService: PatientService,private _snackBar :MatSnackBar, dateAdapter:DateAdapter<any>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(public dialogRef: MatDialogRef<AgregarEditarPatientComponent>, private _healthInsuranceService: HealthInsuranceService, private fb: FormBuilder, private _patientService: PatientService, private _snackBar: MatSnackBar, dateAdapter: DateAdapter<any>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.form = this.fb.group({
       firstname: [null, [Validators.required, Validators.maxLength(40)]],
       lastname: [null, [Validators.required, Validators.maxLength(40)]],
@@ -30,7 +30,7 @@ export class AgregarEditarPatientComponent implements OnInit {
       address: [null, Validators.required],
       email: [null, Validators.required],
       birthDate: [null, Validators.required],
-      healthInsurance: [null, Validators.required],
+      healthInsurance: ['', Validators.required],
     })
     this.id = data.id;
     dateAdapter.setLocale('es-AR');
@@ -39,18 +39,18 @@ export class AgregarEditarPatientComponent implements OnInit {
     this.obtenerObrasSociales();
     this.isEdit(this.id);
   }
-  cancelar(){
+  cancelar() {
     this.dialogRef.close(false);
   }
-  isEdit(id: number|undefined){
-    if(id !== undefined){
+  isEdit(id: number | undefined) {
+    if (id !== undefined) {
       this.operacion = 'Editar';
       this.getPatient(id);
     }
   }
-  obtenerObrasSociales(){
+  obtenerObrasSociales() {
     this._healthInsuranceService.getHealthInsurances().subscribe(data => {
-      this.healthInsurences=data;
+      this.healthInsurences = data;
       console.log('Obras Sociales:', this.healthInsurences)
     });
   }
@@ -73,7 +73,7 @@ export class AgregarEditarPatientComponent implements OnInit {
     });
   }
 
-  addEditPatient(){
+  addEditPatient() {
 
     const patient: Patient = {
       firstname: this.form.value.firstname,
@@ -86,19 +86,19 @@ export class AgregarEditarPatientComponent implements OnInit {
       grupoSanguineo: "",
       antecedentesPersonales: "",
       antecedentesFamiliares: "",
-      healthInsurance: this.form.value.healthInsurance,
+      healthInsurance: this.form.value.healthInsurance.id,
       id: this.form.value.id,
     }
-    //console.log('paciente',patient);
+    console.log('paciente', patient);
     this.loading = true;
 
-    if(this.id === undefined){
+    if (this.id === undefined) {
       //IS ADD
       this._patientService.addPatient(patient).subscribe(() => {
         this.successMessage("agregada");
       });
 
-    }else{
+    } else {
       //IS EDIT
       this._patientService.updatePatient(this.id, patient).subscribe(() => {
         this.successMessage("actualizada");
@@ -109,14 +109,14 @@ export class AgregarEditarPatientComponent implements OnInit {
     this.loading = false;
     this.dialogRef.close(true);
 
-}
-successMessage(operation: string){
-  this._snackBar.open(`El Paciente fue ${operation} con exito`,"" ,{
-    duration: 3000,
-    horizontalPosition: 'center',
-    verticalPosition: 'bottom'
-  });
-}
+  }
+  successMessage(operation: string) {
+    this._snackBar.open(`El Paciente fue ${operation} con exito`, "", {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    });
+  }
 
 
 }

@@ -12,13 +12,13 @@ export class MedicService {
   private myAppUrl: string;
   private myApiUrl: string;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.myApiUrl = "api/Medics";
     this.myAppUrl = "http://localhost:3000/";
   }
 
-  getMedics() : Observable<Medic[]> {
-    return this.http.get<{data: Medic[]}>(`${this.myAppUrl}${this.myApiUrl}`)
+  getMedics(): Observable<Medic[]> {
+    return this.http.get<{ data: Medic[] }>(`${this.myAppUrl}${this.myApiUrl}`)
       .pipe(
         map(response => response.data) // Extrae el array de la propiedad `data`
       );
@@ -35,7 +35,7 @@ export class MedicService {
     return this.http.put<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`, medic)
   }
 
-  deleteMedico(id: number) : Observable<void> {
+  deleteMedico(id: number): Observable<void> {
     return this.http.delete<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`);
 
   }
