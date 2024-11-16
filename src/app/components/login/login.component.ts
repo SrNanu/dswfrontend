@@ -14,6 +14,7 @@ export class LoginComponent {
     username: new FormControl(''),
     password: new FormControl(''),
   });
+hidePassword: any;
   constructor(private router: Router) {}
 
   submit() {
