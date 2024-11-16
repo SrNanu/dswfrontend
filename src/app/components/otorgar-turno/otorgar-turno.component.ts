@@ -40,27 +40,35 @@ export class OtorgarTurnoComponent implements OnInit {
 
 
   addTurno() {
-
     this.loading = true;
-    const aPatient: any = this._patientService.getPatientByDni(this.form.value.dni);
-    const aAttention: Attention = {
-      patient: aPatient,
-      date: this.form.value.date,
-      consultationHours: this.form.value.consultationHours,
-    }
-
-
-    this._attentionService.addAttention(aAttention).subscribe(() => {
-      this.successMessage('agregada');
-      console.log('Turno agregado:', aAttention); // para probar
-      const atenciones = this._attentionService.getAttentions();
-      console.log('Atenciones:', atenciones);
+  
+    // Obtener el paciente mediante suscripción
+    this._patientService.getPatientByDni(this.form.value.dni).subscribe((aPatient: any) => {
+      const aAttention: Attention = {
+        patient: aPatient, // Aquí ya tenemos el paciente
+        date: this.form.value.date,
+        consultationHours: this.form.value.consultationHours,
+      };
+  
+      console.log('Atención:', aAttention);
+  
+      // Agregar la atención
+      this._attentionService.addAttention(aAttention).subscribe(() => {
+        this.successMessage('agregada');
+        console.log('Turno agregado:', aAttention); // para probar
+        const atenciones = this._attentionService.getAttentions();
+        console.log('Atenciones:', atenciones);
+      });
+  
+      this.loading = false;
+      //this.dialogRef.close(true);
+    }, (error) => {
+      // Manejo de errores al obtener el paciente
+      console.error('Error al obtener el paciente:', error);
+      this.loading = false;
     });
-
-
-    this.loading = false;
-    this.dialogRef.close(true);
   }
+  
 
   ngOnInit(): void {
     this.obternerHoras();
