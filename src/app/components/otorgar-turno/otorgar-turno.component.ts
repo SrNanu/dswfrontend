@@ -45,9 +45,9 @@ export class OtorgarTurnoComponent implements OnInit {
     // Obtener el paciente mediante suscripción
     this._patientService.getPatientByDni(this.form.value.dni).subscribe((aPatient: any) => {
       const aAttention: Attention = {
-        patient: aPatient, // Aquí ya tenemos el paciente
+        patient: aPatient.id, // Aquí ya tenemos el paciente
         date: this.form.value.date,
-        consultationHours: this.form.value.consultationHours,
+        consultationHours: this.form.value.consultationHours.id,
       };
   
       console.log('Atención:', aAttention);
