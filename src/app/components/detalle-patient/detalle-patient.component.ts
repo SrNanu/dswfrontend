@@ -66,8 +66,8 @@ export class DetallePatientComponent implements OnInit {
         phoneNumber: data.phoneNumber,
         address: data.address,
         email: data.email,
-        birthDate: new Date(data.birthDate),
-        healthInsurance: selectedHealthInsurance || null  // Asignamos el objeto completo
+        birthDate: new Date(data.birthDate).toISOString().slice(0, 10),
+        healthInsurance: selectedHealthInsurance?.name || null  // Asignamos el objeto completo
       });
       console.log('Paciente:', data);
     });

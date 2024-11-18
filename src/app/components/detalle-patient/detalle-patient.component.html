@@ -9,7 +9,7 @@
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>Nombre</mat-label>
-            <input formControlName="firstname" matInput placeholder="Ingrese nombre" autocomplete="off">
+            <input formControlName="firstname" matInput placeholder="Ingrese nombre" autocomplete="off" readonly>
           </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('firstname')?.hasError('required') && form.get('firstname')?.touched">
@@ -21,7 +21,7 @@
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>Apellido</mat-label>
-            <input formControlName="lastname" matInput placeholder="Ingrese apellido" autocomplete="off">
+            <input formControlName="lastname" matInput placeholder="Ingrese apellido" autocomplete="off" readonly>
           </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('lastname')?.hasError('required') && form.get('lastname')?.touched">
@@ -35,7 +35,7 @@
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>DNI</mat-label>
-            <input formControlName="dni" matInput placeholder="Ingrese DNI" autocomplete="off">
+            <input formControlName="dni" matInput placeholder="Ingrese DNI" autocomplete="off" readonly>
           </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('dni')?.hasError('required') && form.get('dni')?.touched">
@@ -47,7 +47,7 @@
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>Teléfono</mat-label>
-            <input formControlName="phoneNumber" matInput placeholder="Ingrese Teléfono" autocomplete="off">
+            <input formControlName="phoneNumber" matInput placeholder="Ingrese Teléfono" autocomplete="off" readonly>
           </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('phoneNumber')?.hasError('required') && form.get('phoneNumber')?.touched">
@@ -61,7 +61,7 @@
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>Dirección</mat-label>
-            <input formControlName="address" matInput placeholder="Ingrese Dirección" autocomplete="off">
+            <input formControlName="address" matInput placeholder="Ingrese Dirección" autocomplete="off" readonly>
           </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('address')?.hasError('required') && form.get('address')?.touched">
@@ -73,7 +73,7 @@
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
-            <input formControlName="email" matInput placeholder="Ingrese Email" autocomplete="off">
+            <input formControlName="email" matInput placeholder="Ingrese Email" autocomplete="off" readonly>
           </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched">
@@ -86,10 +86,8 @@
       <div class="row">
         <div class="column">
           <mat-form-field appearance="fill">
-            <mat-label>Fecha Nacimiento</mat-label>
-            <input formControlName="birthDate" matInput [matDatepicker]="picker">
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker touchUi #picker></mat-datepicker>
+            <mat-label>Fecha Nacimiento</mat-label> 
+            <input formControlName="birthDate" matInput  >
           </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('birthDate')?.hasError('required') && form.get('birthDate')?.touched">
@@ -103,11 +101,7 @@
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>Obra Social</mat-label>
-            <mat-select formControlName="healthInsurance">
-              <mat-option *ngFor="let item of healthInsurences" [value]="item">
-                {{item.name}}
-              </mat-option>
-            </mat-select>
+            <input formControlName="healthInsurance" matInput  >
           </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('healthInsurance')?.hasError('required') && form.get('healthInsurance')?.touched">
