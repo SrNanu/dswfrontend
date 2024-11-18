@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AgregarEditarPatientComponent } from '../agregar-editar-paciente/agregar-editar-paciente.component';
 import { PatientService } from '../../services/patient.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DetallePatientComponent } from '../detalle-patient/detalle-patient.component';
 
 
 
@@ -18,7 +19,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './list-patient.component.css'
 })
 export class ListPatientsComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['firstname', 'lastname', 'dni', 'phoneNumber', 'address', 'email', 'birthDate', 'healthInsurance', "acciones"];
+  displayedColumns: string[] = ['firstname', 'lastname', 'dni', 'healthInsurance', "acciones"];
   dataSource: MatTableDataSource<Patient>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -68,6 +69,24 @@ export class ListPatientsComponent implements OnInit, AfterViewInit {
   addEditPatient(id?: number) {
     //console.log('id:', id);
     const dialogRef = this.dialog.open(AgregarEditarPatientComponent, {
+      width: '550px',
+      disableClose: true,
+      data: { id: id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result) {
+        this.obtenerPatients();
+      }
+    });
+
+  }
+
+
+  detallePatient(id?: number) {
+    //console.log('id:', id);
+    const dialogRef = this.dialog.open(DetallePatientComponent, {
       width: '550px',
       disableClose: true,
       data: { id: id }

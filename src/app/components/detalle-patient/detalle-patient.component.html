@@ -1,0 +1,124 @@
+<div class="container">
+    <h2 mat-dialog-title>{{operacion}} Paciente</h2>
+    <mat-spinner *ngIf="loading" [diameter]="30" class="spinner"></mat-spinner>
+  </div>
+  
+  <form [formGroup]="form">
+    <mat-dialog-content>
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input formControlName="firstname" matInput placeholder="Ingrese nombre" autocomplete="off">
+          </mat-form-field>
+          <div class="error">
+            <span *ngIf="form.get('firstname')?.hasError('required') && form.get('firstname')?.touched">
+              <strong>Campo obligatorio</strong>
+            </span>
+          </div>
+        </div>
+  
+        <div class="column">
+          <mat-form-field appearance="fill">
+            <mat-label>Apellido</mat-label>
+            <input formControlName="lastname" matInput placeholder="Ingrese apellido" autocomplete="off">
+          </mat-form-field>
+          <div class="error">
+            <span *ngIf="form.get('lastname')?.hasError('required') && form.get('lastname')?.touched">
+              <strong>Campo obligatorio</strong>
+            </span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="fill">
+            <mat-label>DNI</mat-label>
+            <input formControlName="dni" matInput placeholder="Ingrese DNI" autocomplete="off">
+          </mat-form-field>
+          <div class="error">
+            <span *ngIf="form.get('dni')?.hasError('required') && form.get('dni')?.touched">
+              <strong>Campo obligatorio</strong>
+            </span>
+          </div>
+        </div>
+  
+        <div class="column">
+          <mat-form-field appearance="fill">
+            <mat-label>Teléfono</mat-label>
+            <input formControlName="phoneNumber" matInput placeholder="Ingrese Teléfono" autocomplete="off">
+          </mat-form-field>
+          <div class="error">
+            <span *ngIf="form.get('phoneNumber')?.hasError('required') && form.get('phoneNumber')?.touched">
+              <strong>Campo obligatorio</strong>
+            </span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="fill">
+            <mat-label>Dirección</mat-label>
+            <input formControlName="address" matInput placeholder="Ingrese Dirección" autocomplete="off">
+          </mat-form-field>
+          <div class="error">
+            <span *ngIf="form.get('address')?.hasError('required') && form.get('address')?.touched">
+              <strong>Campo obligatorio</strong>
+            </span>
+          </div>
+        </div>
+  
+        <div class="column">
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput placeholder="Ingrese Email" autocomplete="off">
+          </mat-form-field>
+          <div class="error">
+            <span *ngIf="form.get('email')?.hasError('required') && form.get('email')?.touched">
+              <strong>Campo obligatorio</strong>
+            </span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="fill">
+            <mat-label>Fecha Nacimiento</mat-label>
+            <input formControlName="birthDate" matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #picker></mat-datepicker>
+          </mat-form-field>
+          <div class="error">
+            <span *ngIf="form.get('birthDate')?.hasError('required') && form.get('birthDate')?.touched">
+              <strong>Campo obligatorio</strong>
+            </span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="fill">
+            <mat-label>Obra Social</mat-label>
+            <mat-select formControlName="healthInsurance">
+              <mat-option *ngFor="let item of healthInsurences" [value]="item">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="error">
+            <span *ngIf="form.get('healthInsurance')?.hasError('required') && form.get('healthInsurance')?.touched">
+              <strong>Campo obligatorio</strong>
+            </span>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+  
+    <mat-dialog-actions align="end">
+      <button type='button' (click)="cancelar()" mat-button>Salir</button>
+    </mat-dialog-actions>
+  </form>

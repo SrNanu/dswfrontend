@@ -35,6 +35,7 @@ import { FormsModule } from '@angular/forms';
 import { ModalDatosMedicosPacienteComponent } from './components/medic-menu/modal-datos-medicos-paciente/modal-datos-medicos-paciente.component';
 import { EditarConsultaComponent } from './components/medic-menu/editar-consulta/editar-consulta.component';
 import { AgregarConsultaComponent } from './components/medic-menu/agregar-consulta/agregar-consulta.component';
+import { DetallePatientComponent } from './components/detalle-patient/detalle-patient.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { AgregarConsultaComponent } from './components/medic-menu/agregar-consul
     HCPacienteComponent,
     ModalDatosMedicosPacienteComponent,
     EditarConsultaComponent,
-    AgregarConsultaComponent
+    AgregarConsultaComponent,
+    DetallePatientComponent
   ],
   imports: [
     ReactiveFormsModule,
