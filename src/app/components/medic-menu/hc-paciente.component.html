@@ -30,7 +30,7 @@
 
             <ng-container matColumnDef="date">
                 <th mat-sort-header mat-header-cell *matHeaderCellDef> Fecha Consulta </th>
-                <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.date  | date: 'dd/MM/yyyy'  }} </td>
             </ng-container>
 
             <ng-container matColumnDef="reason">

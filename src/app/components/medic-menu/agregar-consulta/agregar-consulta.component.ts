@@ -54,10 +54,12 @@ export class AgregarConsultaComponent {
         this.turnoVacio = this.attentionForTheDaySelected.find(turno => {
           const turnoDate = new Date(turno.date); // parseo pq viene como string
           const selectedDate = new Date(this.form.value.date); // hago la date para comparar
-
+          
           // comparo sin tiempo
-          return turnoDate.toISOString().split('T')[0] === selectedDate.toISOString().split('T')[0] &&
-            turno.reason === "";
+          //return turnoDate.toISOString().split('T')[0] === selectedDate.toISOString().split('T')[0] && ASI ERA ENTES 
+          return turnoDate.toISOString().slice(0, 10) == selectedDate.toISOString().slice(0, 10) &&
+          
+            turno.reason === null;
         });
 
         //console.log('Turno Vacio:', this.turnoVacio);  // veo si se encontro
