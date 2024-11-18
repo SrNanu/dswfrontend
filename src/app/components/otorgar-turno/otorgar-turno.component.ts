@@ -57,7 +57,7 @@ export class OtorgarTurnoComponent implements OnInit {
         this.successMessage('agregada');
         console.log('Turno agregado:', aAttention); // para probar
         const atenciones = this._attentionService.getAttentions();
-        console.log('Atenciones:', atenciones);
+        console.log('Atenciones:', atenciones)
       });
   
       this.loading = false;
