@@ -87,7 +87,7 @@
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>Fecha Nacimiento</mat-label> 
-            <input formControlName="birthDate" matInput  >
+            <input formControlName="birthDate" matInput  readonly>
           </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('birthDate')?.hasError('required') && form.get('birthDate')?.touched">
@@ -101,7 +101,7 @@
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>Obra Social</mat-label>
-            <input formControlName="healthInsurance" matInput  >
+            <input formControlName="healthInsurance" matInput  readonly>
           </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('healthInsurance')?.hasError('required') && form.get('healthInsurance')?.touched">
