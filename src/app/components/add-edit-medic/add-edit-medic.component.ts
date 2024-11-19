@@ -38,7 +38,7 @@ export class AddEditMedicComponent implements OnInit {
       username: ['', [Validators.required, Validators.maxLength(20)]],
       password: ['', [Validators.required, Validators.maxLength(12)]],
       medicalConsultationValue: ['', [Validators.required, Validators.maxLength(5)]],
-      license: ['', [Validators.required, Validators.pattern('^[0-5]*$')]],
+      license: ['', [Validators.required, Validators.pattern('^\\d{4,8}$')]],
       specialty: [null, Validators.required],
       consultationHours: ['', Validators.required],
     })

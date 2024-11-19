@@ -107,14 +107,14 @@
           <mat-label>Matrícula</mat-label>
           <input formControlName="license" matInput placeholder="Ingrese Matrícula" autocomplete="off">
         </mat-form-field>
-        <div class="error">
-          <span *ngIf="form.get('license')?.hasError('required') && form.get('license')?.touched">
-            La matrícula es un campo <strong>requerido</strong>
-          </span>
-          <span *ngIf="form.get('license')?.hasError('pattern')">
-            La matrícula debe tener como minimo <strong>5 caracteres</strong>
-          </span>
-        </div>
+          <div class="error">
+            <span *ngIf="form.get('license')?.hasError('required') && form.get('license')?.touched">
+              La matrícula es un campo <strong>requerido</strong>.
+            </span>
+            <span *ngIf="form.get('license')?.hasError('pattern')">
+              La matrícula debe ser un número de <strong>4 a 8 dígitos</strong>.
+            </span>
+          </div>
       </div>
 
       <div class="column">
