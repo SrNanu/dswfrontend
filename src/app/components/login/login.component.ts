@@ -1,7 +1,9 @@
 import {  Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { LoginService } from '../../services/login.service';
+import { UserBase } from '../../interfaces/userBase';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -15,14 +17,55 @@ export class LoginComponent {
     password: new FormControl(''),
   });
 hidePassword: any;
-  constructor(private router: Router) {}
+  constructor(private router: Router
+    , private loginService: LoginService
+    , private _snackBar: MatSnackBar
+  ) {}
 
   submit() {
-    if (this.form.valid) {
-      console.log(this.form.value); // Aca tendriamos que validar la contraseña y el usuario
-      this.router.navigate(['/sel-job']);
+    //if (this.form.valid) { no se para que era
+  
+    console.log(this.form.value);
+    // validamos que ingrese valores
+    if (this.form.value.username === '' || this.form.value.password === '') {
+      alert('Ingrese un usuario y contraseña');
+      return;
     }
+    // Creamos el usuario
+    const user: UserBase = { 
+      username: this.form.value.username,
+      password: this.form.value.password
+    };
+    // Llamar al servicio de login
+     this.loginService.logIn(user).subscribe({
+      next: (data) => {
+        console.log(`El usuario ${user.username} fue logueado`);
+        console.log("role: " +data.role);
+        // Guardar el token y el rol en el almacenamiento local
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('role', data.role);
+
+        //Mensaje en vez de alerta
+        this._snackBar.open(`El usuario ${user.username} fue logueado`, 'Cerrar', {
+          duration: 3000,
+          panelClass: ['snackbar-success']  // Agregar clase personalizada
+        });
+        
+        // Redirigir al usuario según su rol
+        if (data.role === 'secretary') {
+          this.router.navigate(['/patient']);
+          console.log('Se redirige a la vista de secretaria');
+        } else if (data.role === 'medic') {
+          this.router.navigate(['/buscar-paciente']);
+        } else {
+          alert('Rol de usuario no reconocido');
+        }
+      },
+      error: (err) => {
+        console.error('Error en el login', err);
+        alert('Usuario o contraseña incorrectos');
+      }
+    });
+   
   }
-
-
 }

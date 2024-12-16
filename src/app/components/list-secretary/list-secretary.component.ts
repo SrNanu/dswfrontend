@@ -44,7 +44,8 @@ export class ListSecretarysComponent implements OnInit, AfterViewInit {
       this.dataSource.data = data;
       //console.log('DataSource data:', this.dataSource.data);  Debería mostrar los mismos datos que el log anterior
       this.dataSource.paginator = this.paginator;
-      
+      //Mostrar secretarias en consola
+      console.log('DataSource:', this.dataSource);
       this.dataSource.sort = this.sort;}, error => {
         console.error('Error al obtener secretarys:', error);
       

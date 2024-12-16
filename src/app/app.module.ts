@@ -24,7 +24,6 @@ import { MedicMenuComponent } from './components/medic-menu/med-menu.component';
 import { BuscarPacienteComponent } from './components/medic-menu/buscar-paciente.component';
 import { SelectJobComponent } from './select-job/sel-job.component';
 import { HCPacienteComponent } from './components/medic-menu/hc-paciente.component';
-
 //Modulos
 import { SharedModule } from './shared/shared.module';
 import { AgregarEditarConsultationHoursComponent } from './components/agregar-editar-consultationHours/agregar-editar-consultationHours.component';
@@ -36,6 +35,7 @@ import { ModalDatosMedicosPacienteComponent } from './components/medic-menu/moda
 import { EditarConsultaComponent } from './components/medic-menu/editar-consulta/editar-consulta.component';
 import { AgregarConsultaComponent } from './components/medic-menu/agregar-consulta/agregar-consulta.component';
 import { DetallePatientComponent } from './components/detalle-patient/detalle-patient.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -71,7 +71,8 @@ import { DetallePatientComponent } from './components/detalle-patient/detalle-pa
     AppRoutingModule,
     SharedModule,
     MatProgressSpinnerModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
   ],
   providers: [
     provideClientHydration(),

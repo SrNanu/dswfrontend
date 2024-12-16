@@ -1,4 +1,6 @@
-export interface Secretary {
+import { UserBase } from "./userBase";
+
+export interface Secretary extends UserBase {
     id?: number;
     firstname: string;
     lastname: string;
@@ -6,6 +8,4 @@ export interface Secretary {
     dniType: string;
     dni: number;
     bornDate: Date;
-    password: string;
-    username: string;
 }
