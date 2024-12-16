@@ -21,16 +21,17 @@ hidePassword: any;
     , private loginService: LoginService
     , private _snackBar: MatSnackBar
   ) {}
-
+loading = false;
   submit() {
     //if (this.form.valid) { no se para que era
-  
+    this.loading = true;
     console.log(this.form.value);
     // validamos que ingrese valores
     if (this.form.value.username === '' || this.form.value.password === '') {
       alert('Ingrese un usuario y contraseña');
       return;
     }
+    
     // Creamos el usuario
     const user: UserBase = { 
       username: this.form.value.username,
@@ -44,7 +45,7 @@ hidePassword: any;
         // Guardar el token y el rol en el almacenamiento local
         localStorage.setItem('token', data.token);
         localStorage.setItem('role', data.role);
-
+        console.log("Token: " + data.token);
         //Mensaje en vez de alerta
         this._snackBar.open(`El usuario ${user.username} fue logueado`, 'Cerrar', {
           duration: 3000,
@@ -60,10 +61,14 @@ hidePassword: any;
         } else {
           alert('Rol de usuario no reconocido');
         }
+        this.loading = false;
+      
       },
       error: (err) => {
         console.error('Error en el login', err);
         alert('Usuario o contraseña incorrectos');
+        this.loading = false;
+
       }
     });
    
