@@ -13,6 +13,7 @@ import { MedicMenuComponent } from './components/medic-menu/med-menu.component';
 import { SelectJobComponent } from './select-job/sel-job.component';
 import { HCPacienteComponent } from './components/medic-menu/hc-paciente.component';
 import { BuscarPacienteComponent } from './components/medic-menu/buscar-paciente.component';
+import { AccessDenied } from './components/accessDenied/accessDenied.component';
 
 const routes: Routes = [
   { path: 'patient', component: ListPatientsComponent },
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'sel-job', component: SelectJobComponent },
   { path: 'hc-paciente/:dni', component: HCPacienteComponent },
   { path: 'buscar-paciente', component: BuscarPacienteComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }];
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'access-denied', component: AccessDenied }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

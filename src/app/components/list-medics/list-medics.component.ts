@@ -8,7 +8,7 @@ import { AddEditMedicComponent } from '../add-edit-medic/add-edit-medic.componen
 import { MedicService } from '../../services/medic.service.js';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Specialty } from '../../interfaces/specialty.js';
-
+import { Router } from '@angular/router';  // Importar Router
 
 
 @Component({
@@ -27,7 +27,8 @@ export class ListMedicsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(public dialog: MatDialog, private _medicService: MedicService
-    , private _snackBar: MatSnackBar) {
+    , private _snackBar: MatSnackBar
+    ,private router: Router ) {
     this.dataSource = new MatTableDataSource();
   }
 
@@ -51,7 +52,11 @@ export class ListMedicsComponent implements OnInit, AfterViewInit {
       this.dataSource.sort = this.sort;
     }, error => {
       console.error('Error al obtener medicos:', error);
-
+      // Verificar si el error es de acceso denegado
+      if (error.status === 403 || error.status === 401) {
+        // Redirigir al usuario a una página de error 
+        this.router.navigate(['/access-denied']); 
+      }
       /*this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.paginator._intl.itemsPerPageLabel = "Items por pagina"
