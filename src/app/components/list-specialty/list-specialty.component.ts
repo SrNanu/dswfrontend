@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AgregarEditarSpecialtyComponent } from '../agregar-editar-specialty/agregar-editar-specialty.component.js';
 import { SpecialtyService } from '../../services/specialty.service.js';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,9 +24,19 @@ export class ListSpecialtyComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog, private _specialtyService: SpecialtyService, private _snackBar :MatSnackBar) {
+  constructor(public dialog: MatDialog
+    , private _specialtyService: SpecialtyService
+    , private _snackBar :MatSnackBar
+    , private router: Router) {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
+
+    // Se verifica dos veces porque el rol se guarda en store pero podria ser modificado
+    // si solo se verificaria con el error del backend, carga por un mili segundo la pagina lo cual queda mal
+    const userRole = localStorage.getItem('role');  
+    if (userRole !== 'secretaria') {  
+      this.router.navigate(['/access-denied']);
+    }
    }
 
   ngOnInit(): void {
@@ -46,7 +56,15 @@ export class ListSpecialtyComponent implements OnInit, AfterViewInit {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+    }, error => {
+      console.error('Error al obtener specialidades:', error);
+      // Verificar si el error es de acceso denegado
+      if (error.status === 403 || error.status === 401) {
+        // Redirigir al usuario a una página de error 
+        this.router.navigate(['/access-denied']); 
+      }
     });
+    
   }
 
   applyFilter(event: Event) {

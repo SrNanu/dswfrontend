@@ -30,6 +30,14 @@ export class ListMedicsComponent implements OnInit, AfterViewInit {
     , private _snackBar: MatSnackBar
     ,private router: Router ) {
     this.dataSource = new MatTableDataSource();
+
+    // Se verifica dos veces porque el rol se guarda en store pero podria ser modificado
+    // si solo se verificaria con el error del backend, carga por un mili segundo la pagina lo cual queda mal
+    const userRole = localStorage.getItem('role');  
+
+    if (userRole !== 'secretaria') {  
+      this.router.navigate(['/access-denied']);
+    }
   }
 
   ngOnInit(): void {
@@ -57,10 +65,6 @@ export class ListMedicsComponent implements OnInit, AfterViewInit {
         // Redirigir al usuario a una página de error 
         this.router.navigate(['/access-denied']); 
       }
-      /*this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.paginator._intl.itemsPerPageLabel = "Items por pagina"
-      this.dataSource.sort = this.sort;*/
     });
   }
 

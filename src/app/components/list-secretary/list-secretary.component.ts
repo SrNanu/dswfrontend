@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AgregarEditarSecretaryComponent } from '../agregar-editar-secretary/agregar-editar-secretary.component';
 import { SecretaryService } from '../../services/secretary.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { Router } from '@angular/router';
 
 
 
@@ -24,9 +24,18 @@ export class ListSecretarysComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog, private _secretaryService: SecretaryService, private _snackBar :MatSnackBar) {
+  constructor(public dialog: MatDialog
+    , private _secretaryService: SecretaryService
+    , private _snackBar :MatSnackBar
+    , private router: Router) {
     
     this.dataSource = new MatTableDataSource();
+    // Se verifica dos veces porque el rol se guarda en store pero podria ser modificado
+    // si solo se verificaria con el error del backend, carga por un mili segundo la pagina lo cual queda mal
+    const userRole = localStorage.getItem('role');  
+    if (userRole !== 'secretaria') {  
+      this.router.navigate(['/access-denied']);
+    }
   }
 
   ngOnInit(): void {
@@ -47,13 +56,13 @@ export class ListSecretarysComponent implements OnInit, AfterViewInit {
       //Mostrar secretarias en consola
       console.log('DataSource:', this.dataSource);
       this.dataSource.sort = this.sort;}, error => {
-        console.error('Error al obtener secretarys:', error);
-      
-      /*this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.paginator._intl.itemsPerPageLabel = "Items por pagina"
-      this.dataSource.sort = this.sort;*/
-    });
+        console.error('Error al obtener secretary:', error);
+        // Verificar si el error es de acceso denegado
+        if (error.status === 403 || error.status === 401) {
+          // Redirigir al usuario a una página de error 
+          this.router.navigate(['/access-denied']); 
+        }
+      });
 
   }
   applyFilter(event: Event) {

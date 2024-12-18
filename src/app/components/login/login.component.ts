@@ -54,7 +54,7 @@ loading = false;
         
         // Redirigir al usuario según su rol
         if (data.role === 'secretary') {
-          this.router.navigate(['/patient']);
+          this.router.navigate(['/otorgarturno']);
           console.log('Se redirige a la vista de secretaria');
         } else if (data.role === 'medic') {
           this.router.navigate(['/buscar-paciente']);
