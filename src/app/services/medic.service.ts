@@ -23,40 +23,68 @@ export class MedicService {
         map(response => response.data) // Extrae el array de la propiedad `data`
       );
   }*/
-      getMedics(): Observable<Medic[]> {
-        // Recuperar el token del localStorage
-        const token = localStorage.getItem('token');
-    
-        // Configurar las cabeceras con el token
-        const headers = new HttpHeaders({
-          Authorization: `Bearer ${token}`,
-        });
-    
-        // Realizar la solicitud con las cabeceras configuradas
-        return this.http.get<{ data: Medic[] }>(`${this.myAppUrl}${this.myApiUrl}`, { headers })
-          .pipe(
-            map(response => response.data) // Extraer el array de la propiedad `data`
-          );
-      }
+  getMedics(): Observable<Medic[]> {
+    // Recuperar el token del localStorage
+    const token = localStorage.getItem('token');
+
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    // Realizar la solicitud con las cabeceras configuradas
+    return this.http.get<{ data: Medic[] }>(`${this.myAppUrl}${this.myApiUrl}`, { headers })
+      .pipe(
+        map(response => response.data) // Extraer el array de la propiedad `data`
+      );
+  }
 
   getMedico(id: number): Observable<Medic> {
-    return this.http.get<{ data: Medic }>(`${this.myAppUrl}${this.myApiUrl}/${id}`)
+    // Recuperar el token del localStorage
+    const token = localStorage.getItem('token');
+    
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.get<{ data: Medic }>(`${this.myAppUrl}${this.myApiUrl}/${id}`, { headers })
       .pipe(
         map(response => response.data) // Extrae el objeto de la propiedad `data`
       );
   }
 
   updateMedico(id: number, medic: Medic): Observable<void> {
-    return this.http.put<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`, medic)
+    // Recuperar el token del localStorage
+    const token = localStorage.getItem('token');
+
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.put<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`, medic, { headers });
   }
 
   deleteMedico(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`);
+    // Recuperar el token del localStorage
+    const token = localStorage.getItem('token');
+    
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.delete<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`, { headers });
 
   }
 
   addMedico(medic: Medic): Observable<void> {
-    return this.http.post<void>(`${this.myAppUrl}${this.myApiUrl}`, medic);
+    // Recuperar el token del localStorage
+    const token = localStorage.getItem('token');
+    
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post<void>(`${this.myAppUrl}${this.myApiUrl}`, medic, { headers });
   }
 }
 

@@ -34,7 +34,8 @@ export class ListSpecialtyComponent implements OnInit, AfterViewInit {
     // Se verifica dos veces porque el rol se guarda en store pero podria ser modificado
     // si solo se verificaria con el error del backend, carga por un mili segundo la pagina lo cual queda mal
     const userRole = localStorage.getItem('role');  
-    if (userRole !== 'secretaria') {  
+
+    if (userRole !== 'secretary') {  
       this.router.navigate(['/access-denied']);
     }
    }
@@ -56,13 +57,6 @@ export class ListSpecialtyComponent implements OnInit, AfterViewInit {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    }, error => {
-      console.error('Error al obtener specialidades:', error);
-      // Verificar si el error es de acceso denegado
-      if (error.status === 403 || error.status === 401) {
-        // Redirigir al usuario a una página de error 
-        this.router.navigate(['/access-denied']); 
-      }
     });
     
   }

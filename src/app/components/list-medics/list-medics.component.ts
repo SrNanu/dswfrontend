@@ -34,8 +34,7 @@ export class ListMedicsComponent implements OnInit, AfterViewInit {
     // Se verifica dos veces porque el rol se guarda en store pero podria ser modificado
     // si solo se verificaria con el error del backend, carga por un mili segundo la pagina lo cual queda mal
     const userRole = localStorage.getItem('role');  
-
-    if (userRole !== 'secretaria') {  
+    if (userRole !== 'secretary') {  
       this.router.navigate(['/access-denied']);
     }
   }
