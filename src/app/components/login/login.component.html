@@ -1,6 +1,8 @@
 <mat-card>
-  <mat-card-title>Login</mat-card-title>
-  <mat-spinner class="spinner" *ngIf="loading" [diameter]="30"></mat-spinner>
+  <div class="card-header">
+    <mat-card-title class="title">Login</mat-card-title>
+    <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+  </div>
   <mat-card-content>
     <form [formGroup]="form" (ngSubmit)="submit()">
       <div class="campo">

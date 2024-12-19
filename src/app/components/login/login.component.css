@@ -30,3 +30,17 @@ mat-card-content {
   display: flex;
   justify-content: flex-end;
 }
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+mat-spinner {
+  margin-right: 10px;
+}
+.title {
+  margin-left: 10px;
+}

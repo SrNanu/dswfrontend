@@ -25,7 +25,6 @@ loading = false;
   submit() {
     //if (this.form.valid) { no se para que era
     this.loading = true;
-    console.log(this.form.value);
     // validamos que ingrese valores
     if (this.form.value.username === '' || this.form.value.password === '') {
       alert('Ingrese un usuario y contraseña');
@@ -40,8 +39,6 @@ loading = false;
     // Llamar al servicio de login
      this.loginService.logIn(user).subscribe({
       next: (data) => {
-        console.log(`El usuario ${user.username} fue logueado`);
-        console.log("role: " +data.role);
         // Guardar el token y el rol en el almacenamiento local
         localStorage.setItem('token', data.token);
         localStorage.setItem('role', data.role);
@@ -66,7 +63,11 @@ loading = false;
       },
       error: (err) => {
         console.error('Error en el login', err);
-        alert('Usuario o contraseña incorrectos');
+        //alert('Usuario o contraseña incorrectos');
+        this._snackBar.open(`Usuario o contraseña incorrectos `, 'Cerrar', {
+          duration: 3000,
+          panelClass: ['snackbar-success']  // Agregar clase personalizada
+        });
         this.loading = false;
 
       }
