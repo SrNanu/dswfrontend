@@ -5,17 +5,23 @@
   </div>
   <mat-card-content>
     <form [formGroup]="form" (ngSubmit)="submit()">
+      <div *ngIf="loginError" class="error-text">
+        {{ loginError }}
+      </div>
       <div class="campo">
-        <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-form-field appearance="fill" style="width: 100%;" [class.error]="form.controls['username'].invalid && form.controls['username'].touched" >
           <mat-label>Nombre de usuario</mat-label>
           <input matInput placeholder="Nombre de usuario" formControlName="username" autocomplete="username">
         </mat-form-field>
       </div>
       <div class="campo">
-        <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-form-field appearance="fill" style="width: 100%;" [class.error]="form.controls['password'].invalid && form.controls['password'].touched">
           <mat-label>Contraseña</mat-label>
-          <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="Contraseña"
-            formControlName="password" autocomplete="current-password">
+          <input matInput 
+                 [type]="hidePassword ? 'password' : 'text'" 
+                 placeholder="Contraseña"
+                 formControlName="password" 
+                 autocomplete="current-password">
           <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
             <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>

@@ -19,12 +19,7 @@ mat-card-content {
 
 }
 
-.error {
-  padding: 16px;
-  width: 400px;
-  color: white;
-  background-color: red;
-}
+
 
 .button {
   display: flex;
@@ -43,4 +38,18 @@ mat-spinner {
 }
 .title {
   margin-left: 10px;
+}
+mat-form-field.error .mat-mdc-form-field-flex {
+  border: 1px solid red;
+  border-radius: 4px;
+}
+
+mat-form-field.error .mat-mdc-form-field-wrapper {
+  color: red; /* Cambiar color del texto de ayuda o etiqueta si es necesario */
+}
+
+.error-text {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
