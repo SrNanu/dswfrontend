@@ -1,77 +1,83 @@
-import {  Component, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { UserBase } from '../../interfaces/userBase';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
   });
-hidePassword: any;
-  constructor(private router: Router
-    , private loginService: LoginService
-    , private _snackBar: MatSnackBar
+  hidePassword = true;
+  loading = false;
+
+  constructor(
+    private router: Router,
+    private loginService: LoginService,
+    private _snackBar: MatSnackBar
   ) {}
-loading = false;
+
   submit() {
-    //if (this.form.valid) { no se para que era
-    this.loading = true;
-    // validamos que ingrese valores
-    if (this.form.value.username === '' || this.form.value.password === '') {
-      alert('Ingrese un usuario y contraseña');
+    
+    if (this.form.invalid) {
+      this._snackBar.open('Por favor, complete todos los campos', 'Cerrar', {
+        duration: 3000,
+        panelClass: ['snackbar-error'],
+      });
       return;
     }
-    
-    // Creamos el usuario
-    const user: UserBase = { 
+
+    this.loading = true;
+
+    const user: UserBase = {
       username: this.form.value.username,
-      password: this.form.value.password
+      password: this.form.value.password,
     };
-    // Llamar al servicio de login
-     this.loginService.logIn(user).subscribe({
+
+    this.loginService.logIn(user).subscribe({
       next: (data) => {
-        // Guardar el token y el rol en el almacenamiento local
         localStorage.setItem('token', data.token);
         localStorage.setItem('role', data.role);
-        console.log("Token: " + data.token);
-        //Mensaje en vez de alerta
+
         this._snackBar.open(`El usuario ${user.username} fue logueado`, 'Cerrar', {
           duration: 3000,
-          panelClass: ['snackbar-success']  // Agregar clase personalizada
+          panelClass: ['snackbar-success'],
         });
-        
-        // Redirigir al usuario según su rol
-        if (data.role === 'secretary') {
-          this.router.navigate(['/otorgarturno']);
-          console.log('Se redirige a la vista de secretaria');
-        } else if (data.role === 'medic') {
-          this.router.navigate(['/buscar-paciente']);
-        } else {
-          alert('Rol de usuario no reconocido');
-        }
+
+        this.redirectUser(data.role);
         this.loading = false;
-      
       },
       error: (err) => {
-        console.error('Error en el login', err);
-        //alert('Usuario o contraseña incorrectos');
-        this._snackBar.open(`Usuario o contraseña incorrectos `, 'Cerrar', {
+        let errorMessage = 'Usuario o contraseña incorrectos';
+        if (err.status === 0) {
+          errorMessage = 'No se pudo conectar con el servidor. Intente nuevamente.';
+        }
+        this._snackBar.open(errorMessage, 'Cerrar', {
           duration: 3000,
-          panelClass: ['snackbar-success']  // Agregar clase personalizada
+          panelClass: ['snackbar-error'],
         });
         this.loading = false;
-
-      }
+      },
     });
-   
+  }
+
+  private redirectUser(role: string): void {
+    if (role === 'secretary') {
+      this.router.navigate(['/otorgarturno']);
+    } else if (role === 'medic') {
+      this.router.navigate(['/buscar-paciente']);
+    } else {
+      this._snackBar.open('Rol de usuario no reconocido', 'Cerrar', {
+        duration: 3000,
+        panelClass: ['snackbar-error'],
+      });
+    }
   }
 }
