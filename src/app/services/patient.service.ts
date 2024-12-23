@@ -18,7 +18,15 @@ export class PatientService {
 
   // Obtiene todos los pacientes
   getPatients(): Observable<Patient[]> {
-    return this.http.get<{ message: string; data: Patient[] }>(`${this.myAppUrl}${this.myApiUrl}`)
+    // Recuperar el token del localStorage
+    const token = localStorage.getItem('token');
+
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<{ message: string; data: Patient[] }>(`${this.myAppUrl}${this.myApiUrl}`, { headers })
       .pipe(
         map(response => response.data),
         catchError(this.handleError)
@@ -27,20 +35,41 @@ export class PatientService {
 
   // Elimina un paciente por ID
   deletePatient(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`)
+    // Recuperar el token del localStorage
+    const token = localStorage.getItem('token');
+
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.delete<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`, { headers })
       .pipe(catchError(this.handleError));
   }
 
   // Agrega un nuevo paciente
   addPatient(patient: Patient): Observable<void> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    // Recuperar el token del localStorage
+    const token = localStorage.getItem('token');
+
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
     return this.http.post<void>(`${this.myAppUrl}${this.myApiUrl}`, patient, { headers })
       .pipe(catchError(this.handleError));
   }
 
   // Obtiene un paciente por ID
   getPatient(id: number): Observable<Patient> {
-    return this.http.get<{ data: Patient }>(`${this.myAppUrl}${this.myApiUrl}/${id}`)
+    // Recuperar el token del localStorage
+    const token = localStorage.getItem('token');
+
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<{ data: Patient }>(`${this.myAppUrl}${this.myApiUrl}/${id}`, { headers })
       .pipe(
         map(response => response.data),
         catchError(this.handleError)
@@ -49,14 +78,28 @@ export class PatientService {
 
   // Actualiza un paciente por ID
   updatePatient(id: number, patient: Patient): Observable<void> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    // Recuperar el token del localStorage
+    const token = localStorage.getItem('token');
+
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
     return this.http.put<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`, patient, { headers })
       .pipe(catchError(this.handleError));
   }
 
   // Obtiene un paciente por DNI
   getPatientByDni(dni: string): Observable<Patient> {
-    return this.http.get<{ data: Patient }>(`${this.myAppUrl}${this.myApiUrl}/dni/${dni}`)
+    // Recuperar el token del localStorage
+    const token = localStorage.getItem('token');
+
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<{ data: Patient }>(`${this.myAppUrl}${this.myApiUrl}/dni/${dni}`, { headers })
       .pipe(
         map(response => response.data),
         catchError(this.handleError)
