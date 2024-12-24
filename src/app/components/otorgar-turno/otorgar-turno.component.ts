@@ -10,11 +10,11 @@ import { Patient } from '../../interfaces/patient.js';
 import { PatientService } from '../../services/patient.service.js';
 import { AttentionService } from '../../services/attentions.service.js';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { MatDatepickerModule } from '@angular/material/datepicker/index.js';
 @Component({
   selector: 'app-otorgar-turno',
   templateUrl: './otorgar-turno.component.html',
-  styleUrls: ['./otorgar-turno.component.css']
+  styleUrls: ['./otorgar-turno.component.css'],
 })
 export class OtorgarTurnoComponent implements OnInit {
   loading: any;
@@ -86,8 +86,13 @@ export class OtorgarTurnoComponent implements OnInit {
   }
 
   obternerHoras() {
+    
+
     this._consultationHoursService.getAllConsultationHours().subscribe(data => {
       this.consultationHours = data;
+      //Filtro los horarios segun su medico y que no tengaa una atencion
+      
+     
       console.log('Horas de consulta:', this.consultationHours);
     });
   }
@@ -99,4 +104,11 @@ export class OtorgarTurnoComponent implements OnInit {
       verticalPosition: 'bottom'
     });
   }
+    myFilter = (d: Date | null): boolean => {
+      const day = (d || new Date()).getDay();
+      // Prevent Saturday and Sunday from being selected.
+      return day !== 2 && day !== 4;
+    };
+  
+  
 }
