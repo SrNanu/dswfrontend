@@ -20,6 +20,7 @@ export class OtorgarTurnoComponent implements OnInit {
   loading: any;
   medics: Medic[] = [];
   consultationHours: ConsultationHours[] = [];
+  filteredConsultationHours: ConsultationHours[] = [];
   form: FormGroup;
 
   constructor(@Optional() public dialogRef: MatDialogRef<OtorgarTurnoComponent>,
@@ -56,9 +57,12 @@ export class OtorgarTurnoComponent implements OnInit {
       this._attentionService.addAttention(aAttention).subscribe(() => {
         this.successMessage('agregada');
         console.log('Turno agregado:', aAttention); // para probar
-        const atenciones = this._attentionService.getAttentions();
-        console.log('Atenciones:', atenciones)
+        
       });
+
+      //Muestra las atenciones
+      this._attentionService.getAttentions().subscribe((atenciones) => {
+      console.log('Atenciones:', atenciones)});
   
       this.loading = false;
       //this.dialogRef.close(true);
@@ -107,8 +111,23 @@ export class OtorgarTurnoComponent implements OnInit {
     myFilter = (d: Date | null): boolean => {
       const day = (d || new Date()).getDay();
       // Prevent Saturday and Sunday from being selected.
-      return day !== 2 && day !== 4;
+      const days = ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"];
+      const attentionDays:number[] = []
+      //Filtro los dias de atencion y guardo 1 para lunes, 2 para martes, etc
+      this.filteredConsultationHours.forEach(element => {
+        attentionDays.push(days.indexOf(element.day));
+      });
+      
+      //retorna true si el dia no esta en el array de dias de atencion
+      return attentionDays.includes(day-1) ;
     };
   
-  
+    onMedicChange(selectedMedic: any): void {
+      console.log('Médico seleccionado:', selectedMedic);
+      this.filteredConsultationHours = this.consultationHours.filter((consultationHour) => {
+        return consultationHour.medic.id === selectedMedic.id;
+      });
+      console.log('Horas de consulta filtradas:', this.filteredConsultationHours);
+    }
+    
 }

@@ -51,6 +51,8 @@ export class LoginComponent {
           duration: 3000,
           panelClass: ['snackbar-success'],
         });
+        const token = localStorage.getItem('token');
+        console.log('Token:', token);
 
         this.redirectUser(data.role);
         this.loading = false;
