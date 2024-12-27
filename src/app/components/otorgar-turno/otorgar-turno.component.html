@@ -9,10 +9,20 @@
       <div class="column">
         <mat-form-field appearance="fill">
           <mat-label>DNI Paciente</mat-label>
-          <input matInput formControlName="dni" />
+          <input matInput formControlName="dni" (blur)="checkPatient()" />
+          <mat-error *ngIf="form.get('dni')?.hasError('required')">
+            El DNI es obligatorio
+          </mat-error>
         </mat-form-field>
+        <mat-error *ngIf="form.get('dni')?.hasError('patientNotFound')">
+          El paciente no existe
+          <button mat-raised-button color="primary" (click)="redirectToCreatePatient()" class="create-patient-btn">
+            ¿Deseas crear el paciente?
+          </button>
+        </mat-error>
       </div>
     </div>
+    
 
     <div class="row">
       <div class="column">

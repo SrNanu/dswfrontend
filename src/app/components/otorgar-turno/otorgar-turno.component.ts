@@ -11,6 +11,8 @@ import { PatientService } from '../../services/patient.service.js';
 import { AttentionService } from '../../services/attentions.service.js';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker/index.js';
+import { ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-otorgar-turno',
   templateUrl: './otorgar-turno.component.html',
@@ -22,6 +24,7 @@ export class OtorgarTurnoComponent implements OnInit {
   consultationHours: ConsultationHours[] = [];
   filteredConsultationHours: ConsultationHours[] = [];
   form: FormGroup;
+  patientNotFound: boolean = false;
 
   constructor(@Optional() public dialogRef: MatDialogRef<OtorgarTurnoComponent>,
     private fb: FormBuilder
@@ -30,6 +33,8 @@ export class OtorgarTurnoComponent implements OnInit {
     , private _patientService: PatientService
     , private _attentionService: AttentionService
     , private _snackBar: MatSnackBar
+    , private cdr: ChangeDetectorRef
+    , private router: Router
   ) {
     this.form = this.fb.group({
       dni: [null, [Validators.required]],
@@ -128,6 +133,30 @@ export class OtorgarTurnoComponent implements OnInit {
         return consultationHour.medic.id === selectedMedic.id;
       });
       console.log('Horas de consulta filtradas:', this.filteredConsultationHours);
+    }
+
+    checkPatient() {
+      const dni = this.form.get('dni')?.value;
+      if (!dni) return; // No realizar la búsqueda si el campo está vacío
+      console.log('Buscando paciente con DNI:', dni);
+    
+      this._patientService.getPatientByDni(dni).subscribe(
+        (aPatient: any) => {
+          this.patientNotFound = false; // El paciente existe
+          console.log('Paciente encontrado:', aPatient);
+          this.form.get('dni')?.setErrors(null); // Si el paciente existe, eliminamos el error
+          this.cdr.detectChanges();  // Forzar la detección de cambios
+        },
+        (error) => {
+          this.patientNotFound = true; // El paciente no existe
+          console.error('Paciente no encontrado:', error);
+          this.form.get('dni')?.setErrors({ patientNotFound: true }); // Establecemos el error
+          this.cdr.detectChanges();  // Forzar la detección de cambios
+        }
+      );
+    }
+    redirectToCreatePatient(): void {
+      this.router.navigate(['/crear-paciente']);  // Asegúrate de que esta ruta exista
     }
     
 }

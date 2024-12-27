@@ -37,3 +37,19 @@ mat-form-field {
   background-color: lightgray;
   color: black;
 }
+.create-patient-btn {
+  margin-top: 10px;        /* Añade espacio por encima del botón */
+  text-transform: none;    /* Evita que el texto se convierta en mayúsculas */
+  font-weight: bold;       /* Hace el texto más destacado */
+  width: 100%;             /* Hace que el botón ocupe todo el ancho del formulario */
+}
+
+mat-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+mat-error button {
+  align-self: flex-start;  /* Alinea el botón a la izquierda */
+}
