@@ -156,7 +156,8 @@ export class OtorgarTurnoComponent implements OnInit {
       );
     }
     redirectToCreatePatient(): void {
-      this.router.navigate(['/crear-paciente']);  // Asegúrate de que esta ruta exista
+      this.router.navigate(['/patient']);  // Asegúrate de que esta ruta exista
     }
     
 }
+  
