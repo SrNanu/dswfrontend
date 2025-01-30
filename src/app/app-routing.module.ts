@@ -14,9 +14,10 @@ import { SelectJobComponent } from './select-job/sel-job.component';
 import { HCPacienteComponent } from './components/medic-menu/hc-paciente.component';
 import { BuscarPacienteComponent } from './components/medic-menu/buscar-paciente.component';
 import { AccessDenied } from './components/accessDenied/accessDenied.component';
-
+import { ListAttentionsComponent } from './components/list-attention/list.attention.component';
 const routes: Routes = [
   { path: 'patient', component: ListPatientsComponent },
+  { path: 'attention', component: ListAttentionsComponent },
   { path: 'secretary', component: ListSecretarysComponent },
   { path: 'medic', component: ListMedicsComponent },
   { path: 'specialty', component: ListSpecialtyComponent },
