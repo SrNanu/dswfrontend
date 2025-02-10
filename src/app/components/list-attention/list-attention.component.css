@@ -41,3 +41,12 @@ button{
 .btnDetalle{
   color: #7cb0fd;
 }
+/* Estilo para los íconos de detalles */
+.btnDetalle {
+  color: green; /* Puedes usar cualquier tono de verde, como #4caf50 para un verde más específico */
+  cursor: pointer;
+}
+
+.btnDetalle:hover {
+  color: darkgreen; /* Un tono más oscuro de verde para el hover */
+}
