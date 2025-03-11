@@ -71,7 +71,7 @@ export class AddEditMedicComponent implements OnInit {
     this._specialtyService.getSpecialties().subscribe(data => {
       this.specialties = data;
       console.log('Especialidades:', this.specialties);
-    });
+    }); 
   }
   
 
@@ -87,7 +87,7 @@ export class AddEditMedicComponent implements OnInit {
         password: data.password,
         medicalConsultationValue: data.medicalConsultationValue,
         license: data.license,
-        specialty: specialty
+        specialty: data.specialty
       })
       console.log("specialty " + this.form.value.specialty);
       console.log(data);

@@ -19,7 +19,7 @@ import { Router } from '@angular/router';  // Importar Router
   styleUrl: './list-medics.component.css',
 })
 export class ListMedicsComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['dniType', 'dni', 'firstname', 'lastname', 'username', 'password', 'medicalConsultationValue', 'license','specialty', 'acciones'];
+  displayedColumns: string[] = ['dniType', 'dni', 'firstname', 'lastname', 'username', 'medicalConsultationValue', 'license','specialty', 'acciones'];
   dataSource: MatTableDataSource<Medic>;
   loading: boolean = false;
 

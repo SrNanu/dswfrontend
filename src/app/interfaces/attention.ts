@@ -7,7 +7,7 @@ export interface Attention {
 
     date: Date;
 
-    paymentDate?: Date
+    paymentDate?: String
 
     result?: string
 
@@ -25,7 +25,7 @@ export interface Attention {
 
     observation?: string;
 
-    dateCancelled?: Date;
+    dateCancelled?: string;
 
     consultationHours: ConsultationHours;
 

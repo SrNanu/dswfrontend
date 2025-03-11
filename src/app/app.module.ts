@@ -36,6 +36,7 @@ import { EditarConsultaComponent } from './components/medic-menu/editar-consulta
 import { AgregarConsultaComponent } from './components/medic-menu/agregar-consulta/agregar-consulta.component';
 import { DetallePatientComponent } from './components/detalle-patient/detalle-patient.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ListAttentionsComponent } from './components/list-attention/list.attention.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ModalDatosMedicosPacienteComponent,
     EditarConsultaComponent,
     AgregarConsultaComponent,
-    DetallePatientComponent
+    DetallePatientComponent,
+    ListAttentionsComponent
   ],
   imports: [
     ReactiveFormsModule,

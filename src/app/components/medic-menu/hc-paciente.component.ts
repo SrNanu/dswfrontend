@@ -178,6 +178,7 @@ export class HCPacienteComponent implements OnInit , AfterViewInit {
       if(result){
         this.loadPatientAttentions(this.idPac);
       }
+      this.loadPatientAttentions(this.idPac)
     });
 
   }
