@@ -16,13 +16,13 @@ button {
 
 }
 
-.btnedit, .btndelete{
+.btnDetalle,.btnedit, .btndelete{
   cursor: pointer;
 }
 .btndelete {
   color: #B0304B;
 }
 
-.btnedit {
+.btnDetalle,.btnedit {
   color: #3F51B5;
 }
