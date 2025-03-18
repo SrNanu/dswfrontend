@@ -42,7 +42,7 @@
       <div class="column">
         <mat-form-field class="example-full-width">
           <mat-label>Choose a date</mat-label>
-          <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" formControlName="date">
+          <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" formControlName="date" (selectionchange)="onDateChange()">
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
