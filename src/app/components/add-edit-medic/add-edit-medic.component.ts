@@ -77,7 +77,7 @@ export class AddEditMedicComponent implements OnInit {
 
   getMedico(id: number) {
     this._medicService.getMedico(id).subscribe(data => {
-      const specialty = this.specialties.find(s => s.id === Number(data.specialty));
+      const _specialty = this.specialties.find(s => s.id === data.specialty.id);
       this.form.patchValue({
         firstname: data.firstname, 
         lastname: data.lastname,
@@ -87,9 +87,10 @@ export class AddEditMedicComponent implements OnInit {
         password: data.password,
         medicalConsultationValue: data.medicalConsultationValue,
         license: data.license,
-        specialty: data.specialty
+        specialty: _specialty
       })
-      console.log("specialty " + this.form.value.specialty);
+      console.log("Especialidades" , this.specialties);
+      console.log("specialty " , this.form.value.specialty);
       console.log(data);
 
     });
@@ -109,8 +110,8 @@ export class AddEditMedicComponent implements OnInit {
         medicalConsultationValue: this.form.value.medicalConsultationValue,
         license: this.form.value.license,
         specialty: this.form.value.specialty.id,
-        consultationHours: this.form.value.consultationHours
-      }
+        consultationHours: this.form.value.consultationHours,
+      };
 
       this.loading = true;
 
