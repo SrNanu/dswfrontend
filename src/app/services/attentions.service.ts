@@ -96,5 +96,24 @@ export class AttentionService {
       );
   }
 
+  //Obtengo fechas ocupadas por medico /unavailable-dates/:medicoId
+  getUnavailableDates(medicId: number): Observable<string[]> {
+    // Recuperar el token del localStorage
+    const token = localStorage.getItem('token');
+
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+
+    return this.http.get<{ data: string[] }>(`${this.myAppUrl}${this.myApiUrl}/unavailable-dates/${medicId}`,{headers})
+      .pipe(
+        //imprimo el array para depurar
+        
+        map(response => response.data)
+      );
+  }
+
 
 }

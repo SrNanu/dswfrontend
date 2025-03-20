@@ -25,7 +25,7 @@ export class OtorgarTurnoComponent implements OnInit {
   filteredConsultationHours: ConsultationHours[] = [];
   form: FormGroup;
   patientNotFound: boolean = false;
-
+  unabailableDates: any;
   constructor(
     @Optional() public dialogRef: MatDialogRef<OtorgarTurnoComponent>,
     private fb: FormBuilder,
@@ -116,6 +116,7 @@ export class OtorgarTurnoComponent implements OnInit {
   }
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
+    console.log('Dia:', d);
     // Prevent Saturday and Sunday from being selected.
     const days = [
       'Lunes',
@@ -132,6 +133,19 @@ export class OtorgarTurnoComponent implements OnInit {
       attentionDays.push(days.indexOf(element.day));
     });
 
+    //Obtengo el medico seleccionado
+    const medic = this.form.value.medic;
+
+    //retorna tru si la fecha esta en las fechas no disponibles
+    if (this.unabailableDates) {
+      const unavailable = this.unabailableDates.find(
+        (date: string) => date === d?.toISOString().slice(0, 10)
+      );
+      if (unavailable) return false;
+    }
+    
+    
+
     //retorna true si el dia no esta en el array de dias de atencion
     return attentionDays.includes(day - 1);
   };
@@ -142,6 +156,18 @@ export class OtorgarTurnoComponent implements OnInit {
         return consultationHour.medic.id === selectedMedic.id;
       }
     );
+    console.log ("medico seleccionado",selectedMedic.id)
+    
+    //Seteo fechas deshabilitadas
+    this._attentionService
+      .getUnavailableDates(selectedMedic.id)
+      .subscribe((data) => {
+        this.unabailableDates = data;
+        console.log('Fechas no disponibles:', data);
+        console.log('Fechas no disponibles:', this.unabailableDates);
+      });
+    
+    
   }
   onDateChange(): void {
     //Cuando selecciona una fecha muestra solamente los horarios de ese medico para ese dia de la semana
