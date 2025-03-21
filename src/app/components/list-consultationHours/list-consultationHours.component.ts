@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 })
 
 export class ListConsultationHoursComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['day','startTime', 'endTime', 'medic', 'acciones'];
+  displayedColumns: string[] = ['day','startTime', 'medic', 'acciones'];
   dataSource: MatTableDataSource<ConsultationHours>;
   loading: boolean = false;
 
