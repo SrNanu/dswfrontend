@@ -69,6 +69,9 @@ export class AgregarEditarPatientComponent implements OnInit {
         birthDate: new Date(data.birthDate),
         healthInsurance: selectedHealthInsurance || null  // Asignamos el objeto completo
       });
+      console.log('Obras sociales', this.healthInsurences);
+      console.log('Obra Social:', this.form.value.healthInsurance);
+    
       console.log('Paciente:', data);
     });
   }

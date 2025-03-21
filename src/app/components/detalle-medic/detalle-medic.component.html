@@ -3,14 +3,14 @@
   <mat-spinner *ngIf="loading" [diameter]="30" class="spinner"></mat-spinner>
 </div>
 
-<form [formGroup]="form" (ngSubmit)="addEditMedico()">
+<form [formGroup]="form" >
   <mat-dialog-content>
 
     <div class="row">
       <div class="column">
         <mat-form-field appearance="fill">
           <mat-label>Nombre</mat-label>
-          <input formControlName="firstname" matInput placeholder="Ingrese Nombre" autocomplete="name">
+          <input formControlName="firstname" matInput placeholder="Ingrese Nombre" autocomplete="name" readonly>
         </mat-form-field>
         <div class="error">
           <span *ngIf="form.get('firstname')?.hasError('required') && form.get('firstname')?.touched">
@@ -25,7 +25,7 @@
       <div class="column">
         <mat-form-field appearance="fill">
           <mat-label>Apellido</mat-label>
-          <input formControlName="lastname" matInput placeholder="Ingrese Apellido" autocomplete="family-name">
+          <input formControlName="lastname" matInput placeholder="Ingrese Apellido" autocomplete="family-name" readonly>
         </mat-form-field>
         <div class="error">
           <span *ngIf="form.get('lastname')?.hasError('required') && form.get('lastname')?.touched">
@@ -38,8 +38,8 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="column">
+     <div class="row">
+      <!--<div class="column">
         <mat-form-field appearance="fill">
           <mat-label>Tipo Documento</mat-label>
           <mat-select formControlName="dniType">
@@ -48,12 +48,12 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-      </div>
+      </div> -->
 
       <div class="column">
         <mat-form-field appearance="fill">
           <mat-label>Documento</mat-label>
-          <input formControlName="dni" matInput placeholder="Ingrese Documento" autocomplete="off">
+          <input formControlName="dni" matInput placeholder="Ingrese Documento" autocomplete="off" readonly>
         </mat-form-field>
         <div class="error">
           <span *ngIf="form.get('dni')?.hasError('required') && form.get('dni')?.touched">
@@ -70,7 +70,7 @@
       <div class="column">
         <mat-form-field appearance="fill">
           <mat-label>Usuario</mat-label>
-          <input formControlName="username" matInput placeholder="Ingrese Nombre de Usuario" autocomplete="username">
+          <input formControlName="username" matInput placeholder="Ingrese Nombre de Usuario" autocomplete="username" readonly>
         </mat-form-field>
         <div class="error">
           <span *ngIf="form.get('username')?.hasError('required') && form.get('username')?.touched">
@@ -82,7 +82,7 @@
         </div>
       </div>
 
-      <div *ngIf="operacion === 'Agregar'">
+      <!-- <div *ngIf="operacion === 'Agregar'">
         <div class="row">
           <div class="column">
             <mat-form-field appearance="fill">
@@ -98,14 +98,14 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div>-->
+    </div> 
 
     <div class="row">
       <div class="column">
         <mat-form-field appearance="fill">
           <mat-label>Matrícula</mat-label>
-          <input formControlName="license" matInput placeholder="Ingrese Matrícula" autocomplete="off">
+          <input formControlName="license" matInput placeholder="Ingrese Matrícula" autocomplete="off" readonly>
         </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('license')?.hasError('required') && form.get('license')?.touched">
@@ -120,7 +120,7 @@
       <div class="column">
         <mat-form-field appearance="fill">
           <mat-label>Valor por Consulta</mat-label>
-          <input formControlName="medicalConsultationValue" matInput placeholder="Ingrese Valor por Consulta"
+          <input formControlName="medicalConsultationValue" matInput placeholder="Ingrese Valor por Consulta" readonly
             autocomplete="off">
         </mat-form-field>
         <div class="error">
@@ -136,12 +136,12 @@
     </div>
 
     <!-- Especialidad -->
-    <div class="row">
+    <!-- <div class="row">
       <div class="column">
-        <mat-form-field appearance="fill">
+        <mat-form-field>
           <mat-label>Especialidad</mat-label>
-          <mat-select formControlName="specialty">
-            <mat-option *ngFor="let item of specialties" [value]="item">
+          <mat-select formControlName="specialty" readonly>
+            <mat-option *ngFor="let item of specialtys" [value]="item">
               {{ item.name }}
             </mat-option>
           </mat-select>
@@ -152,13 +152,25 @@
           </div>
         </mat-form-field>
       </div>
-    </div>
+    </div> -->
+    <div class="row">
+        <div class="column">
+          <mat-form-field appearance="fill">
+            <mat-label>Obra Social</mat-label>
+            <input formControlName="specialty" matInput  readonly>
+          </mat-form-field>
+          <div class="error">
+            <span *ngIf="form.get('specialty')?.hasError('required') && form.get('specialty')?.touched">
+              <strong>Campo obligatorio</strong>
+            </span>
+          </div>
+        </div>
+      </div>
 
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">
     <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
-    <button type="submit" mat-button>Agregar</button>
   </mat-dialog-actions>
 
 </form>

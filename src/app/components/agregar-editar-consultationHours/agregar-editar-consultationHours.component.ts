@@ -25,9 +25,6 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
   startTime = ["07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", 
     "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", 
     "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00"];
-  endTime = ["07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", 
-    "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", 
-    "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15"];
 
 
 
@@ -39,7 +36,6 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
       this.form = this.fb.group({
         day: [null, [Validators.required]],
         startTime: [null, [Validators.required]],
-        endTime: [null, [Validators.required]],
         medic:[null, [Validators.required]]
       })
       this.id = data.id;
@@ -63,7 +59,6 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
       this.form.patchValue({
         day: data.day,
         startTime: data.startTime,
-        endTime: data.endTime,
         medic: medic 
       });
     });
@@ -78,7 +73,6 @@ export class AgregarEditarConsultationHoursComponent implements OnInit {
     const aConsultationHours: ConsultationHours = {
       day: this.form.value.day,
       startTime: this.form.value.startTime,
-      endTime: this.form.value.endTime,
       medic: this.form.value.medic.id,
     }
     this.loading = true;

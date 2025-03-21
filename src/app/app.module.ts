@@ -37,7 +37,7 @@ import { AgregarConsultaComponent } from './components/medic-menu/agregar-consul
 import { DetallePatientComponent } from './components/detalle-patient/detalle-patient.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ListAttentionsComponent } from './components/list-attention/list.attention.component';
-
+import { DetalleMedicComponent } from './components/detalle-medic/detalle-medic.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +64,8 @@ import { ListAttentionsComponent } from './components/list-attention/list.attent
     EditarConsultaComponent,
     AgregarConsultaComponent,
     DetallePatientComponent,
-    ListAttentionsComponent
+    ListAttentionsComponent,
+    DetalleMedicComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -74,12 +75,9 @@ import { ListAttentionsComponent } from './components/list-attention/list.attent
     SharedModule,
     MatProgressSpinnerModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
-  providers: [
-    provideClientHydration(),
-    provideAnimationsAsync()
-  ],
-  bootstrap: [AppComponent]
+  providers: [provideClientHydration(), provideAnimationsAsync()],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
