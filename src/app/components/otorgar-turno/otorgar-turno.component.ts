@@ -92,7 +92,6 @@ export class OtorgarTurnoComponent implements OnInit {
   obternerMedicos() {
     this._medicService.getMedics().subscribe((data) => {
       this.medics = data;
-      console.log('Medicos:', this.medics);
     });
   }
 
@@ -103,7 +102,6 @@ export class OtorgarTurnoComponent implements OnInit {
         this.consultationHours = data;
         //Filtro los horarios segun su medico y que no tengaa una atencion
 
-        console.log('Horas de consulta:', this.consultationHours);
       });
   }
 
@@ -116,7 +114,6 @@ export class OtorgarTurnoComponent implements OnInit {
   }
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
-    console.log('Dia:', d);
     // Prevent Saturday and Sunday from being selected.
     const days = [
       'Lunes',
@@ -143,8 +140,6 @@ export class OtorgarTurnoComponent implements OnInit {
       );
       if (unavailable) return false;
     }
-    
-    
 
     //retorna true si el dia no esta en el array de dias de atencion
     return attentionDays.includes(day - 1);
@@ -156,22 +151,19 @@ export class OtorgarTurnoComponent implements OnInit {
         return consultationHour.medic.id === selectedMedic.id;
       }
     );
-    console.log ("medico seleccionado",selectedMedic.id)
-    
+
     //Seteo fechas deshabilitadas
     this._attentionService
       .getUnavailableDates(selectedMedic.id)
       .subscribe((data) => {
         this.unabailableDates = data;
-        console.log('Fechas no disponibles:', data);
-        console.log('Fechas no disponibles:', this.unabailableDates);
       });
-    
-    
   }
   onDateChange(): void {
-    //Cuando selecciona una fecha muestra solamente los horarios de ese medico para ese dia de la semana
-    const day = this.form.value.date.getDay();
+    const selectedDate = this.form.value.date;
+    if (!selectedDate) return;
+
+    const day = selectedDate.getDay();
     const days = [
       'Domingo',
       'Lunes',
@@ -179,19 +171,29 @@ export class OtorgarTurnoComponent implements OnInit {
       'Miercoles',
       'Jueves',
       'Viernes',
-      'Sabado',
+      'Sábado',
     ];
     const daySelected = days[day];
-    this.filteredConsultationHours = this.filteredConsultationHours.filter(
-      (consultationHour) => {
-        return consultationHour.day === daySelected;
-      }
+
+    // Filtrar horarios por el día de la semana
+    let availableHours = this.filteredConsultationHours.filter(
+      (consultationHour) => consultationHour.day === daySelected
     );
-    console.log(
-      'Horas de consulta filtradas por dia:',
-      this.filteredConsultationHours
-    );
+    const formattedDate = selectedDate.toISOString().split('T')[0];
+    // Obtener los IDs de los horarios ocupados para la fecha seleccionada
+    this._attentionService
+      .getAttentionsByDate(selectedDate)
+      .subscribe((data) => {
+        const occupiedHours = data; // Los IDs de los horarios ocupados
+        // Filtrar horarios disponibles eliminando los ocupados
+        this.filteredConsultationHours = availableHours.filter(
+          (consultationHour) => !occupiedHours.includes(consultationHour.id)
+        );
+
+       
+      });
   }
+
   checkPatient() {
     const dni = this.form.get('dni')?.value;
     if (!dni) return; // No realizar la búsqueda si el campo está vacío
@@ -199,13 +201,11 @@ export class OtorgarTurnoComponent implements OnInit {
     this._patientService.getPatientByDni(dni).subscribe(
       (aPatient: any) => {
         this.patientNotFound = false; // El paciente existe
-        console.log('Paciente encontrado:', aPatient);
         this.form.get('dni')?.setErrors(null); // Si el paciente existe, eliminamos el error
         this.cdr.detectChanges(); // Forzar la detección de cambios
       },
       (error) => {
         this.patientNotFound = true; // El paciente no existe
-        console.error('Paciente no encontrado:', error);
         this.form.get('dni')?.setErrors({ patientNotFound: true }); // Establecemos el error
         this.cdr.detectChanges(); // Forzar la detección de cambios
       }
