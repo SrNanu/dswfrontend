@@ -38,6 +38,7 @@ import { DetallePatientComponent } from './components/detalle-patient/detalle-pa
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ListAttentionsComponent } from './components/list-attention/list.attention.component';
 import { DetalleMedicComponent } from './components/detalle-medic/detalle-medic.component';
+import { DetalleSecretaryComponent } from './components/detalle-secretary/detalle-secretary.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +66,8 @@ import { DetalleMedicComponent } from './components/detalle-medic/detalle-medic.
     AgregarConsultaComponent,
     DetallePatientComponent,
     ListAttentionsComponent,
-    DetalleMedicComponent
+    DetalleMedicComponent,
+    DetalleSecretaryComponent
   ],
   imports: [
     ReactiveFormsModule,
