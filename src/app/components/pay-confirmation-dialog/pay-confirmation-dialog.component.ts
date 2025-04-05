@@ -12,9 +12,12 @@ export class PayConfirmationDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: { amount: number }
   ) {}
 
+  // Método para confirmar el pago
+  // Este método se llama cuando el usuario hace clic en el botón "Confirmar" en el diálogo
   confirmPayment(): void {
     this.dialogRef.close(true); // Retorna true si el usuario acepta
   }
+
 
   cancel(): void {
     this.dialogRef.close(false); // Retorna false si el usuario cancela
