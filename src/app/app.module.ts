@@ -39,6 +39,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ListAttentionsComponent } from './components/list-attention/list.attention.component';
 import { DetalleMedicComponent } from './components/detalle-medic/detalle-medic.component';
 import { DetalleSecretaryComponent } from './components/detalle-secretary/detalle-secretary.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { PayConfirmationDialogComponent } from './components/pay-confirmation-dialog/pay-confirmation-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +69,9 @@ import { DetalleSecretaryComponent } from './components/detalle-secretary/detall
     DetallePatientComponent,
     ListAttentionsComponent,
     DetalleMedicComponent,
-    DetalleSecretaryComponent
+    DetalleSecretaryComponent,
+    ConfirmDialogComponent,
+    PayConfirmationDialogComponent
   ],
   imports: [
     ReactiveFormsModule,

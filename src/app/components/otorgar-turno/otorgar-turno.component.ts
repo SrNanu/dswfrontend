@@ -63,6 +63,9 @@ export class OtorgarTurnoComponent implements OnInit {
         this._attentionService.addAttention(aAttention).subscribe(() => {
           this.successMessage('agregada');
           console.log('Turno agregado:', aAttention); // para probar
+          setTimeout(() => {
+              window.location.reload(); // ← AGREGADO
+             }, 1500); // ← AGREGADO
         });
 
         //Muestra las atenciones
@@ -85,9 +88,20 @@ export class OtorgarTurnoComponent implements OnInit {
     this.obternerHoras();
     this.obternerMedicos();
   }
-  cancelar() {
-    this.dialogRef.close(false);
-  }
+cancelar() {
+  this._snackBar.open('Turno cancelado', '', {
+    duration: 1500, // 1.5 segundos
+    horizontalPosition: 'center',
+    verticalPosition: 'bottom',
+  });
+
+  setTimeout(() => {
+    window.location.reload(); // ← Recarga después del mensaje
+  }, 1500);
+
+  this.dialogRef.close(false); // Cierra el diálogo
+}
+
 
   obternerMedicos() {
     this._medicService.getMedics().subscribe((data) => {
