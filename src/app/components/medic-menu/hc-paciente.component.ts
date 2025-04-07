@@ -112,7 +112,7 @@ export class HCPacienteComponent implements OnInit , AfterViewInit {
 
   loadPatientAttentions(id : number): void {
     this.loading = true;
-    this._AttentionService.getAttentionsByPatientId(id).subscribe(
+    this._PatientService.getAttentionsForOneMedic(id).subscribe(
       data =>{
       if (data && data.length > 0) { // here i check if data is valid and not empty
         this.dataSource.data = data;
@@ -200,14 +200,17 @@ export class HCPacienteComponent implements OnInit , AfterViewInit {
 
   }
 
-  deleteAttention(id: number){
-    this._AttentionService.deleteAttention(id).subscribe(data => {
-      this.loadPatientAttentions(this.idPac);
-      this.successMessage();
-    }, error => {
-      console.error('Error al eliminar patient:', error);
-    });
-  }
+
+  //LEGACY CODE, ITS HERE BEACUSE OF BUISENESS LOGIC HAS CHANGED, AND NOW MEDICS DONT DELETE ATTENTIONS, THEY JUST EDIT THEM
+
+  // deleteAttention(id: number){
+  //   this._AttentionService.deleteAttention(id).subscribe(data => {
+  //     this.loadPatientAttentions(this.idPac);
+  //     this.successMessage();
+  //   }, error => {
+  //     console.error('Error al eliminar patient:', error);
+  //   });
+  // }
 
 
   successMessage(){
