@@ -30,11 +30,6 @@ export class AgregarConsultaComponent {
       date: ['', [Validators.required]],
       result: ['', [Validators.required]],
       reason: ['', [Validators.required]],
-      currentIllness: ['', [Validators.required]],
-      vitalSigns: ['', [Validators.required]],
-      physicalExamination: ['', [Validators.required]],
-      diagnosis: ['', [Validators.required]],
-      treatment: ['', [Validators.required]],
       observation: ['', [Validators.required]],
     })
   }
@@ -54,12 +49,11 @@ export class AgregarConsultaComponent {
         this.turnoVacio = this.attentionForTheDaySelected.find(turno => {
           const turnoDate = new Date(turno.date); // parseo pq viene como string
           const selectedDate = new Date(this.form.value.date); // hago la date para comparar
-          
+
           // comparo sin tiempo
-          //return turnoDate.toISOString().split('T')[0] === selectedDate.toISOString().split('T')[0] && ASI ERA ENTES 
-          return turnoDate.toISOString().slice(0, 10) == selectedDate.toISOString().slice(0, 10) &&
-          
-            turno.reason === null;
+          //return turnoDate.toISOString().split('T')[0] === selectedDate.toISOString().split('T')[0] && ASI ERA ENTES
+          return turnoDate.toISOString().slice(0, 10) == selectedDate.toISOString().slice(0, 10)
+              && turno.reason === null;
         });
 
         //console.log('Turno Vacio:', this.turnoVacio);  // veo si se encontro
@@ -71,11 +65,6 @@ export class AgregarConsultaComponent {
             result: this.form.value.result,
             date: this.form.value.date,
             reason: this.form.value.reason,
-            currentIllness: this.form.value.currentIllness,
-            vitalSigns: this.form.value.vitalSigns,
-            physicalExamination: this.form.value.physicalExamination,
-            diagnosis: this.form.value.diagnosis,
-            treatment: this.form.value.treatment,
             observation: this.form.value.observation,
             dateCancelled: this.turnoVacio.dateCancelled,
             consultationHours: this.turnoVacio.consultationHours,
@@ -91,7 +80,7 @@ export class AgregarConsultaComponent {
             });
         } else {
           // muestro que no tenia turno
-          this._snackBar.open(`El Paciente no tiene turno para esta fecha, porfavor ingrese otra`, "", {
+          this._snackBar.open(`El Paciente no tiene turno para esta fecha, porfavor ingrese otra fecha`, "", {
             duration: 8000,
             horizontalPosition: 'center',
             verticalPosition: 'bottom'
