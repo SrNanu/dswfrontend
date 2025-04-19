@@ -164,24 +164,24 @@ export class HCPacienteComponent implements OnInit , AfterViewInit {
     });
   }
 
+  // not in use anymore, but i leave it here in case we need it later
+  // addConsulta(){
 
-  addConsulta(){
+  //   const dialogRef = this.dialog.open(AgregarConsultaComponent, {
+  //     width: '800px',
+  //     disableClose: true,
+  //     data: {id: this.idPac }
+  //   });
 
-    const dialogRef = this.dialog.open(AgregarConsultaComponent, {
-      width: '800px',
-      disableClose: true,
-      data: {id: this.idPac }
-    });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+  //     if(result){
+  //       this.loadPatientAttentions(this.idPac);
+  //     }
+  //     this.loadPatientAttentions(this.idPac)
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if(result){
-        this.loadPatientAttentions(this.idPac);
-      }
-      this.loadPatientAttentions(this.idPac)
-    });
-
-  }
+  // }
 
   editAttention( id?:number){
 
@@ -200,6 +200,32 @@ export class HCPacienteComponent implements OnInit , AfterViewInit {
 
   }
 
+  completeAttention( id?:number, paymentDate? : string){
+
+    if(paymentDate !== null && paymentDate !== ""){
+
+      this._snackBar.open('No se puede completar la consulta, ya que no fue pagada aun',"" ,{
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom'
+      });
+      return;
+    }
+
+    const dialogRef = this.dialog.open(EditarConsultaComponent, {
+      width: '800px',
+      disableClose: true,
+      data: {id: id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if(result){
+        this.loadPatientAttentions(this.idPac);
+      }
+    });
+
+  }
 
   //LEGACY CODE, ITS HERE BEACUSE OF BUISENESS LOGIC HAS CHANGED, AND NOW MEDICS DONT DELETE ATTENTIONS, THEY JUST EDIT THEM
 
