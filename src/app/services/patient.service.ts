@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Patient } from '../interfaces/patient';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { Attention } from '../interfaces/attention.js';
 
 @Injectable({
   providedIn: 'root'
@@ -100,6 +101,22 @@ export class PatientService {
     });
 
     return this.http.get<{ data: Patient }>(`${this.myAppUrl}${this.myApiUrl}/dni/${dni}`, { headers })
+      .pipe(
+        map(response => response.data),
+        catchError(this.handleError)
+      );
+  }
+
+  getAttentionsForOneMedic(patientId: number): Observable<Attention[]> {
+    // Recuperar el token del localStorage
+    const token = localStorage.getItem('token');
+
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<{ data: Attention[] }>(`${this.myAppUrl}${this.myApiUrl}/${patientId}/attentions`, { headers })
       .pipe(
         map(response => response.data),
         catchError(this.handleError)

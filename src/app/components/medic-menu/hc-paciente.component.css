@@ -66,12 +66,12 @@ margin-top: -55px;
 
 }
 
-.btnEdit, .btnDelete {
+.btnEdit, .btnComplete {
 cursor: pointer;
 }
 
-.btnDelete{
-color: #A30B0B;
+.btnComplete{
+background-color: #28a745;
 }
 
 .btnEdit{

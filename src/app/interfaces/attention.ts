@@ -13,16 +13,6 @@ export interface Attention {
 
     reason?: string
 
-    currentIllness?: string
-
-    vitalSigns?: string
-
-    physicalExamination?: string;
-
-    diagnosis?: string;
-
-    treatment?: string;
-
     observation?: string;
 
     dateCancelled?: string;
