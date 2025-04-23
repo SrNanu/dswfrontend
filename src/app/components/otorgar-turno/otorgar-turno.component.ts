@@ -52,12 +52,10 @@ export class OtorgarTurnoComponent implements OnInit {
     this._patientService.getPatientByDni(this.form.value.dni).subscribe(
       (aPatient: any) => {
         const aAttention: Attention = {
-          patient: aPatient.id, // Aquí ya tenemos el paciente
+          patient: aPatient.id, // aca ya tenemos el paciente
           date: this.form.value.date,
           consultationHours: this.form.value.consultationHours.id,
         };
-
-        console.log('Atención:', aAttention);
 
         // Agregar la atención
         this._attentionService.addAttention(aAttention).subscribe(() => {
@@ -70,6 +68,13 @@ export class OtorgarTurnoComponent implements OnInit {
           console.log('Atenciones:', atenciones);
         });
 
+        this.form.reset(); // Reiniciar el formulario después de agregar la atención
+        Object.keys(this.form.controls).forEach(key => {
+          const control = this.form.get(key);
+          control?.setErrors(null); // Clear any existing errors
+          control?.markAsPristine();
+          control?.markAsUntouched();
+        });
         this.loading = false;
         //this.dialogRef.close(true);
       },
@@ -190,7 +195,7 @@ export class OtorgarTurnoComponent implements OnInit {
           (consultationHour) => !occupiedHours.includes(consultationHour.id)
         );
 
-       
+
       });
   }
 
@@ -215,4 +220,3 @@ export class OtorgarTurnoComponent implements OnInit {
     this.router.navigate(['/patient']); // Asegúrate de que esta ruta exista
   }
 }
-  
