@@ -93,22 +93,7 @@ export class AttentionService {
     );
   }
 
-  getAttentionsByPatientId(patientId: number): Observable<Attention[]> {
-    // Recuperar el token del localStorage
-    const token = localStorage.getItem('token');
 
-    // Configurar las cabeceras con el token
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-
-    return this.http
-      .get<{ data: Attention[] }>(
-        `${this.myAppUrl}${this.myApiUrl}/ByPatient/${patientId}`,
-        { headers }
-      )
-      .pipe(map((response) => response.data));
-  }
 
   //Obtengo fechas ocupadas por medico /unavailable-dates/:medicoId
   getUnavailableDates(medicId: number): Observable<string[]> {
