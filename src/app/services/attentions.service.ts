@@ -12,7 +12,7 @@ export class AttentionService {
 
   constructor(private http: HttpClient) {
     this.myAppUrl = 'http://localhost:3000/';
-    this.myApiUrl = 'api/attention';
+    this.myApiUrl = 'api/attentions';
   }
 
   getAttentions(): Observable<Attention[]> {

@@ -15,8 +15,6 @@ import { MatSort } from '@angular/material/sort';
 import { After } from 'v8';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EditarConsultaComponent } from './editar-consulta/editar-consulta.component.js';
-import { AgregarConsultaComponent } from './agregar-consulta/agregar-consulta.component.js';
-
 
 @Component({
   selector: 'app-paciente-detalle',

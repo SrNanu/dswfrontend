@@ -13,15 +13,15 @@ export class HealthInsuranceService {
   private myApiUrl: string;
 
   constructor(private http: HttpClient) {
-    this.myApiUrl = "api/HealthInsurances";
+    this.myApiUrl = "api/health-insurances";
     this.myAppUrl = "http://localhost:3000/";
-    
+
   }
 
 getHealthInsurances(): Observable<HealthInsurance[]> {
   // Recuperar el token del localStorage
     const token = localStorage.getItem('token');
-  
+
     // Configurar las cabeceras con el token
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
