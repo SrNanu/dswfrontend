@@ -14,13 +14,13 @@ export class ConsultationHoursService {
 
   constructor(private http: HttpClient) {
     this.myAppUrl = 'http://localhost:3000/'
-    this.myApiUrl = 'api/consultationhours'
+    this.myApiUrl = 'api/consultation-hours'
   }
 
 getAllConsultationHours(): Observable<ConsultationHours[]> {
   // Recuperar el token del localStorage
       const token = localStorage.getItem('token');
-  
+
       // Configurar las cabeceras con el token
       const headers = new HttpHeaders({
         Authorization: `Bearer ${token}`,

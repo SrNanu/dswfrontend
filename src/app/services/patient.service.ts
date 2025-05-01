@@ -13,7 +13,7 @@ export class PatientService {
   private myAppUrl: string;
 
   constructor(private http: HttpClient) {
-    this.myApiUrl = "api/Patients";
+    this.myApiUrl = "api/patients";
     this.myAppUrl = "http://localhost:3000/";
   }
 
@@ -121,7 +121,7 @@ export class PatientService {
         map(response => response.data),
         catchError(this.handleError)
       );
-  }
+}
 
   // Manejo de errores
   private handleError(error: any): Observable<never> {

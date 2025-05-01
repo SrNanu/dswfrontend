@@ -14,13 +14,13 @@ export class SpecialtyService {
 
   constructor(private http: HttpClient) {
     this.myAppUrl = 'http://localhost:3000/'
-    this.myApiUrl = 'api/Specialties'
+    this.myApiUrl = 'api/specialties'
   }
 
 getSpecialties(): Observable<Specialty[]> {
   // Recuperar el token del localStorage
   const token = localStorage.getItem('token');
-      
+
   // Configurar las cabeceras con el token
   const headers = new HttpHeaders({
   Authorization: `Bearer ${token}`,
@@ -34,7 +34,7 @@ getSpecialties(): Observable<Specialty[]> {
 deleteSpecialty(id: number): Observable<void> {
   // Recuperar el token del localStorage
   const token = localStorage.getItem('token');
-      
+
   // Configurar las cabeceras con el token
   const headers = new HttpHeaders({
   Authorization: `Bearer ${token}`,
@@ -45,7 +45,7 @@ deleteSpecialty(id: number): Observable<void> {
 addSpecialty(aSpecialty: Specialty): Observable<void> {
   // Recuperar el token del localStorage
   const token = localStorage.getItem('token');
-      
+
   // Configurar las cabeceras con el token
   const headers = new HttpHeaders({
   Authorization: `Bearer ${token}`,
@@ -56,7 +56,7 @@ addSpecialty(aSpecialty: Specialty): Observable<void> {
 getSpecialty(id:number): Observable<Specialty> {
   // Recuperar el token del localStorage
   const token = localStorage.getItem('token');
-      
+
   // Configurar las cabeceras con el token
   const headers = new HttpHeaders({
   Authorization: `Bearer ${token}`,
@@ -67,7 +67,7 @@ getSpecialty(id:number): Observable<Specialty> {
 updateSpecialty(id: number, aSpecialty: Specialty): Observable<void> {
   // Recuperar el token del localStorage
   const token = localStorage.getItem('token');
-      
+
   // Configurar las cabeceras con el token
   const headers = new HttpHeaders({
   Authorization: `Bearer ${token}`,

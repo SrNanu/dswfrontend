@@ -12,7 +12,7 @@ export class SecretaryService {
   private myAppUrl: String;
 
   constructor(private http: HttpClient) {
-    this.myApiUrl = 'api/Secretaries';
+    this.myApiUrl = 'api/secretaries';
     this.myAppUrl = 'http://localhost:3000/';
   }
 

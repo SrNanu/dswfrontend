@@ -13,7 +13,7 @@ export class MedicService {
   private myApiUrl: string;
 
   constructor(private http: HttpClient) {
-    this.myApiUrl = "api/Medics";
+    this.myApiUrl = "api/medics";
     this.myAppUrl = "http://localhost:3000/";
   }
 
@@ -42,7 +42,7 @@ export class MedicService {
   getMedico(id: number): Observable<Medic> {
     // Recuperar el token del localStorage
     const token = localStorage.getItem('token');
-    
+
     // Configurar las cabeceras con el token
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
@@ -67,7 +67,7 @@ export class MedicService {
   deleteMedico(id: number): Observable<void> {
     // Recuperar el token del localStorage
     const token = localStorage.getItem('token');
-    
+
     // Configurar las cabeceras con el token
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
@@ -79,7 +79,7 @@ export class MedicService {
   addMedico(medic: Medic): Observable<void> {
     // Recuperar el token del localStorage
     const token = localStorage.getItem('token');
-    
+
     // Configurar las cabeceras con el token
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
