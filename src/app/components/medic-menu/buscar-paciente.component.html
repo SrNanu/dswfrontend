@@ -1,0 +1,27 @@
+<app-med-menu></app-med-menu>
+<body>
+  <div class="buscar-paciente-container">
+      <h2>Buscar Paciente</h2>
+      <form (ngSubmit)="buscarPaciente()">
+        <label for="dni">DNI del Paciente:</label>
+        <input
+          type="text"
+          id="dni"
+          [(ngModel)]="dni"
+          name="dni"
+          placeholder="Ingrese el DNI"
+          required
+        />
+        <div class="error">
+
+          <span *ngIf="error">
+            El codigo es un campo <strong>Obligatorio</strong>
+          </span>
+          <span *ngIf="error">
+            No se encontro ese Paciente, revise el DNI ingresado
+          </span>
+        </div>
+        <button type="submit">Buscar</button>
+      </form>
+  </div>
+</body>

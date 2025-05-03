@@ -1,0 +1,64 @@
+<div class="container">
+  <h2 mat-dialog-title> Datos Medicos del Paciente</h2>
+  <mat-spinner class="spinner" *ngIf="loading" [diameter]="30"></mat-spinner>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="editDatosMedicos()">
+  <mat-dialog-content class="mat-typography">
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Grupo Sanguineo</mat-label>
+          <input formControlName="grupoSanguineo" matInput placeholder="Ingrese Grupo Sanguineo" autocomplete="off">
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('grupoSanguineo')?.hasError('required') && form.get('grupoSanguineo')?.touched">
+            El codigo es un campo <strong>Obligatorio</strong>
+          </span>
+          <span *ngIf="form.get('grupoSanguineo')?.hasError('pattern')">
+            Ingrese un Tipo <strong>Valido</strong>
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill" class="large-textarea">
+          <mat-label>Antecedentes Personales</mat-label>
+          <textarea formControlName="antecedentesPersonales" matInput placeholder="Ingrese Antecedentes Personales" autocomplete="off" rows="4"></textarea>
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('antecedentesPersonales')?.hasError('required') && form.get('antecedentesPersonales')?.touched">
+            Los antecedentes personales son <strong>Obligatorios</strong>; en caso de no tener antecedentes, escriba <strong>Ninguno</strong>.
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill" class="large-textarea">
+          <mat-label>Antecedentes Familiares</mat-label>
+          <textarea formControlName="antecedentesFamiliares" matInput placeholder="Ingrese Antecedentes Familiares" autocomplete="off" rows="4"></textarea>
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('antecedentesFamiliares')?.hasError('required') && form.get('antecedentesFamiliares')?.touched">
+            Los antecedentes familiares son <strong>Obligatorios</strong>; en caso de no tener antecedentes, escriba <strong>Ninguno</strong>.
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button type="button" (click)="close()" mat-button>Cancelar</button>
+    <button [disabled]="form.invalid" type="submit" mat-button >Aceptar</button>
+  </mat-dialog-actions>
+</form>

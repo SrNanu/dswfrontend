@@ -1,0 +1,58 @@
+
+<div class="container">
+  <h2 mat-dialog-title> {{operation}} Horas de Consulta</h2>
+  <mat-spinner class="spinner" *ngIf="loading" [diameter]="30"></mat-spinner>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="addEditConsultationHours()">
+  <mat-dialog-content class="mat-typography">
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field>
+          <mat-label>Dia</mat-label>
+          <mat-select formControlName="day">
+            <mat-option *ngFor="let item of days" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field>
+          <mat-label>Hora Inicio</mat-label>
+          <mat-select formControlName="startTime">
+            <mat-option *ngFor="let item of startTime" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="column">
+        <mat-form-field>
+          <mat-label>Medico</mat-label>
+          <mat-select formControlName="medic">
+            <mat-option *ngFor="let item of medics" [value]="item">
+              {{item.firstname + ' ' + item.lastname + ' ' + item.specialty.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+    <button type='submit' mat-button >Aceptar</button>
+  </mat-dialog-actions>
+
+
+</form>
+

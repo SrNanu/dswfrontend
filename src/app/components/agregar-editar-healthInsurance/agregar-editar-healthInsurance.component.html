@@ -1,0 +1,37 @@
+<div class="container">
+  <h2 mat-dialog-title> {{operation}} Obra Social</h2>
+  <mat-spinner class="spinner" *ngIf="loading" [diameter]="30"></mat-spinner>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="addEditHealthInsurance()">
+  <mat-dialog-content class="mat-typography">
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre</mat-label>
+          <input formControlName="name" matInput placeholder="Ingrese Nombre" autocomplete="off">
+        </mat-form-field>
+        <div class="error">
+
+          <span *ngIf="form.get('name')?.hasError('required') && form.get('name')?.touched">
+            El nombre es un campo <strong>Obligatorio</strong>
+          </span>
+
+          <span *ngIf="form.get('name')?.hasError('maxlength')">
+            El nombre debe tener menos de <strong>40 caracteres</strong>
+          </span>
+
+        </div>
+      </div>
+    </div>
+
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+    <button [disabled]="form.invalid" type="submit" mat-button>Acpetar</button>
+  </mat-dialog-actions>
+
+
+</form>

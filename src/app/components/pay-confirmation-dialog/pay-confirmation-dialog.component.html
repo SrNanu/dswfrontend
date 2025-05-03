@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Confirmar Pago</h2>
+<mat-dialog-content>
+  <p>El monto a pagar es: <strong>${{ data.amount }}</strong></p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancelar</button>
+  <button mat-button color="primary" (click)="confirmPayment()">Aceptar</button>
+</mat-dialog-actions>
+

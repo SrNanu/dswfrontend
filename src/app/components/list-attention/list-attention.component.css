@@ -1,0 +1,74 @@
+/* Estilos generales */
+table {
+  width: 100%;
+  margin-top: 0%;
+}
+
+.mat-toolbar {
+  margin-bottom: 2%;
+}
+
+span {
+  margin-left: 45%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 91%;
+}
+
+button {
+  margin: 5px 0px;
+  font-size: 12px;
+  width: 5%;
+  margin-left: 92%;
+  margin-top: -55px;
+}
+
+/* Estilos de botones */
+.btnEdit,
+.btnDelete,
+.btnDetalle {
+  cursor: pointer;
+}
+
+.btnDelete {
+  color: #8b0000;
+  /* Rojo más oscuro */
+}
+
+.btnEdit {
+  color: #355CCE;
+}
+
+.btnDetalle {
+  color: green;
+  cursor: pointer;
+}
+
+.btnDetalle:hover {
+  color: darkgreen;
+}
+
+/* Estilos para los puntos de estado */
+.estado-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.estado-pagado {
+  background-color: #80e27e;
+  /* Verde más claro */
+}
+
+.estado-cancelado {
+  background-color: #8b0000;
+  /* Rojo más oscuro */
+}
+
+.estado-pendiente {
+  background-color: blue;
+}

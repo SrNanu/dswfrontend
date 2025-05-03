@@ -1,0 +1,55 @@
+
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0px;
+}
+
+.mat-form-field {
+  width:100%;
+  min-width: 400px;
+}
+
+mat-card-title {
+  display: flex;
+  justify-content: center;
+}
+mat-card-content {
+  display: flex;
+
+}
+
+
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+mat-spinner {
+  margin-right: 10px;
+}
+.title {
+  margin-left: 10px;
+}
+mat-form-field.error .mat-mdc-form-field-flex {
+  border: 1px solid red;
+  border-radius: 4px;
+}
+
+mat-form-field.error .mat-mdc-form-field-wrapper {
+  color: red; /* Cambiar color del texto de ayuda o etiqueta si es necesario */
+}
+
+.error-text {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+}

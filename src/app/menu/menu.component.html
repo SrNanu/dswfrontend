@@ -1,0 +1,19 @@
+<mat-toolbar color="primary" class="fixed-toolbar">
+  <span>Secretary Menu</span>
+  <span class="spacer"></span>
+  <button mat-button routerLink="/patient">Patients</button>
+  <button mat-button routerLink="/secretary">Secretaries</button>
+  <button mat-button routerLink="/specialty">Specialties</button>
+  <button mat-button routerLink="/medic">Medics</button>
+  <button mat-button routerLink="/healthInsurance">Health Insurances</button>
+  <button mat-button routerLink="/consultationhours">Consultation Hours</button>
+  <button mat-button routerLink="/attention">Attentions</button>
+  <button mat-button routerLink="/otorgarturno">Appointments</button>
+  <button (click)="logout()" class="logout-button">
+    <img src="assets/icons/logout.svg" alt="Logout Icon" class="logout-icon">
+    Logout
+  </button>
+  
+
+</mat-toolbar>
+

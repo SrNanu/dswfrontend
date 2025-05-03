@@ -1,0 +1,164 @@
+<div class="container">
+  <h2 mat-dialog-title>{{operacion}} Médico</h2>
+  <mat-spinner *ngIf="loading" [diameter]="30" class="spinner"></mat-spinner>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="addEditMedico()">
+  <mat-dialog-content>
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre</mat-label>
+          <input formControlName="firstname" matInput placeholder="Ingrese Nombre" autocomplete="name">
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('firstname')?.hasError('required') && form.get('firstname')?.touched">
+            El nombre es un campo <strong>requerido</strong>
+          </span>
+          <span *ngIf="form.get('firstname')?.hasError('maxlength')">
+            El nombre debe tener como maximo <strong>20 caracteres</strong>
+          </span>
+        </div>
+      </div>
+
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Apellido</mat-label>
+          <input formControlName="lastname" matInput placeholder="Ingrese Apellido" autocomplete="family-name">
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('lastname')?.hasError('required') && form.get('lastname')?.touched">
+            El Apellido es un campo <strong>requerido</strong>
+          </span>
+          <span *ngIf="form.get('lastname')?.hasError('maxlength')">
+            El apellido debe tener como maximo <strong>20 caracteres</strong>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Tipo Documento</mat-label>
+          <mat-select formControlName="dniType">
+            <mat-option *ngFor="let item of tipoDocumento" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Documento</mat-label>
+          <input formControlName="dni" matInput placeholder="Ingrese Documento" autocomplete="off">
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('dni')?.hasError('required') && form.get('dni')?.touched">
+            El DNI es un campo <strong>requerido</strong>
+          </span>
+          <span *ngIf="form.get('dni')?.hasError('pattern')">
+            El DNI debe tener como minimo <strong>8 caracteres</strong>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Usuario</mat-label>
+          <input formControlName="username" matInput placeholder="Ingrese Nombre de Usuario" autocomplete="username">
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('username')?.hasError('required') && form.get('username')?.touched">
+            El nombre de Usuario es un campo <strong>requerido</strong>
+          </span>
+          <span *ngIf="form.get('username')?.hasError('maxlength')">
+            El nombre de usuario debe tener como maximo <strong>20 caracteres</strong>
+          </span>
+        </div>
+      </div>
+
+      <div *ngIf="operacion === 'Agregar'">
+        <div class="row">
+          <div class="column">
+            <mat-form-field appearance="fill">
+              <mat-label>Contraseña</mat-label>
+              <input matInput placeholder="Ingrese Contraseña" [type]="hide ? 'password' : 'text'"
+                formControlName="password" autocomplete="new-password" required>
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field>
+            <div class="error">
+              <span *ngIf="form.get('password')?.hasError('required') && form.get('password')?.touched">
+                <strong>Campo obligatorio</strong>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Matrícula</mat-label>
+          <input formControlName="license" matInput placeholder="Ingrese Matrícula" autocomplete="off">
+        </mat-form-field>
+          <div class="error">
+            <span *ngIf="form.get('license')?.hasError('required') && form.get('license')?.touched">
+              La matrícula es un campo <strong>requerido</strong>.
+            </span>
+            <span *ngIf="form.get('license')?.hasError('pattern')">
+              La matrícula debe ser un número de <strong>4 a 8 dígitos</strong>.
+            </span>
+          </div>
+      </div>
+
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Valor por Consulta</mat-label>
+          <input formControlName="medicalConsultationValue" matInput placeholder="Ingrese Valor por Consulta"
+            autocomplete="off">
+        </mat-form-field>
+        <div class="error">
+          <span
+            *ngIf="form.get('medicalConsultationValue')?.hasError('required') && form.get('medicalConsultationValue')?.touched">
+            El valor por consulta es un campo <strong>requerido</strong>
+          </span>
+          <span *ngIf="form.get('medicalConsultationValue')?.hasError('pattern')">
+            El valor por consulta debe tener como minimo <strong>5 caracteres</strong>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Especialidad -->
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="fill">
+          <mat-label>Especialidad</mat-label>
+          <mat-select formControlName="specialty">
+            <mat-option *ngFor="let item of specialties" [value]="item">
+              {{ item.name }}
+            </mat-option>
+          </mat-select>
+          <div class="error">
+            <span *ngIf="form.get('specialty')?.hasError('required') && form.get('specialty')?.touched">
+              La especialidad es un campo <strong>requerido</strong>
+            </span>
+          </div>
+        </mat-form-field>
+      </div>
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+    <button type="submit" mat-button>Agregar</button>
+  </mat-dialog-actions>
+
+</form>
