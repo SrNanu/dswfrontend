@@ -198,32 +198,32 @@ export class HCPacienteComponent implements OnInit , AfterViewInit {
 
   }
 
-  completeAttention( id?:number, paymentDate? : string){
-
-    if(paymentDate !== null && paymentDate !== ""){
-
-      this._snackBar.open('No se puede completar la consulta, ya que no fue pagada aun',"" ,{
-        duration: 3000,
-        horizontalPosition: 'center',
-        verticalPosition: 'bottom'
-      });
-      return;
-    }
-
-    const dialogRef = this.dialog.open(EditarConsultaComponent, {
-      width: '800px',
-      disableClose: true,
-      data: {id: id }
+  completeAttention(id?: number, paymentDate?: string) {
+  // Verificar si paymentDate es nulo o vacío
+  if (paymentDate === null || paymentDate === "") {
+    this._snackBar.open('No se puede completar la consulta, ya que no fue pagada aún', "", {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if(result){
-        this.loadPatientAttentions(this.idPac);
-      }
-    });
-
+    return;
   }
+
+  // Si la consulta está pagada, abrir el diálogo para editarla
+  const dialogRef = this.dialog.open(EditarConsultaComponent, {
+    width: '800px',
+    disableClose: true,
+    data: { id: id }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    if (result) {
+      this.loadPatientAttentions(this.idPac);
+    }
+  });
+}
+
 
   //LEGACY CODE, ITS HERE BEACUSE OF BUISENESS LOGIC HAS CHANGED, AND NOW MEDICS DONT DELETE ATTENTIONS, THEY JUST EDIT THEM
 
