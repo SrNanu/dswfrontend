@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Attention } from '../../../interfaces/attention.js';
+import { Attention } from '../../../interfaces/attention';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { AttentionService } from '../../../services/attentions.service.js';
+import { AttentionService } from '../../../services/attentions.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { get } from 'http';
 

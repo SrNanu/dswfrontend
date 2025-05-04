@@ -1,8 +1,8 @@
 import { Component, Inject, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Specialty } from '../../interfaces/specialty.js';
-import { SpecialtyService } from '../../services/specialty.service.js';
+import { Specialty } from '../../interfaces/specialty';
+import { SpecialtyService } from '../../services/specialty.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({

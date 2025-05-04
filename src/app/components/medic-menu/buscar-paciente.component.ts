@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { PatientService } from '../../services/patient.service.js';
+import { PatientService } from '../../services/patient.service';
 
 @Component({
   selector: 'app-buscar-paciente',

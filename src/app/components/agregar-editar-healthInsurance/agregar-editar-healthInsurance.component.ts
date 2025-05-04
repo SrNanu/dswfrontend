@@ -1,8 +1,8 @@
 import { Component, Inject, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { HealthInsurance } from '../../interfaces/healthInsurance.js';
-import { HealthInsuranceService } from '../../services/healthInsurance.service.js';
+import { HealthInsurance } from '../../interfaces/healthInsurance';
+import { HealthInsuranceService } from '../../services/healthInsurance.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({

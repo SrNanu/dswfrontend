@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { Specialty } from '../../interfaces/specialty.js';
+import { Specialty } from '../../interfaces/specialty';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { AgregarEditarHealthInsuranceComponent } from '../agregar-editar-healthInsurance/agregar-editar-healthInsurance.component.js';
-import { HealthInsuranceService } from '../../services/healthInsurance.service.js';
+import { AgregarEditarHealthInsuranceComponent } from '../agregar-editar-healthInsurance/agregar-editar-healthInsurance.component';
+import { HealthInsuranceService } from '../../services/healthInsurance.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HealthInsurance } from '../../interfaces/healthInsurance.js';
+import { HealthInsurance } from '../../interfaces/healthInsurance';
 import { Router } from '@angular/router';
 
 

@@ -1,20 +1,20 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Patient } from '../../interfaces/patient.js';
-import { Attention } from '../../interfaces/attention.js';
-import { PatientService } from '../../services/patient.service.js';
+import { Patient } from '../../interfaces/patient';
+import { Attention } from '../../interfaces/attention';
+import { PatientService } from '../../services/patient.service';
 import { throwError } from 'rxjs';
-import { ModalDatosMedicosPacienteComponent } from './modal-datos-medicos-paciente/modal-datos-medicos-paciente.component.js';
+import { ModalDatosMedicosPacienteComponent } from './modal-datos-medicos-paciente/modal-datos-medicos-paciente.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AttentionService } from '../../services/attentions.service.js';
+import { AttentionService } from '../../services/attentions.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { After } from 'v8';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { EditarConsultaComponent } from './editar-consulta/editar-consulta.component.js';
+import { EditarConsultaComponent } from './editar-consulta/editar-consulta.component';
 
 @Component({
   selector: 'app-paciente-detalle',

@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
-import { Medic } from '../../interfaces/medic.js';
+import { Medic } from '../../interfaces/medic';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { AddEditMedicComponent } from '../add-edit-medic/add-edit-medic.component.js';
-import { MedicService } from '../../services/medic.service.js';
+import { AddEditMedicComponent } from '../add-edit-medic/add-edit-medic.component';
+import { MedicService } from '../../services/medic.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Specialty } from '../../interfaces/specialty.js';
+import { Specialty } from '../../interfaces/specialty';
 import { Router } from '@angular/router';  // Importar Router
 import { DetalleMedicComponent } from '../detalle-medic/detalle-medic.component';
 

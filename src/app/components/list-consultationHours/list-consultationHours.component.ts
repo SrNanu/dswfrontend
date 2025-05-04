@@ -4,8 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { AgregarEditarConsultationHoursComponent } from '../agregar-editar-consultationHours/agregar-editar-consultationHours.component.js';
-import { ConsultationHoursService } from '../../services/consultationHours.service.js';
+import { AgregarEditarConsultationHoursComponent } from '../agregar-editar-consultationHours/agregar-editar-consultationHours.component';
+import { ConsultationHoursService } from '../../services/consultationHours.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 

@@ -1,16 +1,16 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Medic } from '../../interfaces/medic.js';
-import { MedicService } from '../../services/medic.service.js';
-import { ConsultationHours } from '../../interfaces/consultationHours.js';
-import { ConsultationHoursService } from '../../services/consultationHours.service.js';
-import { Attention } from '../../interfaces/attention.js';
-import { Patient } from '../../interfaces/patient.js';
-import { PatientService } from '../../services/patient.service.js';
-import { AttentionService } from '../../services/attentions.service.js';
+import { Medic } from '../../interfaces/medic';
+import { MedicService } from '../../services/medic.service';
+import { ConsultationHours } from '../../interfaces/consultationHours';
+import { ConsultationHoursService } from '../../services/consultationHours.service';
+import { Attention } from '../../interfaces/attention';
+import { Patient } from '../../interfaces/patient';
+import { PatientService } from '../../services/patient.service';
+import { AttentionService } from '../../services/attentions.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDatepickerModule } from '@angular/material/datepicker/index.js';
+import { MatDatepickerModule } from '@angular/material/datepicker/index';
 import { ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 @Component({
