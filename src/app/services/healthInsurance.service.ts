@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { HealthInsurance } from '../interfaces/healthInsurance.js';
-import { response } from 'express';
 
 @Injectable({
   providedIn: 'root'
