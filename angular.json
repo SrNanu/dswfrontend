@@ -25,7 +25,7 @@
           "options": {
             "outputPath": "dist/frontend",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",  
             "polyfills": [
               "zone.js"
             ],
@@ -39,20 +39,15 @@
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "1.5kb",
-                  "maximumError": "2mb"
+                  "maximumWarning": "500kb",  
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -72,12 +67,15 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "Frontend:build:production"
+          },
           "configurations": {
             "production": {
-              "buildTarget": "Frontend:build:production"
+              "browserTarget": "Frontend:build:production"
             },
             "development": {
-              "buildTarget": "Frontend:build:development"
+              "browserTarget": "Frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
