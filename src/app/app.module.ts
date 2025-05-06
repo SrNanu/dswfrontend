@@ -6,6 +6,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 //Components
 import { AppComponent } from './app.component';
@@ -42,6 +45,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { PayConfirmationDialogComponent } from './components/pay-confirmation-dialog/pay-confirmation-dialog.component';
 @NgModule({
   declarations: [
+    
     AppComponent,
     ListSecretarysComponent,
     AgregarEditarSecretaryComponent,
@@ -80,6 +84,10 @@ import { PayConfirmationDialogComponent } from './components/pay-confirmation-di
     MatProgressSpinnerModule,
     FormsModule,
     MatSnackBarModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
   ],
   providers: [provideClientHydration(), provideAnimationsAsync()],
   bootstrap: [AppComponent],

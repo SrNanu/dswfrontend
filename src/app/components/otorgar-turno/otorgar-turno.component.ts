@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+<<<<<<< HEAD
 import { Medic } from '../../interfaces/medic';
 import { MedicService } from '../../services/medic.service';
 import { ConsultationHours } from '../../interfaces/consultationHours';
@@ -13,6 +14,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker/index';
 import { ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
+=======
+import { Medic } from '../../interfaces/medic.js';
+import { MedicService } from '../../services/medic.service.js';
+import { ConsultationHours } from '../../interfaces/consultationHours.js';
+import { ConsultationHoursService } from '../../services/consultationHours.service.js';
+import { Attention } from '../../interfaces/attention.js';
+import { Patient } from '../../interfaces/patient.js';
+import { PatientService } from '../../services/patient.service.js';
+import { AttentionService } from '../../services/attentions.service.js';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDatepickerModule } from '@angular/material/datepicker/index.js';
+import { ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
+
+>>>>>>> upstream/master
 @Component({
   selector: 'app-otorgar-turno',
   templateUrl: './otorgar-turno.component.html',
@@ -24,8 +40,16 @@ export class OtorgarTurnoComponent implements OnInit {
   consultationHours: ConsultationHours[] = [];
   filteredConsultationHours: ConsultationHours[] = [];
   form: FormGroup;
+<<<<<<< HEAD
   patientNotFound: boolean = false;
   unabailableDates: any;
+=======
+  filteredPatients: Patient[] = [];
+  allPatients: Patient[] = [];
+  patientNotFound: boolean = false;
+  unabailableDates: any;
+
+>>>>>>> upstream/master
   constructor(
     @Optional() public dialogRef: MatDialogRef<OtorgarTurnoComponent>,
     private fb: FormBuilder,
@@ -38,13 +62,18 @@ export class OtorgarTurnoComponent implements OnInit {
     private router: Router
   ) {
     this.form = this.fb.group({
+<<<<<<< HEAD
       dni: [null, [Validators.required]],
+=======
+      patientSearch: [null, [Validators.required]],
+>>>>>>> upstream/master
       medic: [null, [Validators.required]],
       date: [Date, [Validators.required]],
       consultationHours: [null, [Validators.required]],
     });
   }
 
+<<<<<<< HEAD
   addTurno() {
     this.loading = true;
 
@@ -107,6 +136,95 @@ cancelar() {
   this.dialogRef.close(false); // Cierra el diálogo
 }
 
+=======
+  ngOnInit(): void {
+    this.obternerHoras();
+    this.obternerMedicos();
+    this.loadAllPatients();
+  }
+
+  loadAllPatients(): void {
+    this._patientService.getPatients().subscribe(patients => {
+      this.allPatients = patients;
+    });
+  }
+
+  searchPatient(): void {
+    const searchTerm = this.form.get('patientSearch')?.value;
+    
+    if (typeof searchTerm === 'string') {
+      if (searchTerm.length < 2) {
+        this.filteredPatients = [];
+        this.patientNotFound = false;
+        return;
+      }
+      
+      const term = searchTerm.toLowerCase();
+      this.filteredPatients = this.allPatients.filter(patient => 
+        patient.dni.toLowerCase().includes(term) ||
+        patient.firstname.toLowerCase().includes(term) ||
+        patient.lastname.toLowerCase().includes(term)
+      );
+      
+      this.patientNotFound = this.filteredPatients.length === 0;
+      if (this.patientNotFound) {
+        this.form.get('patientSearch')?.setErrors({ patientNotFound: true });
+      } else {
+        this.form.get('patientSearch')?.setErrors(null);
+      }
+    }
+  }
+
+  displayPatient(patient: Patient): string {
+    return patient ? `${patient.dni} - ${patient.firstname} ${patient.lastname}` : '';
+  }
+
+  addTurno() {
+    this.loading = true;
+    
+    const selectedPatient = this.form.value.patientSearch;
+    
+    if (!selectedPatient || typeof selectedPatient === 'string') {
+      this._snackBar.open('Por favor seleccione un paciente válido', '', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+      });
+      this.loading = false;
+      return;
+    }
+
+    const aAttention: Attention = {
+      patient: selectedPatient.id,
+      date: this.form.value.date,
+      consultationHours: this.form.value.consultationHours.id,
+    };
+
+    this._attentionService.addAttention(aAttention).subscribe(() => {
+      this.successMessage('agregada');
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    }, error => {
+      console.error('Error al agregar atención:', error);
+      this.loading = false;
+    });
+  }
+
+  cancelar() {
+    this._snackBar.open('Turno cancelado', '', {
+      duration: 1500,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+    });
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1500);
+
+    this.dialogRef.close(false);
+  }
+>>>>>>> upstream/master
 
   obternerMedicos() {
     this._medicService.getMedics().subscribe((data) => {
@@ -119,8 +237,11 @@ cancelar() {
       .getAllConsultationHours()
       .subscribe((data) => {
         this.consultationHours = data;
+<<<<<<< HEAD
         //Filtro los horarios segun su medico y que no tengaa una atencion
 
+=======
+>>>>>>> upstream/master
       });
   }
 
@@ -131,9 +252,15 @@ cancelar() {
       verticalPosition: 'bottom',
     });
   }
+<<<<<<< HEAD
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
     // Prevent Saturday and Sunday from being selected.
+=======
+
+  myFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+>>>>>>> upstream/master
     const days = [
       'Lunes',
       'Martes',
@@ -144,15 +271,24 @@ cancelar() {
       'Domingo',
     ];
     const attentionDays: number[] = [];
+<<<<<<< HEAD
     //Filtro los dias de atencion y guardo 1 para lunes, 2 para martes, etc
+=======
+    
+>>>>>>> upstream/master
     this.filteredConsultationHours.forEach((element) => {
       attentionDays.push(days.indexOf(element.day));
     });
 
+<<<<<<< HEAD
     //Obtengo el medico seleccionado
     const medic = this.form.value.medic;
 
     //retorna tru si la fecha esta en las fechas no disponibles
+=======
+    const medic = this.form.value.medic;
+
+>>>>>>> upstream/master
     if (this.unabailableDates) {
       const unavailable = this.unabailableDates.find(
         (date: string) => date === d?.toISOString().slice(0, 10)
@@ -160,7 +296,10 @@ cancelar() {
       if (unavailable) return false;
     }
 
+<<<<<<< HEAD
     //retorna true si el dia no esta en el array de dias de atencion
+=======
+>>>>>>> upstream/master
     return attentionDays.includes(day - 1);
   };
 
@@ -171,13 +310,20 @@ cancelar() {
       }
     );
 
+<<<<<<< HEAD
     //Seteo fechas deshabilitadas
+=======
+>>>>>>> upstream/master
     this._attentionService
       .getUnavailableDates(selectedMedic.id)
       .subscribe((data) => {
         this.unabailableDates = data;
       });
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/master
   onDateChange(): void {
     const selectedDate = this.form.value.date;
     if (!selectedDate) return;
@@ -194,11 +340,15 @@ cancelar() {
     ];
     const daySelected = days[day];
 
+<<<<<<< HEAD
     // Filtrar horarios por el día de la semana
+=======
+>>>>>>> upstream/master
     let availableHours = this.filteredConsultationHours.filter(
       (consultationHour) => consultationHour.day === daySelected
     );
     const formattedDate = selectedDate.toISOString().split('T')[0];
+<<<<<<< HEAD
     // Obtener los IDs de los horarios ocupados para la fecha seleccionada
     this._attentionService
       .getAttentionsByDate(selectedDate)
@@ -234,3 +384,20 @@ cancelar() {
     this.router.navigate(['/patient']); // Asegúrate de que esta ruta exista
   }
 }
+=======
+    
+    this._attentionService
+      .getAttentionsByDate(selectedDate)
+      .subscribe((data) => {
+        const occupiedHours = data;
+        this.filteredConsultationHours = availableHours.filter(
+          (consultationHour) => !occupiedHours.includes(consultationHour.id)
+        );
+      });
+  }
+
+  redirectToCreatePatient(): void {
+    this.router.navigate(['/patient']);
+  }
+}
+>>>>>>> upstream/master

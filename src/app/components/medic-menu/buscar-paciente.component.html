@@ -1,4 +1,5 @@
 <app-med-menu></app-med-menu>
+<<<<<<< HEAD
 <body>
   <div class="buscar-paciente-container">
       <h2>Buscar Paciente</h2>
@@ -25,3 +26,42 @@
       </form>
   </div>
 </body>
+=======
+<div class="buscar-paciente-container">
+  <h2>Buscar Paciente</h2>
+  <form (ngSubmit)="buscarPaciente()">
+    <label for="busqueda">Buscar por nombre o DNI:</label>
+    <input
+      type="text"
+      id="busqueda"
+      [(ngModel)]="dni"
+      name="dni"
+      placeholder="Ingrese nombre o DNI"
+      (input)="filtrarPacientes()"
+      autocomplete="off"
+    />
+    
+    <!-- Lista de sugerencias -->
+    <div *ngIf="mostrarSugerencias && pacientesFiltrados.length > 0" class="sugerencias-container">
+      <div 
+        *ngFor="let paciente of pacientesFiltrados"
+        class="sugerencia-item"
+        (click)="seleccionarPaciente(paciente)"
+      >
+        {{ paciente.firstname }} {{ paciente.lastname }} ({{ paciente.dni }})
+      </div>
+    </div>
+    
+    <div class="error-messages">
+      <div *ngIf="error" class="error">
+        El DNI es un campo <strong>obligatorio</strong>
+      </div>
+      <div *ngIf="errorDeDNI" class="error">
+        No se encontró el paciente, revise los datos ingresados
+      </div>
+    </div>
+    
+    <button type="submit">Buscar</button>
+  </form>
+</div>
+>>>>>>> upstream/master

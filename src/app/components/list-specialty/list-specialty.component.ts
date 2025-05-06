@@ -1,11 +1,20 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+<<<<<<< HEAD
 import { Specialty } from '../../interfaces/specialty';
+=======
+import { Specialty } from '../../interfaces/specialty.js';
+>>>>>>> upstream/master
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+<<<<<<< HEAD
 import { AgregarEditarSpecialtyComponent } from '../agregar-editar-specialty/agregar-editar-specialty.component';
 import { SpecialtyService } from '../../services/specialty.service';
+=======
+import { AgregarEditarSpecialtyComponent } from '../agregar-editar-specialty/agregar-editar-specialty.component.js';
+import { SpecialtyService } from '../../services/specialty.service.js';
+>>>>>>> upstream/master
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 

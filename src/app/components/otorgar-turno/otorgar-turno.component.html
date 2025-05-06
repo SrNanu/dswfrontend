@@ -3,11 +3,15 @@
   <h2 mat-dialog-title>Turno</h2>
 </div>
 <form [formGroup]="form" (ngSubmit)="addTurno()">
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/master
   <mat-dialog-content>
     <div class="row">
       <div class="column">
         <mat-form-field appearance="fill">
+<<<<<<< HEAD
           <mat-label>DNI Paciente</mat-label>
           <input matInput formControlName="dni" (blur)="checkPatient()" />
           <mat-error *ngIf="form.get('dni')?.hasError('required')">
@@ -16,13 +20,36 @@
         </mat-form-field>
         <mat-error *ngIf="form.get('dni')?.hasError('patientNotFound')">
           El paciente no existe
+=======
+          <mat-label>Buscar Paciente (DNI, Nombre o Apellido)</mat-label>
+          <input 
+            matInput 
+            formControlName="patientSearch" 
+            [matAutocomplete]="auto"
+            (input)="searchPatient()"
+          />
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayPatient">
+            <mat-option *ngFor="let patient of filteredPatients" [value]="patient">
+              {{ patient.dni }} - {{ patient.firstname }} {{ patient.lastname }}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="form.get('patientSearch')?.hasError('required')">
+            La búsqueda de paciente es obligatoria
+          </mat-error>
+        </mat-form-field>
+        <mat-error *ngIf="patientNotFound">
+          No se encontraron pacientes
+>>>>>>> upstream/master
           <button mat-raised-button color="primary" (click)="redirectToCreatePatient()" class="create-patient-btn">
             ¿Deseas crear el paciente?
           </button>
         </mat-error>
       </div>
     </div>
+<<<<<<< HEAD
     
+=======
+>>>>>>> upstream/master
 
     <div class="row">
       <div class="column">
@@ -36,13 +63,20 @@
         </mat-form-field>
       </div>
     </div>
+<<<<<<< HEAD
     
+=======
+>>>>>>> upstream/master
 
     <div class="row">
       <div class="column">
         <mat-form-field class="example-full-width">
           <mat-label>Choose a date</mat-label>
+<<<<<<< HEAD
           <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" formControlName="date" (selectionchange)="onDateChange()">
+=======
+          <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker" formControlName="date" (dateChange)="onDateChange()">
+>>>>>>> upstream/master
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -62,7 +96,10 @@
       </div>
     </div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/master
     <mat-dialog-actions>
       <button type="button" (click)="cancelar()" mat-button class="cancel-button">Cancelar</button>
       <button type="submit" mat-button class="add-button">Agregar</button>

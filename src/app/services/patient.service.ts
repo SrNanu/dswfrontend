@@ -128,4 +128,22 @@ export class PatientService {
     console.error('Ha ocurrido un error:', error);
     return throwError('Algo salió mal; por favor, inténtelo nuevamente más tarde.');
   }
+
+  // Buscar pacientes por nombre, apellido o DNI y mostrarlos en el autocomplete
+  searchPatients(term: string): Observable<Patient[]> {
+    // Recuperar el token del localStorage
+    const token = localStorage.getItem('token');
+
+    // Configurar las cabeceras con el token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<{ data: Patient[] }>(`${this.myAppUrl}${this.myApiUrl}//${term}`, { headers })
+      .pipe(
+        map(response => response.data),
+        catchError(this.handleError)
+      );
+  }
+
 }

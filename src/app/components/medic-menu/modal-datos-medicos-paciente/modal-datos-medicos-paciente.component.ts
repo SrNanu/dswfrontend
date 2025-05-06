@@ -1,10 +1,18 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+<<<<<<< HEAD
 import { Patient } from '../../../interfaces/patient';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PatientService } from '../../../services/patient.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HealthInsurance } from '../../../interfaces/healthInsurance';
+=======
+import { Patient } from '../../../interfaces/patient.js';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { PatientService } from '../../../services/patient.service.js';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HealthInsurance } from '../../../interfaces/healthInsurance.js';
+>>>>>>> upstream/master
 
 @Component({
   selector: 'app-modal-datos-medicos-paciente',

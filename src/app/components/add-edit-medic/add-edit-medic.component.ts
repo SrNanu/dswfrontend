@@ -1,11 +1,19 @@
 import { Component, Inject,  OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+<<<<<<< HEAD
 import { Medic } from '../../interfaces/medic';
 import { MedicService } from '../../services/medic.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SpecialtyService } from '../../services/specialty.service';
 import { Specialty } from '../../interfaces/specialty';
+=======
+import { Medic } from '../../interfaces/medic.js';
+import { MedicService } from '../../services/medic.service.js';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SpecialtyService } from '../../services/specialty.service.js';
+import { Specialty } from '../../interfaces/specialty.js';
+>>>>>>> upstream/master
 import { DateAdapter } from '@angular/material/core';
 
 @Component({

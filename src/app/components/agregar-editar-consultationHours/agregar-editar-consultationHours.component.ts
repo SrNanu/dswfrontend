@@ -1,10 +1,17 @@
 import { Component, Inject, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+<<<<<<< HEAD
 import { ConsultationHours } from '../../interfaces/consultationHours';
 import { ConsultationHoursService } from '../../services/consultationHours.service';
 import { MedicService } from '../../services/medic.service';
 import { Medic } from '../../interfaces/medic';
+=======
+import { ConsultationHours } from '../../interfaces/consultationHours.js';
+import { ConsultationHoursService } from '../../services/consultationHours.service.js';
+import { MedicService } from '../../services/medic.service.js';
+import { Medic } from '../../interfaces/medic.js';
+>>>>>>> upstream/master
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
