@@ -1,14 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-<<<<<<< HEAD
 import { Attention } from '../../../interfaces/attention';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AttentionService } from '../../../services/attentions.service';
-=======
-import { Attention } from '../../../interfaces/attention.js';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { AttentionService } from '../../../services/attentions.service.js';
->>>>>>> upstream/master
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { get } from 'http';
 

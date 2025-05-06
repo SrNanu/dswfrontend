@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-<<<<<<< HEAD
 import { Patient } from '../../interfaces/patient';
 import { Attention } from '../../interfaces/attention';
 import { PatientService } from '../../services/patient.service';
@@ -10,26 +9,12 @@ import { ModalDatosMedicosPacienteComponent } from './modal-datos-medicos-pacien
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AttentionService } from '../../services/attentions.service';
-=======
-import { Patient } from '../../interfaces/patient.js';
-import { Attention } from '../../interfaces/attention.js';
-import { PatientService } from '../../services/patient.service.js';
-import { throwError } from 'rxjs';
-import { ModalDatosMedicosPacienteComponent } from './modal-datos-medicos-paciente/modal-datos-medicos-paciente.component.js';
-import { MatDialog } from '@angular/material/dialog';
-import { MatDialogModule } from '@angular/material/dialog';
-import { AttentionService } from '../../services/attentions.service.js';
->>>>>>> upstream/master
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { After } from 'v8';
 import { MatSnackBar } from '@angular/material/snack-bar';
-<<<<<<< HEAD
 import { EditarConsultaComponent } from './editar-consulta/editar-consulta.component';
-=======
-import { EditarConsultaComponent } from './editar-consulta/editar-consulta.component.js';
->>>>>>> upstream/master
 
 @Component({
   selector: 'app-paciente-detalle',
@@ -213,35 +198,6 @@ export class HCPacienteComponent implements OnInit , AfterViewInit {
 
   }
 
-<<<<<<< HEAD
-  completeAttention( id?:number, paymentDate? : string){
-
-    if(paymentDate !== null && paymentDate !== ""){
-
-      this._snackBar.open('No se puede completar la consulta, ya que no fue pagada aun',"" ,{
-        duration: 3000,
-        horizontalPosition: 'center',
-        verticalPosition: 'bottom'
-      });
-      return;
-    }
-
-    const dialogRef = this.dialog.open(EditarConsultaComponent, {
-      width: '800px',
-      disableClose: true,
-      data: {id: id }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if(result){
-        this.loadPatientAttentions(this.idPac);
-      }
-    });
-
-  }
-
-=======
   completeAttention(id?: number, paymentDate?: string) {
   // Verificar si paymentDate es nulo o vacío
   if (paymentDate === null || paymentDate === "") {
@@ -269,7 +225,6 @@ export class HCPacienteComponent implements OnInit , AfterViewInit {
 }
 
 
->>>>>>> upstream/master
   //LEGACY CODE, ITS HERE BEACUSE OF BUISENESS LOGIC HAS CHANGED, AND NOW MEDICS DONT DELETE ATTENTIONS, THEY JUST EDIT THEM
 
   // deleteAttention(id: number){

@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-<<<<<<< HEAD
 //
-=======
-
->>>>>>> upstream/master
 @Component({
   selector: 'app-access-denied',
   templateUrl: './accesDenied.component.html',
