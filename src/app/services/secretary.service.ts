@@ -13,7 +13,7 @@ export class SecretaryService {
 
   constructor(private http: HttpClient) {
     this.myApiUrl = 'api/secretaries';
-    this.myAppUrl = 'http://localhost:3000/';
+    this.myAppUrl = 'https://dswbackend-production-163f.up.railway.app/';
   }
 
   getSecretarys(): Observable<Secretary[]> {
