@@ -106,6 +106,30 @@ export class AgregarEditarSecretaryComponent implements OnInit {
         },
       });
     }
+    this.loading = true;
+    if (this.id === undefined) {
+      this._secretaryService.addSecretary(secretary).subscribe({
+        next: () => {
+          this.successMessage('agregada');
+          this.dialogRef.close(true); // Envía true al padre
+        },
+        error: (err) => {
+          this.errorMessage(err.message);
+          this.loading = false;
+        },
+      });
+    } else {
+      this._secretaryService.updateSecretary(this.id, secretary).subscribe({
+        next: () => {
+          this.successMessage('actualizada');
+          this.dialogRef.close(true); // Envía true al padre
+        },
+        error: (err) => {
+          this.errorMessage(err.message);
+          this.loading = false;
+        },
+      });
+    }
   }
 
   successMessage(operation: string) {

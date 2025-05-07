@@ -82,6 +82,11 @@ export class ListSecretarysComponent implements OnInit, AfterViewInit {
       disableClose: true,
       data: {id: id}
     });
+    dialogRef.afterClosed().subscribe((result:boolean) => {
+      if(result){
+        this.obtenerSecretarys();
+      }
+    });
   }
 detalleSecretary(id?: number) {
   //console.log('id:', id);
