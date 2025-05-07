@@ -48,7 +48,6 @@ export class AddEditMedicComponent implements OnInit {
 
   ngOnInit(): void {
     this.obternerEspecialidades();
-    this.isEdit(this.id);
   }
 
   cancelar() {
@@ -71,6 +70,10 @@ export class AddEditMedicComponent implements OnInit {
     this._specialtyService.getSpecialties().subscribe(data => {
       this.specialties = data;
       console.log('Especialidades:', this.specialties);
+      if(this.id !== undefined) {
+        this.operacion = 'Editar';
+        this.getMedico(this.id);
+      }
     }); 
   }
   
@@ -78,6 +81,11 @@ export class AddEditMedicComponent implements OnInit {
   getMedico(id: number) {
     this._medicService.getMedico(id).subscribe(data => {
       const _specialty = this.specialties.find(s => s.id === data.specialty.id);
+      
+      if (!_specialty) {
+        console.error('Especialidad no encontrada en el listado');
+        return;
+      }
       this.form.patchValue({
         firstname: data.firstname, 
         lastname: data.lastname,
