@@ -44,7 +44,7 @@ export class DetalleMedicComponent implements OnInit {
         [Validators.required, Validators.maxLength(5)],
       ],
       license: ['', [Validators.required, Validators.pattern('^\\d{4,8}$')]],
-      specialty: [null, Validators.required],
+      specialty: ['', Validators.required],
       consultationHours: ['', Validators.required],
     });
     this.id = data.id;
