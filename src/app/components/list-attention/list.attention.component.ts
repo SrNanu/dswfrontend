@@ -101,6 +101,12 @@ displayedColumns: string[] = ['estado', 'date', 'consultationHours', 'patient', 
 
 payAttention(id: number) {
   this._attentionService.getAttention(id).subscribe(attention => {
+    if (attention.dateCancelled) {
+      this.errorMessage("Esta atención ya ha sido cancelada.");
+      return;
+    }
+
+
     if (!attention.consultationHours || !attention.consultationHours.medic) {
       this.errorMessage("No se pudo obtener el médico de la atención.");
       return;
@@ -134,6 +140,9 @@ payAttention(id: number) {
 
 
 async cancelAttention(id: number) {
+
+
+
   const dialogRef = this.dialog.open(ConfirmDialogComponent, {
     width: '350px',
     data: { message: "¿Estás seguro de que deseas cancelar esta atención?" }
@@ -148,11 +157,18 @@ async cancelAttention(id: number) {
   try {
     const attention = await this._attentionService.getAttention(id).toPromise(); // Obtener la atención
 
+
     // Verificar si ya está cancelada
     if (attention && attention.dateCancelled) {
       this.errorMessage("Esta atención ya ha sido cancelada.");
       return;
     }
+
+    if (attention && attention.paymentDate) {
+      this.errorMessage("Esta atención ya ha sido pagada.");
+      return;
+    }
+
 
     if (!attention) {
       this.errorMessage("No se pudo obtener la atención.");
