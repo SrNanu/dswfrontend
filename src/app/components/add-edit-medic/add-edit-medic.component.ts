@@ -39,7 +39,7 @@ export class AddEditMedicComponent implements OnInit {
       password: ['', [Validators.required, Validators.maxLength(12)]],
       medicalConsultationValue: ['', [Validators.required, Validators.maxLength(5)]],
       license: ['', [Validators.required, Validators.pattern('^\\d{4,8}$')]],
-      specialty: ['', Validators.required],
+      specialty: [null, Validators.required],
       consultationHours: ['', Validators.required],
     })
     this.id = data.id;
