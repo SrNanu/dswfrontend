@@ -12,7 +12,7 @@ export class LoginService {
   private myApiUrl: string
 
   constructor(private http: HttpClient) {
-    this.myAppUrl = 'http://localhost:3000/'
+    this.myAppUrl = 'https://dswbackend-production-163f.up.railway.app/'
     this.myApiUrl = 'api/login'
   }
   logIn(user: UserBase): Observable<any> { 
