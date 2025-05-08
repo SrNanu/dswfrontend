@@ -105,6 +105,11 @@ payAttention(id: number) {
       this.errorMessage("Esta atención ya ha sido cancelada.");
       return;
     }
+    
+    if (attention && attention.paymentDate) {
+      this.errorMessage("Esta atención ya ha sido pagada.");
+      return;
+    }
 
 
     if (!attention.consultationHours || !attention.consultationHours.medic) {
@@ -140,23 +145,8 @@ payAttention(id: number) {
 
 
 async cancelAttention(id: number) {
-
-
-
-  const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-    width: '350px',
-    data: { message: "¿Estás seguro de que deseas cancelar esta atención?" }
-  });
-
-  const dialogResult = await dialogRef.afterClosed().toPromise(); // Esperar la respuesta del diálogo
-
-  if (!dialogResult) {
-    return; // Si el usuario no confirma, no hacer nada
-  }
-
   try {
     const attention = await this._attentionService.getAttention(id).toPromise(); // Obtener la atención
-
 
     // Verificar si ya está cancelada
     if (attention && attention.dateCancelled) {
@@ -164,16 +154,17 @@ async cancelAttention(id: number) {
       return;
     }
 
+    // Verificar si ya fue pagada
     if (attention && attention.paymentDate) {
       this.errorMessage("Esta atención ya ha sido pagada.");
       return;
     }
 
-
     if (!attention) {
       this.errorMessage("No se pudo obtener la atención.");
       return;
     }
+
     const attentionDate = new Date(attention.date);
     const currentDate = new Date();
     const diffTime = attentionDate.getTime() - currentDate.getTime();
@@ -182,6 +173,18 @@ async cancelAttention(id: number) {
     if (diffHours < 24) {
       this.errorMessage('No se puede cancelar el turno. El mismo está dentro de las 24 horas.');
       return;
+    }
+
+    // Si pasó todas las validaciones, recién ahí se pide confirmación
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: { message: "¿Estás seguro de que deseas cancelar esta atención?" }
+    });
+
+    const dialogResult = await dialogRef.afterClosed().toPromise(); // Esperar la respuesta del diálogo
+
+    if (!dialogResult) {
+      return; // Si el usuario no confirma, no hacer nada
     }
 
     attention.dateCancelled = new Date().toISOString(); // Actualizar la fecha de cancelación
