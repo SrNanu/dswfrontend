@@ -29,6 +29,8 @@ export class OtorgarTurnoComponent implements OnInit {
   patientNotFound: boolean = false;
   unabailableDates: any;
 
+  medicWorkingDays: string[] = []; //almacena dias que trabaja el medico
+
   constructor(
     @Optional() public dialogRef: MatDialogRef<OtorgarTurnoComponent>,
     private fb: FormBuilder,
@@ -161,39 +163,32 @@ export class OtorgarTurnoComponent implements OnInit {
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
     const days = [
+      'Domingo',
       'Lunes',
       'Martes',
       'Miercoles',
       'Jueves',
       'Viernes',
       'Sabado',
-      'Domingo',
     ];
-    const attentionDays: number[] = [];
     
-    this.filteredConsultationHours.forEach((element) => {
-      attentionDays.push(days.indexOf(element.day));
-    });
-
-    const medic = this.form.value.medic;
-
-    if (this.unabailableDates) {
-      const unavailable = this.unabailableDates.find(
-        (date: string) => date === d?.toISOString().slice(0, 10)
-      );
-      if (unavailable) return false;
-    }
-
-    return attentionDays.includes(day - 1);
+    // Verificar si el día seleccionado está entre los días de trabajo del médico
+    const dayName = days[day];
+    return this.medicWorkingDays.includes(dayName);
   };
 
   onMedicChange(selectedMedic: any): void {
+    // Filtrar horas por médico
     this.filteredConsultationHours = this.consultationHours.filter(
-      (consultationHour) => {
-        return consultationHour.medic.id === selectedMedic.id;
-      }
+      (consultationHour) => consultationHour.medic.id === selectedMedic.id
     );
 
+    // Obtener los días únicos en los que trabaja este médico
+    this.medicWorkingDays = [...new Set(
+      this.filteredConsultationHours.map(hour => hour.day)
+    )];
+
+    // Obtener fechas no disponibles
     this._attentionService
       .getUnavailableDates(selectedMedic.id)
       .subscribe((data) => {
@@ -216,15 +211,18 @@ export class OtorgarTurnoComponent implements OnInit {
     ];
     const daySelected = days[day];
 
+    // Filtrar horas disponibles para el médico en el día seleccionado
     let availableHours = this.filteredConsultationHours.filter(
       (consultationHour) => consultationHour.day === daySelected
     );
+
     const formattedDate = selectedDate.toISOString().split('T')[0];
     
     this._attentionService
       .getAttentionsByDate(selectedDate)
       .subscribe((data) => {
         const occupiedHours = data;
+        // Mostrar solo las horas que no están ocupadas
         this.filteredConsultationHours = availableHours.filter(
           (consultationHour) => !occupiedHours.includes(consultationHour.id)
         );
