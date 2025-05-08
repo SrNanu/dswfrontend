@@ -37,7 +37,7 @@ export class AgregarEditarPatientComponent implements OnInit {
   }
   ngOnInit(): void {
     this.obtenerObrasSociales();
-    this.isEdit(this.id);
+
   }
   cancelar() {
     this.dialogRef.close(false);
@@ -52,6 +52,7 @@ export class AgregarEditarPatientComponent implements OnInit {
     this._healthInsuranceService.getHealthInsurances().subscribe(data => {
       this.healthInsurences = data;
       console.log('Obras Sociales:', this.healthInsurences)
+      this.isEdit(this.id);
     });
   }
   getPatient(id: number) {
