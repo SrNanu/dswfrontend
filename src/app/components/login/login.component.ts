@@ -18,6 +18,7 @@ export class LoginComponent {
   hidePassword = true;
   loading = false;
   loginError: string | null = null;
+
   constructor(
     private router: Router,
     private loginService: LoginService,
@@ -25,7 +26,7 @@ export class LoginComponent {
   ) {}
 
   submit() {
-    this.loginError = null; // Limpia errores previos
+    this.loginError = null;
     if (this.form.invalid) {
       this._snackBar.open('Por favor, complete todos los campos', 'Cerrar', {
         duration: 3000,
@@ -33,7 +34,6 @@ export class LoginComponent {
       });
       return;
     }
-    
 
     this.loading = true;
 
@@ -51,31 +51,39 @@ export class LoginComponent {
           duration: 3000,
           panelClass: ['snackbar-success'],
         });
-        const token = localStorage.getItem('token');
-        console.log('Token:', token);
-
+        
         this.redirectUser(data.role);
         this.loading = false;
       },
       error: (err) => {
         this.loginError = 'Usuario o contraseña incorrectos';
         this.loading = false;
-        this.form.markAllAsTouched(); // Marca los campos como "touched" para que se apliquen las validaciones
+        
+        // Solo marcamos el campo de contraseña como inválido
+        this.form.get('password')?.setErrors({ incorrect: true });
+        this.form.get('password')?.markAsTouched();
+        
         let errorMessage = 'Usuario o contraseña incorrectos';
-
         if (err.status === 0) {
           errorMessage = 'No se pudo conectar con el servidor. Intente nuevamente.';
         }
-        // Marcar los campos como inválidos para reflejar el error
-        this.form.controls['username'].setErrors({ invalid: true });
-        this.form.controls['password'].setErrors({ invalid: true });
+        
         this._snackBar.open(errorMessage, 'Cerrar', {
           duration: 3000,
           panelClass: ['snackbar-error'],
         });
-        this.loading = false;
       },
     });
+  }
+
+  // Limpia el error específico cuando se edita el campo
+  clearFieldError(controlName: string) {
+    const control = this.form.get(controlName);
+    if (control?.errors?.['incorrect']) {
+      control.setErrors(null);
+      control.updateValueAndValidity();
+    }
+    this.loginError = null;
   }
 
   private redirectUser(role: string): void {

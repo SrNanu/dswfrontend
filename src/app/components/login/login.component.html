@@ -9,9 +9,16 @@
         {{ loginError }}
       </div>
       <div class="campo">
-        <mat-form-field appearance="fill" style="width: 100%;" [class.error]="form.controls['username'].invalid && form.controls['username'].touched" >
+        <mat-form-field appearance="fill" style="width: 100%;" [class.error]="form.controls['username'].invalid && form.controls['username'].touched">
           <mat-label>Nombre de usuario</mat-label>
-          <input matInput placeholder="Nombre de usuario" formControlName="username" autocomplete="username">
+          <input matInput 
+                 placeholder="Nombre de usuario" 
+                 formControlName="username" 
+                 autocomplete="username"
+                 (input)="clearFieldError('username')">
+          <mat-error *ngIf="form.get('username')?.hasError('required')">
+            El nombre de usuario es requerido
+          </mat-error>
         </mat-form-field>
       </div>
       <div class="campo">
@@ -21,10 +28,17 @@
                  [type]="hidePassword ? 'password' : 'text'" 
                  placeholder="Contraseña"
                  formControlName="password" 
-                 autocomplete="current-password">
+                 autocomplete="current-password"
+                 (input)="clearFieldError('password')">
           <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
             <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
+          <mat-error *ngIf="form.get('password')?.hasError('required')">
+            La contraseña es requerida
+          </mat-error>
+          <mat-error *ngIf="form.get('password')?.hasError('incorrect')">
+            Contraseña incorrecta
+          </mat-error>
         </mat-form-field>
       </div>
       <div class="button">
